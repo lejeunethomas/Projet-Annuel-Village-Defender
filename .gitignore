@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Dossiers temporaires Unity
 Village Defender/[Ll]ibrary/
 Village Defender/[Tt]emp/
@@ -15,3 +16,32 @@ Village Defender/Thumbs.db
 Village Defender/.vscode/
 Village Defender/*.csproj
 Village Defender/*.sln
+=======
+# Unity
+Library/
+Temp/
+Obj/
+Build/
+Builds/
+Logs/
+UserSettings/
+
+# Rider / Visual Studio
+.idea/
+.vscode/
+*.csproj
+*.sln
+*.slnx
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.tmp
+*.tmp_proj
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+>>>>>>> be21d7c (health bar)
