@@ -126,10 +126,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 184e3132bd559cd42a9455c9152fde90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TowerCombat
-  range: 5
-  damage: 10
-  fireRate: 2
-  targetEnemy: {fileID: 0}
+  data: {fileID: 11400000, guid: def52c13e9cfe2c46a47478af9991abd, type: 2}
 --- !u!208 &7774987776762990287
 NavMeshObstacle:
   m_ObjectHideFlags: 0

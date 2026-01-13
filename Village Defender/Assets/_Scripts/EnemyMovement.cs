@@ -3,35 +3,39 @@ using UnityEngine.AI;
 
 public class EnemyMovement : MonoBehaviour
 {
-    public Transform targetBase;
-    public int health = 30;
-    public int goldReward = 10;
+    public EnemyData data;
     private NavMeshAgent agent;
+    private int currentHealth;
 
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        if (targetBase != null)
-            agent.SetDestination(targetBase.position);
+        
+        if (data != null)
+        {
+            agent.speed = data.moveSpeed;
+            currentHealth = data.maxHealth;
+        }
+
+        GameObject baseObj = GameObject.FindWithTag("Base");
+        if (baseObj != null)
+            agent.SetDestination(baseObj.transform.position);
     }
 
-    void Update()
+    public void TakeDamage(int damageAmount)
     {
-        // Si l'ennemi est arrivé à la base
-        if (!agent.pathPending && agent.remainingDistance < 0.5f)
+        currentHealth -= damageAmount;
+        if (currentHealth <= 0)
         {
-            GameManager.Instance.DamageBase(1);
-            Destroy(gameObject); // L'ennemi disparaît
+            Die();
         }
     }
 
-    public void TakeDamage(int damage)
+    void Die()
     {
-        health -= damage;
-        if (health <= 0)
-        {
-            GameManager.Instance.AddGold(goldReward);
-            Destroy(gameObject);
-        }
+        if (data != null)
+            GameManager.Instance.AddGold(data.goldReward);
+            
+        Destroy(gameObject);
     }
 }

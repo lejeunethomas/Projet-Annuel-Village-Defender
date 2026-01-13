@@ -2,15 +2,15 @@ using UnityEngine;
 
 public class TowerCombat : MonoBehaviour
 {
-    public float range = 5f;
-    public int damage = 10;
-    public float fireRate = 1f;
-    private float fireCountdown = 0f;
+    public TowerData data;
 
-    public Transform targetEnemy;
+    private float fireCountdown = 0f;
+    private Transform targetEnemy;
 
     void Update()
     {
+        if (data == null) return;
+
         UpdateTarget();
 
         if (targetEnemy == null) return;
@@ -18,7 +18,7 @@ public class TowerCombat : MonoBehaviour
         if (fireCountdown <= 0f)
         {
             Shoot();
-            fireCountdown = 1f / fireRate;
+            fireCountdown = 1f / data.fireRate;
         }
 
         fireCountdown -= Time.deltaTime;
@@ -26,7 +26,6 @@ public class TowerCombat : MonoBehaviour
 
     void UpdateTarget()
     {
-        // Trouve tous les ennemis (taggués "Enemy")
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
         float shortestDistance = Mathf.Infinity;
         GameObject nearestEnemy = null;
@@ -41,7 +40,7 @@ public class TowerCombat : MonoBehaviour
             }
         }
 
-        if (nearestEnemy != null && shortestDistance <= range)
+        if (nearestEnemy != null && shortestDistance <= data.range)
         {
             targetEnemy = nearestEnemy.transform;
         }
@@ -53,19 +52,19 @@ public class TowerCombat : MonoBehaviour
 
     void Shoot()
     {
-        // Simplification : pas de projectile physique, juste des dégâts directs
         EnemyMovement e = targetEnemy.GetComponent<EnemyMovement>();
         if (e != null)
         {
-            e.TakeDamage(damage);
-            Debug.Log("Pew Pew!"); // Pour vérifier que ça tire
+            e.TakeDamage(data.damage);
         }
     }
-    
-    // Pour voir la portée dans l'éditeur
+
     void OnDrawGizmosSelected()
     {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, range);
+        if (data != null)
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(transform.position, data.range);
+        }
     }
 }

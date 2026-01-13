@@ -150,6 +150,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 732d95d8cff977a489b9cc82de0c1ac3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyMovement
+  data: {fileID: 11400000, guid: d9156cabbb49dc24ca8c6423977e7769, type: 2}
   targetBase: {fileID: 0}
-  health: 30
-  goldReward: 10

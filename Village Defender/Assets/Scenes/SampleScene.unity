@@ -279,7 +279,7 @@ GameObject:
   - component: {fileID: 131501261}
   m_Layer: 0
   m_Name: Base
-  m_TagString: Untagged
+  m_TagString: Base
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -503,10 +503,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0c7b678f6615314caaa98b7977fbb05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SimpleSpawner
-  enemyPrefab: {fileID: 8973471828063620200, guid: 83c5ba70fb821fe41b9de2dece950aa6, type: 3}
+  enemyData: {fileID: 11400000, guid: d9156cabbb49dc24ca8c6423977e7769, type: 2}
   spawnPoint: {fileID: 940658300}
-  baseTarget: {fileID: 131501260}
-  timeBetweenWaves: 5
+  timeBetweenSpawns: 2
 --- !u!4 &940658300
 Transform:
   m_ObjectHideFlags: 0

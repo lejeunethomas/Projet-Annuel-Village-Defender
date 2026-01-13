@@ -3,29 +3,42 @@ using System.Collections;
 
 public class SimpleSpawner : MonoBehaviour
 {
-    public GameObject enemyPrefab;
+    [Header("Configuration")]
+    public EnemyData enemyData;
     public Transform spawnPoint;
-    public Transform baseTarget; // La cible que les ennemis doivent atteindre
-    public float timeBetweenWaves = 5f;
+    public float timeBetweenSpawns = 2f;
 
     void Start()
     {
-        StartCoroutine(SpawnWave());
+        StartCoroutine(SpawnLoop());
     }
 
-    IEnumerator SpawnWave()
+    IEnumerator SpawnLoop()
     {
-        while (true) // Boucle infinie pour le proto
+        while (true)
         {
             SpawnEnemy();
-            yield return new WaitForSeconds(2f); // Un ennemi toutes les 2 secondes
+            yield return new WaitForSeconds(timeBetweenSpawns);
         }
     }
 
     void SpawnEnemy()
     {
-        GameObject newEnemy = Instantiate(enemyPrefab, spawnPoint.position, spawnPoint.rotation);
-        // On assigne la cible à l'ennemi
-        newEnemy.GetComponent<EnemyMovement>().targetBase = baseTarget;
+        GameObject prefabToUse = enemyData.enemyPrefab;
+
+        if (prefabToUse != null)
+        {
+            GameObject newEnemy = Instantiate(prefabToUse, spawnPoint.position, spawnPoint.rotation);
+
+            EnemyMovement script = newEnemy.GetComponent<EnemyMovement>();
+            if (script != null)
+            {
+                script.data = enemyData; 
+            }
+        }
+        else
+        {
+            Debug.LogError("⚠️ La fiche " + enemyData.name + " n'a pas de Prefab associé !");
+        }
     }
 }
