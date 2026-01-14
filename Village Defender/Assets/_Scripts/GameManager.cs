@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     [Header("État du jeu")]
     public int enemiesALive = 0;
     public bool isSpawningFinished = false;
-    public bool RunWave = false;
+    public bool runWave = false;
     
     public BaseHealthUI baseHealthUI;
     

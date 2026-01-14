@@ -16,7 +16,7 @@ public class SimpleSpawner : MonoBehaviour
     {
         foreach (WaveData wave in waves)
         {
-            yield return new WaitUntil(() => GameManager.RunWave == true);
+            yield return new WaitUntil(() => GameManager.Instance.runWave == true);
             foreach (WaveData.EnemyGroup group in wave.groups)
             {
                 for (int i = 0; i < group.count; i++)
@@ -25,13 +25,13 @@ public class SimpleSpawner : MonoBehaviour
                     yield return new WaitForSeconds(1f / group.rate);
                 }
             }
-            GameManager.RunWave = false;
+            GameManager.Instance.runWave = false;
         }
     }
-
+ 
     void SpawnEnemy(EnemyData data)
     {
-        if (data.enemyPrefab == null) return;
+        if (data.enemyPrefab != null) return;
         
         GameObject newEnemy = Instantiate(data.enemyPrefab, spawnPoint.position, spawnPoint.rotation);
 
