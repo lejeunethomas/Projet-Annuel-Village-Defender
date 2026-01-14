@@ -643,7 +643,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d500400c72018e14c87d9bb770ce1965, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
-  gold: 100
+  gold: 25
   baseHealth: 10
 --- !u!4 &1620877972
 Transform:
