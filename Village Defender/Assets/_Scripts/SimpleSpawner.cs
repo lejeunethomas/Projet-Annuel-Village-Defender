@@ -16,19 +16,16 @@ public class SimpleSpawner : MonoBehaviour
     {
         foreach (WaveData wave in waves)
         {
-            if (GameManager.RunWave == true)
+            yield return new WaitUntil(() => GameManager.RunWave == true);
+            foreach (WaveData.EnemyGroup group in wave.groups)
             {
-                foreach (WaveData.EnemyGroup group in wave.groups)
-                {
-                    for (int i = 0; i < group.count; i++)
-                    {
-                        SpawnEnemy(group.enemyType);
-                        yield return new WaitForSeconds(1f / group.rate);
-                    }
+                for (int i = 0; i < group.count; i++)
+                { 
+                    SpawnEnemy(group.enemyType); 
+                    yield return new WaitForSeconds(1f / group.rate);
                 }
-                
-                GameManager.RunWave = false;
             }
+            GameManager.RunWave = false;
         }
     }
 
