@@ -1,12 +1,11 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class SimpleSpawner : MonoBehaviour
 {
-    [Header("Configuration")]
-    public EnemyData enemyData;
+    public List<WaveData> waves;
     public Transform spawnPoint;
-    public float timeBetweenSpawns = 2f;
 
     void Start()
     {
@@ -15,30 +14,33 @@ public class SimpleSpawner : MonoBehaviour
 
     IEnumerator SpawnLoop()
     {
-        while (true)
+        foreach (WaveData wave in waves)
         {
-            SpawnEnemy();
-            yield return new WaitForSeconds(timeBetweenSpawns);
+            if (GameManager.RunWave == true)
+            {
+                foreach (WaveData.EnemyGroup group in wave.groups)
+                {
+                    for (int i = 0; i < group.count; i++)
+                    {
+                        SpawnEnemy(group.enemyType);
+                        yield return new WaitForSeconds(1f / group.rate);
+                    }
+                }
+                
+                GameManager.RunWave = false;
+            }
         }
     }
 
-    void SpawnEnemy()
+    void SpawnEnemy(EnemyData data)
     {
-        GameObject prefabToUse = enemyData.enemyPrefab;
+        if (data.enemyPrefab == null) return;
+        
+        GameObject newEnemy = Instantiate(data.enemyPrefab, spawnPoint.position, spawnPoint.rotation);
 
-        if (prefabToUse != null)
-        {
-            GameObject newEnemy = Instantiate(prefabToUse, spawnPoint.position, spawnPoint.rotation);
-
-            EnemyMovement script = newEnemy.GetComponent<EnemyMovement>();
-            if (script != null)
-            {
-                script.data = enemyData; 
-            }
-        }
-        else
-        {
-            Debug.LogError("⚠️ La fiche " + enemyData.name + " n'a pas de Prefab associé !");
-        }
+        EnemyMovement script = newEnemy.GetComponent<EnemyMovement>(); 
+        script.data = data;
+        
+        GameManager.Instance.RegisterEnemy();
     }
 }
