@@ -7,7 +7,6 @@ public class GameManager : MonoBehaviour
 
     public int gold = 100;
     public int baseHealth = 10;
-    public BaseHealthUI baseHealthUI;
     
     void Awake() { Instance = this; }
 
@@ -20,10 +19,6 @@ public class GameManager : MonoBehaviour
     public void DamageBase(int amount)
     {
         baseHealth -= amount;
-        
-        if (baseHealthUI != null)
-            baseHealthUI.UpdateHealth(baseHealth);
-        
         Debug.Log("Base HP: " + baseHealth);
         if (baseHealth <= 0)
         {
