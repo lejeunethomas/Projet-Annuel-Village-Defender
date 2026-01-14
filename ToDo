@@ -1,0 +1,96 @@
+Plaintext
+
+
+=============================================================================
+PROJET ANNUEL : VILLAGE DEFENDER (UNITY)
+ROADMAP & TODO LIST
+=============================================================================
+
+PARTICIPANTS : 2 Personnes
+THEME : Village Defense + Time Travel (Moyen-âge / Steampunk)
+CHALLENGE TECHNIQUE : Stockage profil joueur & Ranking (Backend)
+
+=============================================================================
+🔴 PHASE 1 : ARCHITECTURE & BASES (Janvier - Mi-Février)
+OBJECTIF : Structure propre, code modulaire, mécanique de base.
+-----------------------------------------------------------------------------
+[ ] ARCHITECTURE DONNÉES
+    [ ] Créer ScriptableObject "EnemyData" (PV, Vitesse, Gain Or, Prefab)
+    [ ] Créer ScriptableObject "TowerData" (Portée, Dégâts, Cadence, Coût, Prefab)
+    [ ] Créer ScriptableObject "WaveData" (Liste d'ennemis + délais)
+
+[ ] GAMEPLAY "VOYAGE TEMPOREL"
+    [ ] GameManager : Gérer état "Global" (Epoque A vs Epoque B)
+    [ ] Script changement visuel : Remplacer matériaux/modèles au clic d'un bouton
+    [ ] Adapter UI selon l'époque (couleurs/style)
+
+[ ] UI DE BASE (HUD)
+    [ ] Affichage Compteurs : Or, Vies Base, Numéro Vague
+    [ ] Bouton "Start Next Wave"
+    [ ] Système de Build : Boutons pour sélectionner une tour à poser
+
+=============================================================================
+🟠 PHASE 2 : VERS L'ALPHA (Mi-Février - 5 Avril 2026)
+DEADLINE : 05/04/2026 (Jalon 3)
+LIVRABLE : Gameplay majoritaire, Exécutable.
+-----------------------------------------------------------------------------
+[ ] CONTENU (REMPLISSAGE)
+    [ ] Intégrer les 6 types d'ennemis (ex: Rapide, Tank, Volant...) via ScriptableObjects
+    [ ] Intégrer les 5 types de tours (ex: Archer, Canon, Gel, Zone...)
+    [ ] Créer 2 Maps jouables (1 map, 2 versions visuelles : Passé/Futur)
+
+[ ] CHALLENGE TECHNIQUE (LEADERBOARD)
+    [ ] Setup Backend (Firebase ou PlayFab - plugin Unity)
+    [ ] UI : Écran Login / Inscription simple (Pseudo/Email)
+    [ ] Script : Envoi du score (Vagues survécues) à la fin de la partie
+    [ ] UI : Tableau des scores (Top 10) dans le Menu Principal
+
+[ ] GAMEPLAY AVANCE
+    [ ] Système d'Upgrade des tours (Clic sur tour -> Payer -> Améliorer stats)
+    [ ] Pathfinding dynamique : Bloquer la pose de tour si elle bloque le chemin complet
+
+=============================================================================
+🟡 PHASE 3 : VERS LA BETA (Avril - 14 Juin 2026)
+DEADLINE : 14/06/2026 (Jalon 4)
+LIVRABLE : Quasi-complet, Assets finaux, Peu de bugs.
+-----------------------------------------------------------------------------
+[ ] GRAPHISMES & AUDIO (JUICE)
+    [ ] Remplacer primitives (cubes) par Modèles 3D (Asset Store Low Poly)
+    [ ] Ajouter Particules (Tirs, Explosions, Construction, Hit markers)
+    [ ] Audio : SFX (Tirs, Interface, Mort ennemi)
+    [ ] Audio : Musique d'ambiance (1 track par époque)
+
+[ ] INTERFACE POLISHED
+    [ ] Menu Principal complet (Jouer, Options, Credits, Quitter)
+    [ ] Écran de Pause (Reprendre, Menu, Quitter)
+    [ ] Game Over Screen (Score, Rejouer)
+
+[ ] SAUVEGARDE LOCALE
+    [ ] PlayerPrefs : Sauver le volume sonore, le pseudo du joueur
+
+=============================================================================
+🟢 PHASE 4 : RELEASE CANDIDATE (Juin - 9 Juillet 2026)
+DEADLINE : 09/07/2026 (Jalon 5)
+LIVRABLE : Bug Free, Installeur, Site web.
+-----------------------------------------------------------------------------
+[ ] DEBUG & POLISH
+    [ ] Playtests intensifs (Amis/Famille) -> Noter bugs
+    [ ] Equilibrage (Nerf/Buff des tours et ennemis)
+    [ ] Nettoyage du code (Supprimer Debug.Log, organiser dossiers)
+
+[ ] PACKAGING
+    [ ] Créer Icône du jeu
+    [ ] Compiler Build Final (Windows)
+    [ ] Créer Installeur (Setup.exe avec Inno Setup)
+
+[ ] BONUS SYLLABUS
+    [ ] Trailer vidéo (30 sec)
+    [ ] Page Web simple (Itch.io ou page statique)
+
+=============================================================================
+🏁 PHASE 5 : SOUTENANCE (19 Juillet 2026)
+-----------------------------------------------------------------------------
+[ ] Slides de présentation (Post-Mortem, Choix techniques)
+[ ] Démo live préparée (Cheat codes activés au cas où)
+
+
