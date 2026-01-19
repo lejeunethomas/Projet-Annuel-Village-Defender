@@ -9,12 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5482060a5a3db9444a90e7f6ecce9787, type: 3}
-  m_Name: Tour
-  m_EditorClassIdentifier: Assembly-CSharp::TowerData
-  towerName: catapulte
-  towerPrefab: {fileID: 0}
-  cost: 15
-  range: 5
-  fireRate: 1
-  damage: 15
+  m_Script: {fileID: 11500000, guid: 95f3de7d6297f194d84d51de00afd4d1, type: 3}
+  m_Name: Wave1
+  m_EditorClassIdentifier: Assembly-CSharp::WaveData
+  groups:
+  - enemyType: {fileID: 11400000, guid: d9156cabbb49dc24ca8c6423977e7769, type: 2}
+    count: 5
+    rate: 1

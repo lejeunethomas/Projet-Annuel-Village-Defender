@@ -3,13 +3,41 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager Instance; // Singleton pour accès facile
-
+    public static GameManager Instance;
+    
+    [Header("RESOURCES")]
     public int gold = 100;
     public int baseHealth = 10;
+    
+    [Header("État du jeu")]
+    public int enemiesALive = 0;
+    public bool isSpawningFinished = false;
+    public bool runWave = false;
+    
     public BaseHealthUI baseHealthUI;
     
     void Awake() { Instance = this; }
+    
+    public void RegisterEnemy(){ enemiesALive++; }
+
+    public void UnregisterEnemmy()
+    {
+        enemiesALive--;
+        CheckWinCondition();
+    }
+
+    public void CheckWinCondition()
+    {
+        if (isSpawningFinished && enemiesALive <= 0)
+        {
+            Victory();
+        }
+    }
+
+    public void Victory()
+    {
+        
+    }
 
     public void AddGold(int amount)
     {
