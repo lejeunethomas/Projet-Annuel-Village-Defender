@@ -13,9 +13,19 @@ public class GameManager : MonoBehaviour
     public int enemiesALive = 0;
     public bool isSpawningFinished = false;
     
+    [Header("UI")]
     public BaseHealthUI baseHealthUI;
-    
-    void Awake() { Instance = this; }
+    public GameObject gameOverScreen;
+
+
+    void Awake()
+    {
+        Instance = this;
+        
+        if (gameOverScreen != null)
+            gameOverScreen.SetActive(false);
+
+    }
     
     public void RegisterEnemy(){ enemiesALive++; }
 
@@ -31,11 +41,6 @@ public class GameManager : MonoBehaviour
         {
             Victory();
         }
-    }
-
-    public void Victory()
-    {
-        
     }
 
     public void AddGold(int amount)
@@ -55,8 +60,19 @@ public class GameManager : MonoBehaviour
         if (baseHealth <= 0)
         {
             Debug.Log("GAME OVER");
-            // Recharge la scène pour recommencer (simple pour le prototype)
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            Defeat();
         }
     }
+    
+    public void Victory()
+    {
+        
+    }
+    
+    public void Defeat()
+    {
+        
+    }
+    
+    
 }
