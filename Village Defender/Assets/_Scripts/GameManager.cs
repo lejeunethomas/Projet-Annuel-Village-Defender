@@ -4,41 +4,157 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
-    
-    [Header("RESOURCES")]
-    public int gold = 100;
-    public int baseHealth = 10;
-    
-    [Header("État du jeu")]
-    public int enemiesALive = 0;
-    public bool isSpawningFinished = false;
-    public bool runWave = false;
-    
-    [Header("UI")]
-    public BaseHealthUI baseHealthUI;
-    public GameObject gameOverScreen;
 
-
-    void Awake()
+    public enum GamePhase
     {
-        Instance = this;
-        
-        if (gameOverScreen != null)
-            gameOverScreen.SetActive(false);
-
+        Village,
+        Preparation,
+        Wave,
+        EndScreen
     }
-    
-    public void RegisterEnemy(){ enemiesALive++; }
 
-    public void UnregisterEnemmy()
+    [Header("Ressources")]
+    public int gold = 100;
+
+    [Header("Base")]
+    public int baseMaxHealth = 10;
+    public int baseHealth = 10;
+
+    [Header("Vagues")]
+    public int currentWaveIndex = 0;
+    public int enemiesAlive = 0;
+    public bool isSpawningFinished = false;
+
+    [Header("Références gameplay")]
+    public SimpleSpawner spawner;
+    public TowerBuilder towerBuilder;
+    public BaseHealthUI baseHealthUI;
+
+    [Header("UI")]
+    public GameObject villageUI;
+    public GameObject preparationUI;
+    public GameObject waveUI;
+    public GameOverUI endWaveUI;
+
+    [Header("Récompenses")]
+    public int endWaveBonusGold = 25;
+
+    public GamePhase CurrentPhase { get; private set; }
+
+    private void Awake()
     {
-        enemiesALive--;
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
+    }
+
+    private void Start()
+    {
+        baseHealth = baseMaxHealth;
+
+        if (baseHealthUI != null)
+        {
+            baseHealthUI.maxHealth = baseMaxHealth;
+            baseHealthUI.UpdateHealth(baseHealth);
+        }
+        
+        SetPhase(GamePhase.Village);
+    }
+
+    public void SetPhase(GamePhase newPhase)
+    {
+        CurrentPhase = newPhase;
+
+        if (villageUI != null)
+            villageUI.SetActive(newPhase == GamePhase.Village);
+
+        if (preparationUI != null)
+            preparationUI.SetActive(newPhase == GamePhase.Preparation);
+
+        if (waveUI != null)
+            waveUI.SetActive(newPhase == GamePhase.Wave);
+
+        if (endWaveUI != null)
+            endWaveUI.gameObject.SetActive(newPhase == GamePhase.EndScreen);
+
+        if (towerBuilder != null)
+            towerBuilder.SetCanBuild(newPhase == GamePhase.Preparation);
+
+        Debug.Log("Phase actuelle : " + newPhase);
+    }
+
+    public void GoToPreparation()
+    {
+        Debug.Log("GoToPreparation appelé. Phase actuelle = " + CurrentPhase);
+
+        if (CurrentPhase != GamePhase.Village)
+        {
+            Debug.Log("Refusé : on n'est pas en phase Village.");
+            return;
+        }
+
+        SetPhase(GamePhase.Preparation);
+    }
+
+    public void LaunchWave()
+    {
+        if (CurrentPhase != GamePhase.Preparation)
+            return;
+
+        if (spawner == null)
+        {
+            Debug.LogError("Aucun SimpleSpawner assigné dans le GameManager.");
+            return;
+        }
+
+        enemiesAlive = 0;
+        isSpawningFinished = false;
+
+        SetPhase(GamePhase.Wave);
+        spawner.StartCurrentWave(currentWaveIndex);
+    }
+
+    public void ReturnToVillageAfterEndScreen(bool victory)
+    {
+
+        baseHealth = baseMaxHealth;
+
+        if (baseHealthUI != null)
+            baseHealthUI.UpdateHealth(baseHealth);
+
+        enemiesAlive = 0;
+        isSpawningFinished = false;
+
+        SetPhase(GamePhase.Village);
+    }
+
+    public void RegisterEnemy()
+    {
+        enemiesAlive++;
+        Debug.Log("Ennemis vivants : " + enemiesAlive);
+    }
+
+    public void UnregisterEnemy()
+    {
+        enemiesAlive = Mathf.Max(0, enemiesAlive - 1);
+        Debug.Log("Ennemis vivants : " + enemiesAlive);
+        CheckWinCondition();
+    }
+
+    public void NotifySpawningFinished()
+    {
+        isSpawningFinished = true;
+        Debug.Log("Spawn terminé.");
         CheckWinCondition();
     }
 
     public void CheckWinCondition()
     {
-        if (isSpawningFinished && enemiesALive <= 0)
+        if (CurrentPhase == GamePhase.Wave && isSpawningFinished && enemiesAlive <= 0)
         {
             Victory();
         }
@@ -47,33 +163,69 @@ public class GameManager : MonoBehaviour
     public void AddGold(int amount)
     {
         gold += amount;
-        Debug.Log("Gold: " + gold);
+        Debug.Log("Gold : " + gold);
+    }
+
+    public void SpendGold(int amount)
+    {
+        gold -= amount;
+        if (gold < 0)
+            gold = 0;
+
+        Debug.Log("Gold : " + gold);
     }
 
     public void DamageBase(int amount)
     {
+        if (CurrentPhase == GamePhase.EndScreen)
+            return;
+
         baseHealth -= amount;
-        
+
+        if (baseHealth < 0)
+            baseHealth = 0;
+
         if (baseHealthUI != null)
             baseHealthUI.UpdateHealth(baseHealth);
-        
-        Debug.Log("Base HP: " + baseHealth);
+
+        Debug.Log("Base HP : " + baseHealth);
+
         if (baseHealth <= 0)
         {
-            Debug.Log("GAME OVER");
             Defeat();
         }
     }
-    
+
     public void Victory()
     {
-        
+        AddGold(endWaveBonusGold);
+        currentWaveIndex++;
+
+        SetPhase(GamePhase.EndScreen);
+
+        if (endWaveUI != null)
+            endWaveUI.ShowVictory();
+
+        Debug.Log("Victoire : vague terminée.");
     }
-    
+
     public void Defeat()
     {
-        
+        SetPhase(GamePhase.EndScreen);
+
+        if (endWaveUI != null)
+            endWaveUI.ShowDefeat();
+
+        Debug.Log("Défaite : la base a été détruite.");
     }
-    
-    
+
+    public bool IsBuildPhase()
+    {
+        return CurrentPhase == GamePhase.Preparation;
+    }
+
+    public void RestartScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
 }
