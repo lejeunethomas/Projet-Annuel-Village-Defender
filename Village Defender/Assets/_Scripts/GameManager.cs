@@ -29,6 +29,10 @@ public class GameManager : MonoBehaviour
     public SimpleSpawner spawner;
     public TowerBuilder towerBuilder;
     public BaseHealthUI baseHealthUI;
+    
+    [Header("UI Controllers")]
+    public VillageUIController villageUIController;
+    public BuildingInventory buildingInventory;
 
     [Header("UI")]
     public GameObject villageUI;
@@ -84,6 +88,15 @@ public class GameManager : MonoBehaviour
         if (towerBuilder != null)
             towerBuilder.SetCanBuild(newPhase == GamePhase.Preparation);
 
+        if (newPhase == GamePhase.Preparation && towerBuilder != null)
+            towerBuilder.RefreshStockDropdown();
+
+        if (newPhase != GamePhase.Village && villageUIController != null)
+            villageUIController.CloseAllPanels();
+
+        if (villageUIController != null)
+            villageUIController.RefreshTexts();
+
         Debug.Log("Phase actuelle : " + newPhase);
     }
 
@@ -117,10 +130,19 @@ public class GameManager : MonoBehaviour
         SetPhase(GamePhase.Wave);
         spawner.StartCurrentWave(currentWaveIndex);
     }
+    
+    public void ReturnToVillageFromPreparation()
+    {
+        if (CurrentPhase != GamePhase.Preparation)
+            return;
 
+        if (towerBuilder != null)
+            towerBuilder.ReturnAllPlacedBuildingsToStock();
+
+        SetPhase(GamePhase.Village);
+    }
     public void ReturnToVillageAfterEndScreen(bool victory)
     {
-
         baseHealth = baseMaxHealth;
 
         if (baseHealthUI != null)
@@ -128,6 +150,9 @@ public class GameManager : MonoBehaviour
 
         enemiesAlive = 0;
         isSpawningFinished = false;
+
+        if (towerBuilder != null)
+            towerBuilder.ReturnAllPlacedBuildingsToStock();
 
         SetPhase(GamePhase.Village);
     }

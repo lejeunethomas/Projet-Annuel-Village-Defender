@@ -11,14 +11,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fca82a27-470f-426d-a69f-3d1b82f3a83d" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Village Defender/.idea/indexLayout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Village Defender/.idea/indexLayout.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Village Defender/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Village Defender/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene/NavMesh-Plane.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SampleScene/NavMesh-Plane.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene/NavMesh-Plane.asset.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SampleScene/NavMesh-Plane.asset.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Examples &amp; Extras/Resources/Fonts &amp; Materials/Oswald Bold SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextMesh Pro/Examples &amp; Extras/Resources/Fonts &amp; Materials/Oswald Bold SDF.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Examples &amp; Extras/Resources/Fonts &amp; Materials/Roboto-Bold SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextMesh Pro/Examples &amp; Extras/Resources/Fonts &amp; Materials/Roboto-Bold SDF.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/GameManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/GameManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/TowerBuilder.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/TowerBuilder.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,6 +31,9 @@
     &quot;accountId&quot;: &quot;3382b13a-ef0a-4ec0-b5fb-210aa40077fc&quot;
   }
 }</component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Assets/_Scripts/Data/Wave/Wave1.asset" root0="FORCE_HIGHLIGHTING" />
+  </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 7
@@ -59,6 +59,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.build.unityPlugin",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -111,7 +112,8 @@
       <workItem from="1768402723947" duration="1180000" />
       <workItem from="1773990776329" duration="2482000" />
       <workItem from="1774885908386" duration="22649000" />
-      <workItem from="1775573985117" duration="1712000" />
+      <workItem from="1775573985117" duration="2018000" />
+      <workItem from="1775641820260" duration="3891000" />
     </task>
     <servers />
   </component>
@@ -146,5 +148,9 @@
         </breakpoint>
       </breakpoints>
     </breakpoint-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>
