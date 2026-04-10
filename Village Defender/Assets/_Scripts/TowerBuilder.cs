@@ -5,6 +5,12 @@ using UnityEngine.EventSystems;
 
 public class TowerBuilder : MonoBehaviour
 {
+    public enum BuildMode
+    {
+        Build,
+        Delete
+    }
+
     [Header("Références")]
     public BuildingInventory inventory;
 
@@ -15,12 +21,15 @@ public class TowerBuilder : MonoBehaviour
     [Header("UI préparation")]
     public TMP_Dropdown selectBatDropdown;
     public TMP_Text towerText;
+    public TMP_Text modeButtonText;
 
     private bool canBuild = false;
     private int selectedCatalogIndex = -1;
+    private BuildMode currentMode = BuildMode.Build;
+
     private List<int> dropdownToCatalogIndex = new List<int>();
     private List<PlacedBuilding> placedBuildings = new List<PlacedBuilding>();
-    
+
     [System.Serializable]
     private class PlacedBuilding
     {
@@ -31,11 +40,15 @@ public class TowerBuilder : MonoBehaviour
     public void SetCanBuild(bool value)
     {
         canBuild = value;
+
+        if (!canBuild)
+            SetMode(BuildMode.Build);
     }
 
     private void Start()
     {
         RefreshStockDropdown();
+        UpdateModeButtonText();
     }
 
     public void RefreshStockDropdown()
@@ -92,6 +105,34 @@ public class TowerBuilder : MonoBehaviour
         UpdateSelectedTowerText();
     }
 
+    public void ToggleBuildDeleteMode()
+    {
+        if (!canBuild)
+            return;
+
+        if (currentMode == BuildMode.Build)
+            SetMode(BuildMode.Delete);
+        else
+            SetMode(BuildMode.Build);
+    }
+
+    private void SetMode(BuildMode newMode)
+    {
+        currentMode = newMode;
+        UpdateModeButtonText();
+        UpdateSelectedTowerText();
+    }
+
+    private void UpdateModeButtonText()
+    {
+        if (modeButtonText == null)
+            return;
+
+        modeButtonText.text = currentMode == BuildMode.Build
+            ? "Mode : Construction"
+            : "Mode : Suppression";
+    }
+
     void OnDropdownChanged(int dropdownIndex)
     {
         if (dropdownIndex < 0 || dropdownIndex >= dropdownToCatalogIndex.Count)
@@ -116,7 +157,10 @@ public class TowerBuilder : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-            TryBuild();
+            if (currentMode == BuildMode.Build)
+                TryBuild();
+            else
+                TryRemoveTower();
         }
     }
 
@@ -173,6 +217,81 @@ public class TowerBuilder : MonoBehaviour
         }
     }
 
+    void TryRemoveTower()
+    {
+        if (Camera.main == null)
+        {
+            Debug.LogError("Aucune caméra avec le tag MainCamera.");
+            return;
+        }
+
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+
+        if (!Physics.Raycast(ray, out hit, 500f))
+            return;
+
+        int placedIndex;
+        if (TryGetPlacedBuildingIndex(hit.transform, out placedIndex))
+        {
+            RemovePlacedBuilding(placedIndex);
+        }
+        else
+        {
+            Debug.Log("Aucune tour placée sélectionnée.");
+        }
+    }
+
+    bool TryGetPlacedBuildingIndex(Transform hitTransform, out int placedIndex)
+    {
+        placedIndex = -1;
+
+        if (hitTransform == null)
+            return false;
+
+        for (int i = 0; i < placedBuildings.Count; i++)
+        {
+            PlacedBuilding placed = placedBuildings[i];
+
+            if (placed == null || placed.instance == null)
+                continue;
+
+            Transform current = hitTransform;
+
+            while (current != null)
+            {
+                if (current.gameObject == placed.instance)
+                {
+                    placedIndex = i;
+                    return true;
+                }
+
+                current = current.parent;
+            }
+        }
+
+        return false;
+    }
+
+    void RemovePlacedBuilding(int placedIndex)
+    {
+        if (placedIndex < 0 || placedIndex >= placedBuildings.Count)
+            return;
+
+        PlacedBuilding placed = placedBuildings[placedIndex];
+        if (placed == null)
+            return;
+
+        if (inventory != null)
+            inventory.AddBuildingToStock(placed.catalogIndex, 1);
+
+        if (placed.instance != null)
+            Destroy(placed.instance);
+
+        placedBuildings.RemoveAt(placedIndex);
+        RefreshStockDropdown();
+    }
+
     void BuildTower(Vector3 position, TowerData towerToBuild)
     {
         Vector3 spawnPosition = position;
@@ -196,7 +315,7 @@ public class TowerBuilder : MonoBehaviour
 
         RefreshStockDropdown();
     }
-    
+
     public void ReturnAllPlacedBuildingsToStock()
     {
         if (inventory == null)
@@ -229,15 +348,21 @@ public class TowerBuilder : MonoBehaviour
     {
         if (towerText == null)
             return;
+        
+        TowerData data = inventory.GetBuilding(selectedCatalogIndex);
+        int count = inventory.GetOwnedCount(selectedCatalogIndex);
+
+        if (currentMode == BuildMode.Delete)
+        {
+            towerText.text = data.name + " | Stock : " + count;
+            return;
+        }
 
         if (inventory == null || selectedCatalogIndex < 0)
         {
             towerText.text = "Aucun bâtiment disponible";
             return;
         }
-
-        TowerData data = inventory.GetBuilding(selectedCatalogIndex);
-        int count = inventory.GetOwnedCount(selectedCatalogIndex);
 
         if (data == null)
         {

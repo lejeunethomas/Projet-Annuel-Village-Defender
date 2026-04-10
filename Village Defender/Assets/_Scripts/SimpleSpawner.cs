@@ -4,10 +4,14 @@ using System.Collections.Generic;
 
 public class SimpleSpawner : MonoBehaviour
 {
+    [Header("Vagues")]
     public List<WaveData> waves;
-    public Transform spawnPoint;
+
+    [Header("Points de spawn")]
+    public List<Transform> spawnPoints = new List<Transform>();
 
     private Coroutine currentSpawnRoutine;
+    private int nextSpawnPointIndex = 0;
 
     public void StartCurrentWave(int waveIndex)
     {
@@ -30,13 +34,29 @@ public class SimpleSpawner : MonoBehaviour
             return;
         }
 
-        if (spawnPoint == null)
+        if (spawnPoints == null || spawnPoints.Count == 0)
         {
-            Debug.LogError("Aucun spawnPoint assigné dans le SimpleSpawner.");
+            Debug.LogError("Aucun point de spawn assigné dans le SimpleSpawner.");
             GameManager.Instance.NotifySpawningFinished();
             return;
         }
 
+        for (int i = spawnPoints.Count - 1; i >= 0; i--)
+        {
+            if (spawnPoints[i] == null)
+            {
+                spawnPoints.RemoveAt(i);
+            }
+        }
+
+        if (spawnPoints.Count == 0)
+        {
+            Debug.LogError("Tous les points de spawn du SimpleSpawner sont null.");
+            GameManager.Instance.NotifySpawningFinished();
+            return;
+        }
+
+        nextSpawnPointIndex = 0;
         currentSpawnRoutine = StartCoroutine(SpawnWave(waves[waveIndex]));
     }
 
@@ -59,7 +79,7 @@ public class SimpleSpawner : MonoBehaviour
 
             for (int i = 0; i < group.count; i++)
             {
-                SpawnEnemy(group.enemyType);
+                SpawnEnemy(group.enemyType, GetNextSpawnPoint());
 
                 float delay = 1f;
                 if (group.rate > 0f)
@@ -73,7 +93,17 @@ public class SimpleSpawner : MonoBehaviour
         GameManager.Instance.NotifySpawningFinished();
     }
 
-    void SpawnEnemy(EnemyData data)
+    Transform GetNextSpawnPoint()
+    {
+        if (spawnPoints == null || spawnPoints.Count == 0)
+            return null;
+
+        Transform point = spawnPoints[nextSpawnPointIndex];
+        nextSpawnPointIndex = (nextSpawnPointIndex + 1) % spawnPoints.Count;
+        return point;
+    }
+
+    void SpawnEnemy(EnemyData data, Transform spawnPoint)
     {
         if (data == null)
         {
@@ -84,6 +114,12 @@ public class SimpleSpawner : MonoBehaviour
         if (data.enemyPrefab == null)
         {
             Debug.LogError("Le prefab d'ennemi est null pour : " + data.name);
+            return;
+        }
+
+        if (spawnPoint == null)
+        {
+            Debug.LogError("SpawnPoint null dans SpawnEnemy.");
             return;
         }
 
