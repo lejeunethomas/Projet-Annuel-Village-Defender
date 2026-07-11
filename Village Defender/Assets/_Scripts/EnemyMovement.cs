@@ -28,7 +28,7 @@ public class EnemyMovement : MonoBehaviour
         if (!agent.pathPending && agent.remainingDistance < 0.5f)
         {
             GameManager.Instance.DamageBase(1);
-            GameManager.Instance.UnregisterEnemmy();
+            GameManager.Instance.UnregisterEnemy();
             Destroy(gameObject); // L'ennemi disparaît
         }
     }
@@ -47,7 +47,7 @@ public class EnemyMovement : MonoBehaviour
         if (data != null)
             GameManager.Instance.AddGold(data.goldReward);
             
-        GameManager.Instance.UnregisterEnemmy();
+        GameManager.Instance.UnregisterEnemy();
         Destroy(gameObject);
     }
 }
