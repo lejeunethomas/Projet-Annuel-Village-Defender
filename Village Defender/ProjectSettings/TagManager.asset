@@ -6,11 +6,12 @@ TagManager:
   tags:
   - Enemy
   - Base
+  - Tower
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - BuildGround
   - Water
   - UI
   - 

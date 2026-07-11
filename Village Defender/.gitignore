@@ -1,0 +1,17 @@
+# Dossiers temporaires Unity
+Village Defender/[Ll]ibrary/
+Village Defender/[Tt]emp/
+Village Defender/[Oo]bj/
+Village Defender/[Bb]uild/
+Village Defender/[Bb]uilds/
+Village Defender/[Ll]ogs/
+Village Defender/[Uu]ser[Ss]ettings/
+
+# Fichiers générés par l'OS
+Village Defender/.DS_Store
+Village Defender/Thumbs.db
+
+# Fichiers générés par Visual Studio
+Village Defender/.vscode/
+Village Defender/*.csproj
+Village Defender/*.sln

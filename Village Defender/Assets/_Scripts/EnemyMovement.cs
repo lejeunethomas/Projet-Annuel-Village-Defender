@@ -21,6 +21,17 @@ public class EnemyMovement : MonoBehaviour
         if (baseObj != null)
             agent.SetDestination(baseObj.transform.position);
     }
+    
+    void Update()
+    {
+        // Si l'ennemi est arrivé à la base
+        if (!agent.pathPending && agent.remainingDistance < 0.5f)
+        {
+            GameManager.Instance.DamageBase(1);
+            GameManager.Instance.UnregisterEnemy();
+            Destroy(gameObject); // L'ennemi disparaît
+        }
+    }
 
     public void TakeDamage(int damageAmount)
     {
@@ -36,6 +47,7 @@ public class EnemyMovement : MonoBehaviour
         if (data != null)
             GameManager.Instance.AddGold(data.goldReward);
             
+        GameManager.Instance.UnregisterEnemy();
         Destroy(gameObject);
     }
 }
