@@ -39,3 +39,8 @@ ExportedObj/
 
 # Fichiers de crash Unity
 sysinfo.txt
+
+# Exécutables et Builds
+*.exe
+*_Data/
+MonoBleedingEdge/
