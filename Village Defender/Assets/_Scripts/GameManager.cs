@@ -210,14 +210,14 @@ public class GameManager : MonoBehaviour
 
     public bool SpendWood(int amount)
     {
-        if (Wood > amount)
+        if (Wood >= amount)
         {
             Wood -= amount;
             return true;
         }
         else
         {
-            Debug.Log('Pas assez de bois');
+            Debug.Log("Pas assez de bois");
             return false;
         }
     }
@@ -225,19 +225,19 @@ public class GameManager : MonoBehaviour
     public void AddStone(int amount)
     {
         Stone = Stone + amount;
-        Debug.log('Stone : ' + Stone);
+        Debug.Log("Stone : " + Stone);
     }
 
     public bool SpendStone(int amount)
     {
-        if (Stone > amount)
+        if (Stone >= amount)
         {
             Stone -= amount;
             return true;
         }
         else
         {
-            Debug.Log('Pas assez de Pierre');
+            Debug.Log("Pas assez de Pierre");
             return false;
         }
     }
