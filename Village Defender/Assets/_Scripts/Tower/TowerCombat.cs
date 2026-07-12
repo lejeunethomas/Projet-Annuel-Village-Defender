@@ -1,11 +1,16 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TowerCombat : MonoBehaviour
 {
     public TowerData data;
 
+	[Header("UI")]
+    public Image healthBarFill;
+
     private float fireCountdown = 0f;
     private Transform targetEnemy;
+	private int currentHealth;
 
     void Start()
     {
@@ -13,6 +18,12 @@ public class TowerCombat : MonoBehaviour
         {
             TargetManager.Instance.toursActives.Add(this.transform);
         }
+
+		if(data != null)
+		{
+			currentHealth = data.maxHealth;
+			UpdateHealthBar();
+		}
     }
 
     void Update()
@@ -82,6 +93,24 @@ public class TowerCombat : MonoBehaviour
             Gizmos.DrawWireSphere(transform.position, data.range);
         }
     }
+
+	public void TakeDamage(int damage)
+	{
+		currentHealth -= damage;
+		UpdateHealthBar();
+		if (currentHealth <= 0)
+		{
+			Destroy(gameObject);
+		}
+	}
+	
+	private void UpdateHealthBar()
+	{
+		if (healthBarFill != null && data != null)
+        {
+            healthBarFill.fillAmount = (float)currentHealth / data.maxHealth;
+        }
+	}
     
     void OnDestroy()
     {

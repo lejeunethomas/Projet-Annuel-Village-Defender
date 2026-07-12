@@ -11,8 +11,8 @@ public class TowerData : ScriptableObject
     public int cost = 15;
 
     [Header("Stats")]
+	public int maxHealth = 10;
     public int range = 5;
     public float fireRate = 1f;
     public int damage = 15;
-
 }

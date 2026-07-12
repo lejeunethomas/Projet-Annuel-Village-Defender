@@ -22,4 +22,9 @@ public class EnemyData : ScriptableObject
     public float moveSpeed = 5f;
     public int goldReward = 5;
 	
+	[Header("Attaque")]
+	public int attackDamage = 5;
+	public float attackRate = 0.5f;
+	public float attackRange = 1f;
+	
 }

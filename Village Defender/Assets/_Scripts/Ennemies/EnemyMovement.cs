@@ -7,6 +7,7 @@ public class EnemyMovement : MonoBehaviour
     private NavMeshAgent agent;
     private int currentHealth;
 	private Transform Target;
+	private float attackTimer;
 
     void Start()
     {
@@ -15,6 +16,7 @@ public class EnemyMovement : MonoBehaviour
         if (data != null)
         {
             agent.speed = data.moveSpeed;
+			agent.stoppingDistance = data.attackRange;
             currentHealth = data.maxHealth;
         }
 
@@ -28,11 +30,30 @@ public class EnemyMovement : MonoBehaviour
     {
 		if(Target != null && agent.hasPath && !agent.pathPending)
 		{
-			if (agent.remainingDistance < 0.5f)
+			if (agent.remainingDistance <= data.attackRange)
         	{
+				Vector3 direction = (Target.position - transform.position).normalized;
+				if(direction != Vector3.zero)
+				{
+					Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
+					transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
+				}
+
 				if(Target.CompareTag("Base")){
 					GameManager.Instance.DamageBase(1);
             		Die();
+				}else if(Target.CompareTag("Tower"))
+				{
+					if(attackTimer <= 0f)
+					{
+						TowerCombat tower = Target.GetComponent<TowerCombat>();
+						if(tower != null)
+						{
+							tower.TakeDamage(data.attackDamage);
+						}
+						attackTimer = data.attackRate;
+					}
+					attackTimer -= Time.deltaTime;
 				}
         	}
 		} 
@@ -52,6 +73,7 @@ public class EnemyMovement : MonoBehaviour
     {
         if (agent != null && cible != null)
         {
+			Target = cible;
             agent.SetDestination(cible.position);
         }
     }
