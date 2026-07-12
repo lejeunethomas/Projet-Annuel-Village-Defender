@@ -6,6 +6,7 @@ public class EnemyMovement : MonoBehaviour
     public EnemyData data;
     private NavMeshAgent agent;
     private int currentHealth;
+	private Transform Target;
 
     void Start()
     {
@@ -18,16 +19,23 @@ public class EnemyMovement : MonoBehaviour
         }
 
         if(TargetManager.Instance != null)
-            TargetManager.Instance.ennemisActifs.Add(this);
+		{
+			TargetManager.Instance.ennemisActifs.Add(this);
+		}
     }
     
     void Update()
     {
-        if (!agent.pathPending && agent.remainingDistance < 0.5f)
-        {
-            GameManager.Instance.DamageBase(1);
-            Die();
-        }
+		if(Target != null && agent.hasPath && !agent.pathPending)
+		{
+			if (agent.remainingDistance < 0.5f)
+        	{
+				if(Target.CompareTag("Base")){
+					GameManager.Instance.DamageBase(1);
+            		Die();
+				}
+        	}
+		} 
     }
 
     public void TakeDamage(int damageAmount)
