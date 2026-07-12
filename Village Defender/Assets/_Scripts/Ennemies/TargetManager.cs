@@ -31,7 +31,7 @@ public class TargetManager : MonoBehaviour
             {
                 id = ennemisActifs[i].gameObject.GetInstanceID(),
                 position = ennemisActifs[i].transform.position,
-                targetPriority = 1
+                targetPriority = (int)ennemisActifs[i].data.priority
             };
         }
 
