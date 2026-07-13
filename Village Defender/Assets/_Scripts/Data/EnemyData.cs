@@ -11,6 +11,7 @@ public class EnemyData : ScriptableObject
 {
     [Header("Infos de base")]
     public string enemyName = "Soldat";
+    public Type Type = Type.None;
     public GameObject enemyPrefab;
 
 	[Header("Comportement IA")]

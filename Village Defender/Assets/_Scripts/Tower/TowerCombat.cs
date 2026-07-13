@@ -59,7 +59,7 @@ public class TowerCombat : MonoBehaviour
             if (enemy == null) continue;
 
             float distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
-            if (distanceToEnemy < shortestDistance)
+            if (distanceToEnemy < shortestDistance && enemy.data.Type == data.targetType)
             {
                 shortestDistance = distanceToEnemy;
                 nearestEnemy = enemy;
