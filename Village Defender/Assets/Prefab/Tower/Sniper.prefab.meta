@@ -1,21 +1,10 @@
 fileFormatVersion: 2
-<<<<<<< HEAD
-<<<<<<<< HEAD:Village Defender/Assets/Prefab/Tower/Mortier.prefab.meta
-guid: 39f4f5ce3de5e32488f664d10f098907
-PrefabImporter:
-========
-guid: af747ac29d6ed5f44b43f7f042933c9b
-folderAsset: yes
-DefaultImporter:
->>>>>>>> origin/Preprod:Village Defender/Assets/Prefab/Ennemy.meta
-=======
 <<<<<<<< HEAD:Village Defender/Assets/Prefab/Tower/Sniper.prefab.meta
 guid: a502bc29647c4c74097f94a8ae324f3a
 ========
 guid: 39f4f5ce3de5e32488f664d10f098907
 >>>>>>>> origin/Preprod:Village Defender/Assets/Prefab/Tower/Mortier.prefab.meta
 PrefabImporter:
->>>>>>> origin/Preprod
   externalObjects: {}
   userData: 
   assetBundleName: 
