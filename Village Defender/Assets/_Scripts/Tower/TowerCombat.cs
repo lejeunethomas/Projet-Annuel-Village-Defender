@@ -1,11 +1,30 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TowerCombat : MonoBehaviour
 {
     public TowerData data;
 
+	[Header("UI")]
+    public Image healthBarFill;
+
     private float fireCountdown = 0f;
     private Transform targetEnemy;
+	private int currentHealth;
+
+    void Start()
+    {
+        if (TargetManager.Instance != null)
+        {
+            TargetManager.Instance.toursActives.Add(this.transform);
+        }
+
+		if(data != null)
+		{
+			currentHealth = data.maxHealth;
+			UpdateHealthBar();
+		}
+    }
 
     void Update()
     {
@@ -26,14 +45,21 @@ public class TowerCombat : MonoBehaviour
 
     void UpdateTarget()
     {
-        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-        float shortestDistance = Mathf.Infinity;
-        GameObject nearestEnemy = null;
-
-        foreach (GameObject enemy in enemies)
+        if (TargetManager.Instance == null || TargetManager.Instance.ennemisActifs.Count == 0)
         {
+            targetEnemy = null;
+            return;
+        }
+        
+        float shortestDistance = Mathf.Infinity;
+        EnemyMovement nearestEnemy = null;
+
+        foreach (EnemyMovement enemy in TargetManager.Instance.ennemisActifs)
+        {
+            if (enemy == null) continue;
+
             float distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
-            if (distanceToEnemy < shortestDistance)
+            if (distanceToEnemy < shortestDistance && enemy.data.Type == data.targetType)
             {
                 shortestDistance = distanceToEnemy;
                 nearestEnemy = enemy;
@@ -65,6 +91,32 @@ public class TowerCombat : MonoBehaviour
         {
             Gizmos.color = Color.red;
             Gizmos.DrawWireSphere(transform.position, data.range);
+        }
+    }
+
+	public void TakeDamage(int damage)
+	{
+		currentHealth -= damage;
+		UpdateHealthBar();
+		if (currentHealth <= 0)
+		{
+			Destroy(gameObject);
+		}
+	}
+	
+	private void UpdateHealthBar()
+	{
+		if (healthBarFill != null && data != null)
+        {
+            healthBarFill.fillAmount = (float)currentHealth / data.maxHealth;
+        }
+	}
+    
+    void OnDestroy()
+    {
+        if (TargetManager.Instance != null)
+        {
+            TargetManager.Instance.toursActives.Remove(this.transform);
         }
     }
 }

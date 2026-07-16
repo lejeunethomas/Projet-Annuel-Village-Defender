@@ -10,14 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5f1ffe71600d2cd4f90ba2dc0ef215bb, type: 3}
-  m_Name: Enemy_Basic
+  m_Name: Sprinteur
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
   enemyName: Soldat
-  enemyPrefab: {fileID: 8973471828063620200, guid: 83c5ba70fb821fe41b9de2dece950aa6, type: 3}
-  priority: 1
-  maxHealth: 15
-  moveSpeed: 5
-  goldReward: 5
-  attackDamage: 5
-  attackRate: 0.5
+  Type: 2
+  enemyPrefab: {fileID: 0}
+  priority: 0
+  maxHealth: 4
+  moveSpeed: 10
+  goldReward: 2
+  attackDamage: 2
+  attackRate: 0.8
   attackRange: 1

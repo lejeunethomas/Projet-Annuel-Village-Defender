@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3515177051428639220}
   - component: {fileID: 3749235739476228019}
   m_Layer: 0
-  m_Name: Capsule
+  m_Name: "B\xE9lier"
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -150,5 +150,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 732d95d8cff977a489b9cc82de0c1ac3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyMovement
-  data: {fileID: 11400000, guid: d9156cabbb49dc24ca8c6423977e7769, type: 2}
-  targetBase: {fileID: 0}
+  data: {fileID: 11400000, guid: 7683d6d9163339941a8838a872a91aff, type: 2}
