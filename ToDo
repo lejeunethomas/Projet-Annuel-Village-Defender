@@ -14,29 +14,29 @@ CHALLENGE TECHNIQUE : Stockage profil joueur & Ranking (Backend)
 🔴 PHASE 1 : ARCHITECTURE & BASES (Janvier - Mi-Février)
 OBJECTIF : Structure propre, code modulaire, mécanique de base.
 -----------------------------------------------------------------------------
-[ ] ARCHITECTURE DONNÉES
-    [ ] Créer ScriptableObject "EnemyData" (PV, Vitesse, Gain Or, Prefab)
-    [ ] Créer ScriptableObject "TowerData" (Portée, Dégâts, Cadence, Coût, Prefab)
-    [ ] Créer ScriptableObject "WaveData" (Liste d'ennemis + délais)
+[X] ARCHITECTURE DONNÉES
+    [X] Créer ScriptableObject "EnemyData" (PV, Vitesse, Gain Or, Prefab)
+    [X] Créer ScriptableObject "TowerData" (Portée, Dégâts, Cadence, Coût, Prefab)
+    [X] Créer ScriptableObject "WaveData" (Liste d'ennemis + délais)
 
-[ ] GAMEPLAY "VOYAGE TEMPOREL"
+[ ] GAMEPLAY "VOYAGE TEMPOREL" (en cours Thomas)
     [ ] GameManager : Gérer état "Global" (Epoque A vs Epoque B)
     [ ] Script changement visuel : Remplacer matériaux/modèles au clic d'un bouton
     [ ] Adapter UI selon l'époque (couleurs/style)
 
-[ ] UI DE BASE (HUD)
-    [ ] Affichage Compteurs : Or, Vies Base, Numéro Vague
-    [ ] Bouton "Start Next Wave"
-    [ ] Système de Build : Boutons pour sélectionner une tour à poser
+[X] UI DE BASE (HUD)
+    [X] Affichage Compteurs : Or, Vies Base, Numéro Vague
+    [X] Bouton "Start Next Wave"
+    [X] Système de Build : Boutons pour sélectionner une tour à poser
 
 =============================================================================
 🟠 PHASE 2 : VERS L'ALPHA (Mi-Février - 5 Avril 2026)
 DEADLINE : 05/04/2026 (Jalon 3)
 LIVRABLE : Gameplay majoritaire, Exécutable.
 -----------------------------------------------------------------------------
-[ ] CONTENU (REMPLISSAGE)
-    [ ] Intégrer les 6 types d'ennemis (ex: Rapide, Tank, Volant...) via ScriptableObjects
-    [ ] Intégrer les 5 types de tours (ex: Archer, Canon, Gel, Zone...)
+[X] CONTENU (REMPLISSAGE)
+    [X] Intégrer les 6 types d'ennemis (ex: Rapide, Tank, Volant...) via ScriptableObjects
+    [X] Intégrer les 5 types de tours (ex: Archer, Canon, Gel, Zone...)
     [ ] Créer 2 Maps jouables (1 map, 2 versions visuelles : Passé/Futur)
 
 [ ] CHALLENGE TECHNIQUE (LEADERBOARD)
@@ -46,8 +46,8 @@ LIVRABLE : Gameplay majoritaire, Exécutable.
     [ ] UI : Tableau des scores (Top 10) dans le Menu Principal
 
 [ ] GAMEPLAY AVANCE
-    [ ] Système d'Upgrade des tours (Clic sur tour -> Payer -> Améliorer stats)
-    [ ] Pathfinding dynamique : Bloquer la pose de tour si elle bloque le chemin complet
+    [ ] Système d'Upgrade des tours (Clic sur tour -> Payer -> Améliorer stats) (en cours Thomas)
+    [X] Pathfinding dynamique : Bloquer la pose de tour si elle bloque le chemin complet -> Tour prend des dégats
 
 =============================================================================
 🟡 PHASE 3 : VERS LA BETA (Avril - 14 Juin 2026)
@@ -55,17 +55,17 @@ DEADLINE : 14/06/2026 (Jalon 4)
 LIVRABLE : Quasi-complet, Assets finaux, Peu de bugs.
 -----------------------------------------------------------------------------
 [ ] GRAPHISMES & AUDIO (JUICE)
-    [ ] Remplacer primitives (cubes) par Modèles 3D (Asset Store Low Poly)
+    [ ] Remplacer primitives (cubes) par Modèles 3D (Asset Store Low Poly) (En cours Thomas)
     [ ] Ajouter Particules (Tirs, Explosions, Construction, Hit markers)
     [ ] Audio : SFX (Tirs, Interface, Mort ennemi)
     [ ] Audio : Musique d'ambiance (1 track par époque)
 
-[ ] INTERFACE POLISHED
+[ ] INTERFACE POLISHED En priorité !!
     [ ] Menu Principal complet (Jouer, Options, Credits, Quitter)
     [ ] Écran de Pause (Reprendre, Menu, Quitter)
     [ ] Game Over Screen (Score, Rejouer)
 
-[ ] SAUVEGARDE LOCALE
+[ ] SAUVEGARDE LOCALE En priorité !!
     [ ] PlayerPrefs : Sauver le volume sonore, le pseudo du joueur
 
 =============================================================================
