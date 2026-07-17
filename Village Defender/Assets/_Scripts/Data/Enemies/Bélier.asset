@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
   enemyName: Soldat
   Type: 1
-  enemyPrefab: {fileID: 0}
+  enemyPrefab: {fileID: 8973471828063620200, guid: 93f2a37d379e3984fa58d035ca9061d5, type: 3}
   priority: 1
   maxHealth: 40
   moveSpeed: 2

@@ -13,4 +13,5 @@ public class WaveData : ScriptableObject
     }
 
     public List<EnemyGroup> groups;
+    public bool Boss = false;
 }

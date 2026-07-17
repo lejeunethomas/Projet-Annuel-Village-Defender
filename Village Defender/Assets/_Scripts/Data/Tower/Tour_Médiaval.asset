@@ -10,13 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5482060a5a3db9444a90e7f6ecce9787, type: 3}
-  m_Name: Tour
+  m_Name: "Tour_M\xE9diaval"
   m_EditorClassIdentifier: Assembly-CSharp::TowerData
-  towerName: catapulte
-  towerPrefab: {fileID: 6307273590239403016, guid: 10e84724d7f22dd42a922ef274d6b811, type: 3}
-  cost: 15
-  maxHealth: 10
-  range: 5
-  fireRate: 1
-  damage: 15
-  targetType: 0
+  towerName: Sniper
+  towerPrefab: {fileID: 6307273590239403016, guid: 5e7133c925905d141a2967487a2d03fb, type: 3}
+  epoque: 2
+  cost: 20
+  maxHealth: 12
+  range: 12
+  fireRate: 0.5
+  damage: 20
+  targetType: 3

@@ -76,6 +76,12 @@ public class BuildingInventory : MonoBehaviour
         if (GameManager.Instance == null)
             return false;
 
+        if (GameManager.Instance.currentEpoch < (int)data.epoque)
+        {
+            Debug.Log("Impossible d'acheter : " + data.name + ". Nécessite l'époque " + data.epoque);
+            return false;
+        }
+
         if (GameManager.Instance.gold < data.cost)
         {
             Debug.Log("Pas assez d'or pour acheter : " + data.name);

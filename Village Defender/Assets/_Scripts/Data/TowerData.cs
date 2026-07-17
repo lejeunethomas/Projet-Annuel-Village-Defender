@@ -1,11 +1,19 @@
 using UnityEngine;
 
+public enum GameEpoque
+{
+	Antiquité = 1,
+	Rennaissance = 2,
+	Comptenporaine = 3,
+}
+
 [CreateAssetMenu(fileName = "NewTower", menuName = "VillageDefender/TowerData")]
 public class TowerData : ScriptableObject
 {
     [Header("Infos")]
     public string towerName = "catapulte";
     public GameObject towerPrefab;
+    public GameEpoque epoque = GameEpoque.Antiquité;
 
     [Header("Économie")]
     public int cost = 15;
