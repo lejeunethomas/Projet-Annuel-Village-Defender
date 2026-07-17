@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
   enemyName: Archer
   Type: 3
-  enemyPrefab: {fileID: 0}
+  enemyPrefab: {fileID: 6978966065922409311, guid: 27bbc7aa19aca404fb5d0c5092acb394, type: 3}
   priority: 1
   maxHealth: 8
   moveSpeed: 6
