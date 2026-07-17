@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class VillageUIController : MonoBehaviour
 {
@@ -11,8 +12,11 @@ public class VillageUIController : MonoBehaviour
     public GameObject shopPanel;
     public GameObject stockPanel;
 
-    [Header("Textes")]
-    public TMP_Text shopText;
+    [Header("Boutique (Génération Auto)")]
+    public Transform shopContainer;
+    public GameObject shopItemPrefab;
+
+    [Header("Stock")]
     public TMP_Text stockText;
 
     private void Start()
@@ -76,38 +80,55 @@ public class VillageUIController : MonoBehaviour
 
     public void RefreshTexts()
     {
-        if (inventory == null)
-            return;
+        if (inventory == null || GameManager.Instance == null) return;
+        
+        int epoqueActuelle = GameManager.Instance.currentEpoch;
 
-        if (shopText != null)
+        if (shopContainer != null && shopItemPrefab != null)
         {
-            string content = "Boutique :\n";
+            foreach (Transform child in shopContainer)
+            {
+                Destroy(child.gameObject);
+            }
 
             for (int i = 0; i < inventory.GetCatalogCount(); i++)
             {
                 TowerData data = inventory.GetBuilding(i);
-                if (data != null)
+
+                if (data != null && (int)data.epoque == epoqueActuelle)
                 {
-                    content += "- " + data.name + " : " + data.cost + " or\n";
+                    GameObject newBtn = Instantiate(shopItemPrefab, shopContainer);
+                    
+                    TMP_Text btnText = newBtn.GetComponentInChildren<TMP_Text>();
+                    if (btnText != null)
+                    {
+                        btnText.text = data.name + " (" + data.cost + " or)";
+                    }
+
+                    Button buttonComponent = newBtn.GetComponent<Button>();
+                    if (buttonComponent != null)
+                    {
+                        int indexCatalogue = i;
+                        buttonComponent.onClick.AddListener(() => BuyBuilding(indexCatalogue));
+                    }
                 }
             }
-
-            shopText.text = content;
         }
 
         if (stockText != null)
         {
-            string content = "Stock :\n";
+            string content = "Stock :\n\n";
 
             for (int i = 0; i < inventory.GetCatalogCount(); i++)
             {
                 TowerData data = inventory.GetBuilding(i);
-                if (data != null)
+                int count = inventory.GetOwnedCount(i);
+
+                if (data != null && ((int)data.epoque == epoqueActuelle || count > 0))
                 {
-                    content += "- " + data.name + " x" + inventory.GetOwnedCount(i) + "\n";
+                    content += "- " + data.name + " x" + count + "\n";
                 }
             }
-
             stockText.text = content;
         }
     }

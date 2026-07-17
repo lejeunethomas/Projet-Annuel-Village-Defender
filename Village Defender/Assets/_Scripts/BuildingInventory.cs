@@ -115,4 +115,23 @@ public class BuildingInventory : MonoBehaviour
 
         ownedCounts[catalogIndex] += amount;
     }
+
+    public void RemoveBuildingFromStock(int NewEpoque)
+    {
+        for (int i = 0; i < ownedCounts.Count; i++)
+        {
+            TowerData data = buildingCatalog[i];
+            if (data != null && (int)data.epoque < NewEpoque && ownedCounts[i] > 0)
+            {
+                int Tower = ownedCounts[i];
+                int Return = Tower * data.cost;
+                
+                GameManager.Instance.AddGold(Return);
+                
+                ownedCounts[i]--;
+                
+                Debug.Log($"Liquidation : {Tower}x {data.name} repris. Remboursement : {Return} or.");
+            }
+        }
+    }
 }
