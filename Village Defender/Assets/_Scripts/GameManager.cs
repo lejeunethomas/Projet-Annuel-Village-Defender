@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour
 
     [Header("Ressources")]
     public int gold = 100;
+    public int Wood = 0;
+    public int Stone = 0;
 
     [Header("Base")]
     public int baseMaxHealth = 10;
@@ -24,6 +26,9 @@ public class GameManager : MonoBehaviour
     public int currentWaveIndex = 0;
     public int enemiesAlive = 0;
     public bool isSpawningFinished = false;
+
+    [Header("Époque")] 
+    public int currentEpoch = 1;
 
     [Header("Références gameplay")]
     public SimpleSpawner spawner;
@@ -157,6 +162,17 @@ public class GameManager : MonoBehaviour
         SetPhase(GamePhase.Village);
     }
 
+    public void NextEpoque()
+    {
+        currentEpoch++;
+
+        if (buildingInventory != null)
+            buildingInventory.RemoveBuildingFromStock(currentEpoch);
+
+        Debug.Log("🎉 Félicitations ! Passage à l'époque " + currentEpoch + " !");
+        Victory();
+    }
+
     public void RegisterEnemy()
     {
         enemiesAlive++;
@@ -181,7 +197,19 @@ public class GameManager : MonoBehaviour
     {
         if (CurrentPhase == GamePhase.Wave && isSpawningFinished && enemiesAlive <= 0)
         {
-            Victory();
+            if (spawner != null &&
+                spawner.waves != null &&
+                currentWaveIndex >= 0 &&
+                currentWaveIndex < spawner.waves.Count &&
+                spawner.waves[currentWaveIndex] != null &&
+                spawner.waves[currentWaveIndex].Boss)
+            {
+                NextEpoque();
+            }
+            else
+            {
+                Victory();
+            }
         }
     }
 
@@ -198,6 +226,46 @@ public class GameManager : MonoBehaviour
             gold = 0;
 
         Debug.Log("Gold : " + gold);
+    }
+
+    public void AddWood(int amount)
+    {
+        Wood = Wood +  amount;
+        Debug.Log("Wood : " +  Wood);
+    }
+
+    public bool SpendWood(int amount)
+    {
+        if (Wood >= amount)
+        {
+            Wood -= amount;
+            return true;
+        }
+        else
+        {
+            Debug.Log("Pas assez de bois");
+            return false;
+        }
+    }
+
+    public void AddStone(int amount)
+    {
+        Stone = Stone + amount;
+        Debug.Log("Stone : " + Stone);
+    }
+
+    public bool SpendStone(int amount)
+    {
+        if (Stone >= amount)
+        {
+            Stone -= amount;
+            return true;
+        }
+        else
+        {
+            Debug.Log("Pas assez de Pierre");
+            return false;
+        }
     }
 
     public void DamageBase(int amount)

@@ -16,6 +16,7 @@ MonoBehaviour:
   - enemyType: {fileID: 11400000, guid: d9156cabbb49dc24ca8c6423977e7769, type: 2}
     count: 12
     rate: 1.6
-  - enemyType: {fileID: 11400000, guid: d9156cabbb49dc24ca8c6423977e7769, type: 2}
-    count: 12
+  - enemyType: {fileID: 11400000, guid: 7683d6d9163339941a8838a872a91aff, type: 2}
+    count: 1
     rate: 2
+  Boss: 0
