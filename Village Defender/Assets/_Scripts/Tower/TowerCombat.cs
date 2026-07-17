@@ -7,6 +7,11 @@ public class TowerCombat : MonoBehaviour
 
 	[Header("UI")]
     public Image healthBarFill;
+    
+    [Header("Projectiles")]
+    public GameObject projectilePrefab;
+    public Transform projectileSpawn;
+    public float projectileSpeed = 15f;
 
     private float fireCountdown = 0f;
     private Transform targetEnemy;
@@ -81,7 +86,16 @@ public class TowerCombat : MonoBehaviour
         EnemyMovement e = targetEnemy.GetComponent<EnemyMovement>();
         if (e != null)
         {
-            e.TakeDamage(data.damage);
+            if (projectilePrefab != null && projectileSpawn != null && e.transform != null)
+            {
+                GameObject projectile = Instantiate(projectilePrefab, projectileSpawn.position, projectileSpawn.rotation);
+                
+                Projectile projectileScript = projectile.GetComponent<Projectile>();
+                if (projectileScript != null)
+                {
+                    projectileScript.Setup(e.transform, data.damage ,projectileSpeed);
+                }
+            }
         }
     }
 
