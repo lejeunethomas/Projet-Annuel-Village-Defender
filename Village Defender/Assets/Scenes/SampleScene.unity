@@ -4741,6 +4741,7 @@ MonoBehaviour:
   currentWaveIndex: 0
   enemiesAlive: 0
   isSpawningFinished: 0
+  currentEpoch: 1
   spawner: {fileID: 940658299}
   towerBuilder: {fileID: 1030709718}
   baseHealthUI: {fileID: 1909087971}
