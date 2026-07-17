@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5482060a5a3db9444a90e7f6ecce9787, type: 3}
   m_Name: Sniper
   m_EditorClassIdentifier: Assembly-CSharp::TowerData
-  towerName: catapulte
-  towerPrefab: {fileID: 0}
+  towerName: Sniper
+  towerPrefab: {fileID: 6307273590239403016, guid: a502bc29647c4c74097f94a8ae324f3a, type: 3}
   cost: 20
   maxHealth: 12
   range: 12

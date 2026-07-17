@@ -4017,8 +4017,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BuildingInventory
   buildingCatalog:
   - {fileID: 11400000, guid: def52c13e9cfe2c46a47478af9991abd, type: 2}
-  - {fileID: 11400000, guid: 82b7860bfc89cef46a0413736d3111d9, type: 2}
-  ownedCounts: 0000000000000000
+  - {fileID: 11400000, guid: 097cb6e9fe5e53a4f9b693fb1e7def3e, type: 2}
+  - {fileID: 11400000, guid: 246a9105c6c5b3b42885929154dffa18, type: 2}
+  ownedCounts: 000000000000000000000000
 --- !u!4 &1095212494
 Transform:
   m_ObjectHideFlags: 0

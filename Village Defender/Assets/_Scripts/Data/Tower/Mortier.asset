@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5482060a5a3db9444a90e7f6ecce9787, type: 3}
   m_Name: Mortier
   m_EditorClassIdentifier: Assembly-CSharp::TowerData
-  towerName: catapulte
-  towerPrefab: {fileID: 0}
+  towerName: Mortier
+  towerPrefab: {fileID: 6307273590239403016, guid: 39f4f5ce3de5e32488f664d10f098907, type: 3}
   cost: 30
   maxHealth: 20
   range: 9

@@ -19,4 +19,4 @@ MonoBehaviour:
   range: 5
   fireRate: 1
   damage: 15
-  targetType: 1
+  targetType: 0
