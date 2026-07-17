@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Catapulte
   m_EditorClassIdentifier: Assembly-CSharp::TowerData
   towerName: Mortier
-  towerPrefab: {fileID: 6307273590239403016, guid: 39f4f5ce3de5e32488f664d10f098907, type: 3}
+  towerPrefab: {fileID: 6307273590239403016, guid: 7cbe2c027a9a8fa4b8cfad9500f31a69, type: 3}
   epoque: 1
   cost: 30
   maxHealth: 20

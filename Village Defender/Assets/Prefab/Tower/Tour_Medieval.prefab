@@ -177,6 +177,37 @@ MonoBehaviour:
   m_FillOrigin: 1
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &5848317818394181339
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7492135063430106408}
+  m_Layer: 0
+  m_Name: Firepoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7492135063430106408
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5848317818394181339}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.056079984, y: 1.23, z: -0.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7181816337840927127}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6307273590239403016
 GameObject:
   m_ObjectHideFlags: 0
@@ -211,6 +242,7 @@ Transform:
   m_Children:
   - {fileID: 3429627277501712763}
   - {fileID: 5917815571693670442}
+  - {fileID: 7492135063430106408}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &7654927291206146179
@@ -248,6 +280,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TowerCombat
   data: {fileID: 0}
   healthBarFill: {fileID: 3383982929664391689}
+  projectilePrefab: {fileID: 858729005501247381, guid: 963358f2e7a83c743b7f59208fd60e9f, type: 3}
+  projectileSpawn: {fileID: 7492135063430106408}
+  projectileSpeed: 15
 --- !u!208 &7774987776762990287
 NavMeshObstacle:
   m_ObjectHideFlags: 0
