@@ -17,7 +17,7 @@ MonoBehaviour:
   enemyPrefab: {fileID: 8973471828063620200, guid: fb346c91243c0714e819024911824b74, type: 3}
   priority: 1
   maxHealth: 8
-  moveSpeed: 6
+  moveSpeed: 4
   goldReward: 7
   attackDamage: 4
   attackRate: 0.3
