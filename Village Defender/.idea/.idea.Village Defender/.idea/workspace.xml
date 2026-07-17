@@ -11,12 +11,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fca82a27-470f-426d-a69f-3d1b82f3a83d" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Village Defender/.idea/indexLayout.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Village Defender/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Village Defender/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/BuidingInventory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/BuildingInventory.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/BuidingInventory.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/BuildingInventory.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/SimpleSpawner.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/SimpleSpawner.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/TowerBuilder.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/TowerBuilder.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/Data/Tower/TourSorcier.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/Data/Tower/TourSorcier.asset.meta" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,6 +32,7 @@
   }
 }</component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Assets/_Scripts/Data/Tower/Tour.asset" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/_Scripts/Data/Wave/Wave1.asset" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
@@ -116,7 +116,13 @@
       <workItem from="1775573985117" duration="2018000" />
       <workItem from="1775641820260" duration="4195000" />
       <workItem from="1775659850116" duration="3308000" />
-      <workItem from="1775823961637" duration="2396000" />
+      <workItem from="1775823961637" duration="6975000" />
+      <workItem from="1777011296295" duration="10635000" />
+      <workItem from="1778151804643" duration="534000" />
+      <workItem from="1779956038243" duration="3222000" />
+      <workItem from="1781160281080" duration="6361000" />
+      <workItem from="1782305238669" duration="2065000" />
+      <workItem from="1782393283439" duration="564000" />
     </task>
     <servers />
   </component>
