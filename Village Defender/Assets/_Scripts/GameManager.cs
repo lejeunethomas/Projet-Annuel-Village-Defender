@@ -27,6 +27,9 @@ public class GameManager : MonoBehaviour
     public int enemiesAlive = 0;
     public bool isSpawningFinished = false;
 
+    [Header("Époque")] 
+    public int currentEpoch = 1;
+
     [Header("Références gameplay")]
     public SimpleSpawner spawner;
     public TowerBuilder towerBuilder;
@@ -159,6 +162,13 @@ public class GameManager : MonoBehaviour
         SetPhase(GamePhase.Village);
     }
 
+    public void NextEpoque()
+    {
+        currentEpoch++;
+        Debug.Log("🎉 Félicitations ! Passage à l'époque " + currentEpoch + " !");
+        Victory();
+    }
+
     public void RegisterEnemy()
     {
         enemiesAlive++;
@@ -183,7 +193,14 @@ public class GameManager : MonoBehaviour
     {
         if (CurrentPhase == GamePhase.Wave && isSpawningFinished && enemiesAlive <= 0)
         {
-            Victory();
+            if (spawner.waves[currentWaveIndex].Boss == true)
+            {
+                NextEpoque();
+            }
+            else
+            {
+                Victory();
+            }
         }
     }
 
