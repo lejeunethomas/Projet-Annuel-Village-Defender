@@ -19,9 +19,9 @@ OBJECTIF : Structure propre, code modulaire, mécanique de base.
     [X] Créer ScriptableObject "TowerData" (Portée, Dégâts, Cadence, Coût, Prefab)
     [X] Créer ScriptableObject "WaveData" (Liste d'ennemis + délais)
 
-[ ] GAMEPLAY "VOYAGE TEMPOREL" (en cours Thomas)
-    [ ] GameManager : Gérer état "Global" (Epoque A vs Epoque B)
-    [ ] Script changement visuel : Remplacer matériaux/modèles au clic d'un bouton
+[ ] GAMEPLAY "VOYAGE TEMPOREL"
+    [X] GameManager : Gérer état "Global" (Epoque A vs Epoque B)
+    [X] Script changement visuel : Remplacer matériaux/modèles au clic d'un bouton
     [ ] Adapter UI selon l'époque (couleurs/style)
 
 [X] UI DE BASE (HUD)
@@ -55,7 +55,7 @@ DEADLINE : 14/06/2026 (Jalon 4)
 LIVRABLE : Quasi-complet, Assets finaux, Peu de bugs.
 -----------------------------------------------------------------------------
 [ ] GRAPHISMES & AUDIO (JUICE)
-    [ ] Remplacer primitives (cubes) par Modèles 3D (Asset Store Low Poly) (En cours Thomas)
+    [X] Remplacer primitives (cubes) par Modèles 3D (Asset Store Low Poly)
     [ ] Ajouter Particules (Tirs, Explosions, Construction, Hit markers)
     [ ] Audio : SFX (Tirs, Interface, Mort ennemi)
     [ ] Audio : Musique d'ambiance (1 track par époque)
