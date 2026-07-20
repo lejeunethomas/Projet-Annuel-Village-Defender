@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.Serialization;
 
 public class GameManager : MonoBehaviour
 {
@@ -18,6 +17,9 @@ public class GameManager : MonoBehaviour
     public int gold = 100;
     public int wood = 0;
     public int stone = 0;
+    public int iron = 0;
+    public int Wood = 0;
+    public int Stone = 0;
 
     [Header("Base")]
     public int baseMaxHealth = 10;
@@ -217,7 +219,7 @@ public class GameManager : MonoBehaviour
                 currentWaveIndex >= 0 &&
                 currentWaveIndex < spawner.waves.Count &&
                 spawner.waves[currentWaveIndex] != null &&
-                spawner.waves[currentWaveIndex].boss)
+                spawner.waves[currentWaveIndex].Boss)
             {
                 NextEpoque();
             }
@@ -243,10 +245,48 @@ public class GameManager : MonoBehaviour
         Debug.Log("Gold : " + gold);
     }
 
+    public void AddResource(ResourceType type, int amount)
+    {
+        if (amount <= 0)
+            return;
+
+        switch (type)
+        {
+            case ResourceType.Wood:
+                wood += amount;
+                Wood = wood;
+                Debug.Log("Bois : " + wood);
+                break;
+            case ResourceType.Stone:
+                stone += amount;
+                Stone = stone;
+                Debug.Log("Pierre : " + stone);
+                break;
+            case ResourceType.Iron:
+                iron += amount;
+                Debug.Log("Fer : " + iron);
+                break;
+        }
+    }
+
+    public int GetResource(ResourceType type)
+    {
+        switch (type)
+        {
+            case ResourceType.Wood:
+                return wood;
+            case ResourceType.Stone:
+                return stone;
+            case ResourceType.Iron:
+                return iron;
+            default:
+                return 0;
+        }
+    }
+
     public void AddWood(int amount)
     {
-        wood = wood +  amount;
-        Debug.Log("Wood : " +  wood);
+        AddResource(ResourceType.Wood, amount);
     }
 
     public bool SpendWood(int amount)
@@ -254,6 +294,7 @@ public class GameManager : MonoBehaviour
         if (wood >= amount)
         {
             wood -= amount;
+            Wood = wood;
             return true;
         }
         else
@@ -265,8 +306,7 @@ public class GameManager : MonoBehaviour
 
     public void AddStone(int amount)
     {
-        stone = stone + amount;
-        Debug.Log("Stone : " + stone);
+        AddResource(ResourceType.Stone, amount);
     }
 
     public bool SpendStone(int amount)
@@ -274,6 +314,7 @@ public class GameManager : MonoBehaviour
         if (stone >= amount)
         {
             stone -= amount;
+            Stone = stone;
             return true;
         }
         else
