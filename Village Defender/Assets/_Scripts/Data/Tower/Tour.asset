@@ -15,6 +15,7 @@ MonoBehaviour:
   towerName: Tour
   towerPrefab: {fileID: 6307273590239403016, guid: 10e84724d7f22dd42a922ef274d6b811, type: 3}
   epoque: 1
+  towerIcon: {fileID: 21300000, guid: ab96ae670e1270746b3dbac5eedca41a, type: 3}
   cost: 1
   maxHealth: 10
   range: 5

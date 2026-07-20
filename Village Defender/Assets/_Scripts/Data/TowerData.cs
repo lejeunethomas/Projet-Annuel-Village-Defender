@@ -14,6 +14,7 @@ public class TowerData : ScriptableObject
     public string towerName = "catapulte";
     public GameObject towerPrefab;
     public GameEpoque epoque = GameEpoque.Antiquité;
+    public Sprite towerIcon;
 
     [Header("Économie")]
     public int cost = 15;

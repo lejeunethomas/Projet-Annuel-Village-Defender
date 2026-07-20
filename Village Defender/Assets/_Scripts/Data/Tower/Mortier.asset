@@ -15,6 +15,7 @@ MonoBehaviour:
   towerName: Mortier
   towerPrefab: {fileID: 6307273590239403016, guid: 39f4f5ce3de5e32488f664d10f098907, type: 3}
   epoque: 1
+  towerIcon: {fileID: 21300000, guid: 6ceb23c81e5ed9540b08e0917e30b76a, type: 3}
   cost: 1
   maxHealth: 10
   range: 5

@@ -91,17 +91,31 @@ public class GameManager : MonoBehaviour
         if (endWaveUI != null)
             endWaveUI.gameObject.SetActive(newPhase == GamePhase.EndScreen);
 
-        if (towerBuilder != null)
-            towerBuilder.SetCanBuild(newPhase == GamePhase.Preparation);
+        if (newPhase == GamePhase.Preparation)
+        {
+            if (villageUIController != null)
+            {
+                villageUIController.RefreshHotbar();
+            }
 
-        if (newPhase == GamePhase.Preparation && towerBuilder != null)
-            towerBuilder.RefreshStockDropdown();
-
-        if (newPhase != GamePhase.Village && villageUIController != null)
-            villageUIController.CloseAllPanels();
-
-        if (villageUIController != null)
-            villageUIController.RefreshTexts();
+            if (towerBuilder != null)
+            {
+                towerBuilder.SelectTowerFromCatalog(-1);
+                towerBuilder.SetCanBuild(true);
+            }
+        }
+        else 
+        {
+            if (villageUIController != null)
+            {
+                villageUIController.CloseAllPanels();
+            }
+            
+            if (towerBuilder != null)
+            {
+                towerBuilder.SetCanBuild(false);
+            }
+        }
 
         Debug.Log("Phase actuelle : " + newPhase);
     }

@@ -5,131 +5,76 @@ using UnityEngine.UI;
 public class VillageUIController : MonoBehaviour
 {
     [Header("Références")]
-    public BuildingInventory inventory;
+    public BuildingInventory inventory; 
     public TowerBuilder towerBuilder;
 
-    [Header("Panels")]
-    public GameObject shopPanel;
-    public GameObject stockPanel;
-
-    [Header("Boutique (Génération Auto)")]
-    public Transform shopContainer;
-    public GameObject shopItemPrefab;
-
-    [Header("Stock")]
-    public TMP_Text stockText;
+    [Header("Hotbar")]
+    public GameObject hotbarPanel;
+    public Transform hotbarContainer;
+    public GameObject hotbarButtonPrefab;
 
     private void Start()
     {
-        CloseAllPanels();
-        RefreshTexts();
+        RefreshHotbar();
     }
 
-    public void ToggleShopPanel()
-    {
-        if (GameManager.Instance == null || GameManager.Instance.CurrentPhase != GameManager.GamePhase.Village)
-            return;
-
-        bool newState = !shopPanel.activeSelf;
-        shopPanel.SetActive(newState);
-
-        if (stockPanel != null && newState)
-            stockPanel.SetActive(false);
-
-        RefreshTexts();
-    }
-
-    public void ToggleStockPanel()
-    {
-        if (GameManager.Instance == null || GameManager.Instance.CurrentPhase != GameManager.GamePhase.Village)
-            return;
-
-        bool newState = !stockPanel.activeSelf;
-        stockPanel.SetActive(newState);
-
-        if (shopPanel != null && newState)
-            shopPanel.SetActive(false);
-
-        RefreshTexts();
-    }
-
-    public void CloseAllPanels()
-    {
-        if (shopPanel != null)
-            shopPanel.SetActive(false);
-
-        if (stockPanel != null)
-            stockPanel.SetActive(false);
-    }
-
-    public void BuyBuilding(int catalogIndex)
-    {
-        if (GameManager.Instance == null || GameManager.Instance.CurrentPhase != GameManager.GamePhase.Village)
-            return;
-
-        if (inventory == null)
-            return;
-
-        bool success = inventory.BuyBuilding(catalogIndex);
-
-        if (success && towerBuilder != null)
-            towerBuilder.RefreshStockDropdown();
-
-        RefreshTexts();
-    }
-
-    public void RefreshTexts()
+    public void RefreshHotbar()
     {
         if (inventory == null || GameManager.Instance == null) return;
         
         int epoqueActuelle = GameManager.Instance.currentEpoch;
 
-        if (shopContainer != null && shopItemPrefab != null)
+        foreach (Transform child in hotbarContainer)
         {
-            foreach (Transform child in shopContainer)
-            {
-                Destroy(child.gameObject);
-            }
+            Destroy(child.gameObject);
+        }
 
-            for (int i = 0; i < inventory.GetCatalogCount(); i++)
-            {
-                TowerData data = inventory.GetBuilding(i);
+        for (int i = 0; i < inventory.GetCatalogCount(); i++)
+        {
+            TowerData data = inventory.GetBuilding(i);
 
-                if (data != null && (int)data.epoque == epoqueActuelle)
+            if (data != null && (int)data.epoque == epoqueActuelle)
+            {
+                GameObject newBtn = Instantiate(hotbarButtonPrefab, hotbarContainer);
+                
+                TMP_Text btnText = newBtn.GetComponentInChildren<TMP_Text>();
+                if (btnText != null)
                 {
-                    GameObject newBtn = Instantiate(shopItemPrefab, shopContainer);
-                    
-                    TMP_Text btnText = newBtn.GetComponentInChildren<TMP_Text>();
-                    if (btnText != null)
+                    btnText.text = data.cost + " Or";
+                }
+                
+                Transform iconTransform = newBtn.transform.Find("Icon");
+                if (iconTransform != null)
+                {
+                    Image iconImage = iconTransform.GetComponent<Image>();
+                    if (iconImage != null && data.towerIcon != null)
                     {
-                        btnText.text = data.GetDisplayName() + " (" + data.cost + " or)";
+                        iconImage.sprite = data.towerIcon;
                     }
+                }
 
-                    Button buttonComponent = newBtn.GetComponent<Button>();
-                    if (buttonComponent != null)
-                    {
-                        int indexCatalogue = i;
-                        buttonComponent.onClick.AddListener(() => BuyBuilding(indexCatalogue));
-                    }
+                Button buttonComponent = newBtn.GetComponent<Button>();
+                if (buttonComponent != null)
+                {
+                    int indexCatalogue = i;
+                    buttonComponent.onClick.AddListener(() => SelectTowerForBuilding(indexCatalogue));
                 }
             }
         }
+    }
 
-        if (stockText != null)
+    public void CloseAllPanels()
+    {
+        if (hotbarPanel != null)
         {
-            string content = "Stock :\n\n";
-
-            for (int i = 0; i < inventory.GetCatalogCount(); i++)
-            {
-                TowerData data = inventory.GetBuilding(i);
-                int count = inventory.GetOwnedCount(i);
-
-                if (data != null && ((int)data.epoque == epoqueActuelle || count > 0))
-                {
-                    content += "- " + data.GetDisplayName() + " x" + count + "\n";
-                }
-            }
-            stockText.text = content;
+            hotbarPanel.SetActive(false);
         }
+    }
+    
+    public void SelectTowerForBuilding(int index)
+    {
+        towerBuilder.SelectTowerFromCatalog(index);
+
+        Debug.Log("Tour sélectionnée : " + inventory.GetBuilding(index).name);
     }
 }

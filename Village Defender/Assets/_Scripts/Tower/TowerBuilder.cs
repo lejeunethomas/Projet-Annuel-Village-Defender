@@ -19,7 +19,6 @@ public class TowerBuilder : MonoBehaviour
     public float buildHeight = 0.5f;
 
     [Header("UI préparation")]
-    public TMP_Dropdown selectBatDropdown;
     public TMP_Text towerText;
     public TMP_Text modeButtonText;
 
@@ -27,7 +26,6 @@ public class TowerBuilder : MonoBehaviour
     private int _selectedCatalogIndex = -1;
     private BuildMode _currentMode = BuildMode.Build;
 
-    private List<int> _dropdownToCatalogIndex = new List<int>();
     private List<PlacedBuilding> _placedBuildings = new List<PlacedBuilding>();
 
     [System.Serializable]
@@ -35,6 +33,12 @@ public class TowerBuilder : MonoBehaviour
     {
         public GameObject instance;
         public int catalogIndex;
+    }
+
+    private void Start()
+    {
+        UpdateModeButtonText();
+        UpdateSelectedTowerText();
     }
 
     public void SetCanBuild(bool value)
@@ -45,64 +49,10 @@ public class TowerBuilder : MonoBehaviour
             SetMode(BuildMode.Build);
     }
 
-    private void Start()
+    public void SelectTowerFromCatalog(int index)
     {
-        RefreshStockDropdown();
-        UpdateModeButtonText();
-    }
-
-    public void RefreshStockDropdown()
-    {
-        _dropdownToCatalogIndex.Clear();
-
-        if (selectBatDropdown != null)
-        {
-            selectBatDropdown.onValueChanged.RemoveAllListeners();
-            selectBatDropdown.ClearOptions();
-        }
-
-        if (inventory == null)
-        {
-            UpdateSelectedTowerText();
-            return;
-        }
-
-        List<string> options = new List<string>();
-
-        for (int i = 0; i < inventory.GetCatalogCount(); i++)
-        {
-            TowerData data = inventory.GetBuilding(i);
-            int count = inventory.GetOwnedCount(i);
-
-            if (data != null && count > 0)
-            {
-                _dropdownToCatalogIndex.Add(i);
-                options.Add(data.GetDisplayName() + " x" + count);
-            }
-        }
-
-        if (selectBatDropdown != null)
-        {
-            if (options.Count > 0)
-            {
-                selectBatDropdown.AddOptions(options);
-                selectBatDropdown.value = 0;
-                selectBatDropdown.RefreshShownValue();
-                selectBatDropdown.onValueChanged.AddListener(OnDropdownChanged);
-
-                OnDropdownChanged(0);
-            }
-            else
-            {
-                _selectedCatalogIndex = -1;
-            }
-        }
-        else
-        {
-            _selectedCatalogIndex = _dropdownToCatalogIndex.Count > 0 ? _dropdownToCatalogIndex[0] : -1;
-        }
-
-        UpdateSelectedTowerText();
+        _selectedCatalogIndex = index;
+        SetMode(BuildMode.Build);
     }
 
     public void ToggleBuildDeleteMode()
@@ -133,20 +83,6 @@ public class TowerBuilder : MonoBehaviour
             : "Mode : Suppression";
     }
 
-    void OnDropdownChanged(int dropdownIndex)
-    {
-        if (dropdownIndex < 0 || dropdownIndex >= _dropdownToCatalogIndex.Count)
-        {
-            _selectedCatalogIndex = -1;
-        }
-        else
-        {
-            _selectedCatalogIndex = _dropdownToCatalogIndex[dropdownIndex];
-        }
-
-        UpdateSelectedTowerText();
-    }
-
     void Update()
     {
         if (!_canBuild)
@@ -166,64 +102,45 @@ public class TowerBuilder : MonoBehaviour
 
     void TryBuild()
     {
-        if (inventory == null)
+        if (inventory == null || _selectedCatalogIndex < 0)
         {
-            Debug.LogError("Aucun BuildingInventory assigné dans TowerBuilder.");
-            return;
-        }
-
-        if (_selectedCatalogIndex < 0)
-        {
-            Debug.Log("Aucun bâtiment disponible dans le stock.");
+            Debug.Log("Aucun bâtiment sélectionné.");
             return;
         }
 
         TowerData towerToBuild = inventory.GetBuilding(_selectedCatalogIndex);
-        if (towerToBuild == null)
-        {
-            Debug.LogError("Le bâtiment sélectionné est null.");
+        if (towerToBuild == null || towerToBuild.towerPrefab == null)
             return;
-        }
 
-        if (towerToBuild.towerPrefab == null)
-        {
-            Debug.LogError("Le prefab du bâtiment sélectionné est null.");
-            return;
-        }
-
-        if (inventory.GetOwnedCount(_selectedCatalogIndex) <= 0)
-        {
-            Debug.Log("Tu ne possèdes plus ce bâtiment.");
-            RefreshStockDropdown();
-            return;
-        }
-
-        if (Camera.main == null)
-        {
-            Debug.LogError("Aucune caméra avec le tag MainCamera.");
-            return;
-        }
+        if (Camera.main == null) return;
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
         if (Physics.Raycast(ray, out hit, 500f, buildLayerMask))
         {
+            if (inventory.GetOwnedCount(_selectedCatalogIndex) > 0)
+            {
+                inventory.ConsumeBuilding(_selectedCatalogIndex);
+            }
+            else
+            {
+                bool achatReussi = inventory.BuyBuilding(_selectedCatalogIndex);
+                if (!achatReussi)
+                {
+                    Debug.Log("Pas assez d'or pour construire cette tour !");
+                    return;
+                }
+                inventory.ConsumeBuilding(_selectedCatalogIndex);
+            }
+
             BuildTower(hit.point, towerToBuild);
-        }
-        else
-        {
-            Debug.Log("Le rayon n'a rien touché. Vérifie le collider du sol et le LayerMask.");
         }
     }
 
     void TryRemoveTower()
     {
-        if (Camera.main == null)
-        {
-            Debug.LogError("Aucune caméra avec le tag MainCamera.");
-            return;
-        }
+        if (Camera.main == null) return;
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
@@ -236,28 +153,19 @@ public class TowerBuilder : MonoBehaviour
         {
             RemovePlacedBuilding(placedIndex);
         }
-        else
-        {
-            Debug.Log("Aucune tour placée sélectionnée.");
-        }
     }
 
     bool TryGetPlacedBuildingIndex(Transform hitTransform, out int placedIndex)
     {
         placedIndex = -1;
-
-        if (hitTransform == null)
-            return false;
+        if (hitTransform == null) return false;
 
         for (int i = 0; i < _placedBuildings.Count; i++)
         {
             PlacedBuilding placed = _placedBuildings[i];
-
-            if (placed == null || placed.instance == null)
-                continue;
+            if (placed == null || placed.instance == null) continue;
 
             Transform current = hitTransform;
-
             while (current != null)
             {
                 if (current.gameObject == placed.instance)
@@ -265,22 +173,18 @@ public class TowerBuilder : MonoBehaviour
                     placedIndex = i;
                     return true;
                 }
-
                 current = current.parent;
             }
         }
-
         return false;
     }
 
     void RemovePlacedBuilding(int placedIndex)
     {
-        if (placedIndex < 0 || placedIndex >= _placedBuildings.Count)
-            return;
+        if (placedIndex < 0 || placedIndex >= _placedBuildings.Count) return;
 
         PlacedBuilding placed = _placedBuildings[placedIndex];
-        if (placed == null)
-            return;
+        if (placed == null) return;
 
         if (inventory != null)
             inventory.AddBuildingToStock(placed.catalogIndex, 1);
@@ -289,7 +193,7 @@ public class TowerBuilder : MonoBehaviour
             Destroy(placed.instance);
 
         _placedBuildings.RemoveAt(placedIndex);
-        RefreshStockDropdown();
+        UpdateSelectedTowerText();
     }
 
     void BuildTower(Vector3 position, TowerData towerToBuild)
@@ -305,79 +209,54 @@ public class TowerBuilder : MonoBehaviour
             combat.data = towerToBuild;
         }
 
-        inventory.ConsumeBuilding(_selectedCatalogIndex);
-
         _placedBuildings.Add(new PlacedBuilding
         {
             instance = tower,
             catalogIndex = _selectedCatalogIndex
         });
 
-        RefreshStockDropdown();
+        UpdateSelectedTowerText();
     }
 
     public void ReturnAllPlacedBuildingsToStock()
     {
-        if (inventory == null)
-            return;
+        if (inventory == null) return;
 
         for (int i = _placedBuildings.Count - 1; i >= 0; i--)
         {
             PlacedBuilding placed = _placedBuildings[i];
-
             if (placed != null)
             {
-                TowerData data = inventory.GetBuilding(placed.catalogIndex);
-                if (data != null)
-                {
-                    inventory.AddBuildingToStock(placed.catalogIndex, 1);
-                }
-
-                if (placed.instance != null)
-                {
-                    Destroy(placed.instance);
-                }
+                inventory.AddBuildingToStock(placed.catalogIndex, 1);
+                if (placed.instance != null) Destroy(placed.instance);
             }
         }
 
         _placedBuildings.Clear();
-        RefreshStockDropdown();
+        UpdateSelectedTowerText();
     }
 
     void UpdateSelectedTowerText()
     {
-        if (towerText == null)
-            return;
+        if (towerText == null) return;
 
-        if (inventory == null)
+        if (_selectedCatalogIndex < 0 || inventory == null)
         {
-            towerText.text = "Aucun bâtiment disponible";
+            towerText.text = "Sélectionnez une tour dans la Hotbar";
             return;
         }
-        
+
         TowerData data = inventory.GetBuilding(_selectedCatalogIndex);
-        int count = inventory.GetOwnedCount(_selectedCatalogIndex);
-
-        if (_currentMode == BuildMode.Delete)
+        if (data != null)
         {
-            towerText.text = data != null
-                ? data.GetDisplayName() + " | Stock : " + count
-                : "Aucun bâtiment disponible";
-            return;
+            int stock = inventory.GetOwnedCount(_selectedCatalogIndex);
+            
+            if (_currentMode == BuildMode.Delete)
+                towerText.text = "Clic pour supprimer";
+            else if (stock > 0)
+                towerText.text = data.GetDisplayName() + " (En Stock : " + stock + ")";
+            else
+                towerText.text = data.GetDisplayName() + " (" + data.cost + " Or)";
         }
-
-        if (inventory == null || _selectedCatalogIndex < 0)
-        {
-            towerText.text = "Aucun bâtiment disponible";
-            return;
-        }
-
-        if (data == null)
-        {
-            towerText.text = "Aucun bâtiment disponible";
-            return;
-        }
-
-        towerText.text = data.GetDisplayName() + " | Stock : " + count;
     }
 }

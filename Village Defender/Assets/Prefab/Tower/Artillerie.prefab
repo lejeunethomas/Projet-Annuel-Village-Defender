@@ -278,8 +278,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 184e3132bd559cd42a9455c9152fde90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TowerCombat
-  data: {fileID: 0}
-  healthBarFill: {fileID: 3383982929664391689}
+  data: {fileID: 11400000, guid: a9a92d7cbdc24b6498b898be02f62fb2, type: 2}
+  healthBarFill: {fileID: 0}
   projectilePrefab: {fileID: 858729005501247381, guid: 963358f2e7a83c743b7f59208fd60e9f, type: 3}
   projectileSpawn: {fileID: 6027224975637588566}
   projectileSpeed: 15
