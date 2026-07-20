@@ -19,16 +19,16 @@ public class ResourceFarm
     public Transform spawnPoint;
     public bool purchased;
 
-    private GameObject instance;
+    private GameObject _instance;
 
     public GameObject Instance
     {
-        get { return instance; }
+        get { return _instance; }
     }
 
     public void SetInstance(GameObject newInstance)
     {
-        instance = newInstance;
+        _instance = newInstance;
     }
 }
 
@@ -41,7 +41,7 @@ public class ResourceFarmManager : MonoBehaviour
     public float productionInterval = 1f;
     public int productionAmount = 1;
 
-    private float productionTimer;
+    private float _productionTimer;
 
     private void OnValidate()
     {
@@ -57,12 +57,12 @@ public class ResourceFarmManager : MonoBehaviour
         if (GameManager.Instance == null)
             return;
 
-        productionTimer += Time.deltaTime;
+        _productionTimer += Time.deltaTime;
 
-        if (productionTimer < productionInterval)
+        if (_productionTimer < productionInterval)
             return;
 
-        productionTimer = 0f;
+        _productionTimer = 0f;
         ProduceResources();
     }
 

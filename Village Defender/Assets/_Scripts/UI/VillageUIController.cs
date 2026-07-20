@@ -31,6 +31,8 @@ public class VillageUIController : MonoBehaviour
 
     public void RefreshHotbar()
     {
+        if (hotbarPanel != null) hotbarPanel.SetActive(true); 
+
         RefreshFarmUI();
 
         if (inventory == null || GameManager.Instance == null) return;

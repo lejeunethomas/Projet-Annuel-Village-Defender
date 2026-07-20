@@ -18,8 +18,6 @@ public class GameManager : MonoBehaviour
     public int wood = 0;
     public int stone = 0;
     public int iron = 0;
-    public int Wood = 0;
-    public int Stone = 0;
 
     [Header("Base")]
     public int baseMaxHealth = 10;
@@ -219,7 +217,7 @@ public class GameManager : MonoBehaviour
                 currentWaveIndex >= 0 &&
                 currentWaveIndex < spawner.waves.Count &&
                 spawner.waves[currentWaveIndex] != null &&
-                spawner.waves[currentWaveIndex].Boss)
+                spawner.waves[currentWaveIndex].boss)
             {
                 NextEpoque();
             }
@@ -249,17 +247,15 @@ public class GameManager : MonoBehaviour
     {
         if (amount <= 0)
             return;
-
+        
         switch (type)
         {
             case ResourceType.Wood:
                 wood += amount;
-                Wood = wood;
                 Debug.Log("Bois : " + wood);
                 break;
             case ResourceType.Stone:
                 stone += amount;
-                Stone = stone;
                 Debug.Log("Pierre : " + stone);
                 break;
             case ResourceType.Iron:
@@ -294,7 +290,6 @@ public class GameManager : MonoBehaviour
         if (wood >= amount)
         {
             wood -= amount;
-            Wood = wood;
             return true;
         }
         else
@@ -314,7 +309,6 @@ public class GameManager : MonoBehaviour
         if (stone >= amount)
         {
             stone -= amount;
-            Stone = stone;
             return true;
         }
         else
