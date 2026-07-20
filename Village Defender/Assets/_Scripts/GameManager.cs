@@ -15,6 +15,9 @@ public class GameManager : MonoBehaviour
 
     [Header("Ressources")]
     public int gold = 100;
+    public int wood = 0;
+    public int stone = 0;
+    public int iron = 0;
     public int Wood = 0;
     public int Stone = 0;
 
@@ -228,17 +231,56 @@ public class GameManager : MonoBehaviour
         Debug.Log("Gold : " + gold);
     }
 
+    public void AddResource(ResourceType type, int amount)
+    {
+        if (amount <= 0)
+            return;
+
+        switch (type)
+        {
+            case ResourceType.Wood:
+                wood += amount;
+                Wood = wood;
+                Debug.Log("Bois : " + wood);
+                break;
+            case ResourceType.Stone:
+                stone += amount;
+                Stone = stone;
+                Debug.Log("Pierre : " + stone);
+                break;
+            case ResourceType.Iron:
+                iron += amount;
+                Debug.Log("Fer : " + iron);
+                break;
+        }
+    }
+
+    public int GetResource(ResourceType type)
+    {
+        switch (type)
+        {
+            case ResourceType.Wood:
+                return wood;
+            case ResourceType.Stone:
+                return stone;
+            case ResourceType.Iron:
+                return iron;
+            default:
+                return 0;
+        }
+    }
+
     public void AddWood(int amount)
     {
-        Wood = Wood +  amount;
-        Debug.Log("Wood : " +  Wood);
+        AddResource(ResourceType.Wood, amount);
     }
 
     public bool SpendWood(int amount)
     {
-        if (Wood >= amount)
+        if (wood >= amount)
         {
-            Wood -= amount;
+            wood -= amount;
+            Wood = wood;
             return true;
         }
         else
@@ -250,15 +292,15 @@ public class GameManager : MonoBehaviour
 
     public void AddStone(int amount)
     {
-        Stone = Stone + amount;
-        Debug.Log("Stone : " + Stone);
+        AddResource(ResourceType.Stone, amount);
     }
 
     public bool SpendStone(int amount)
     {
-        if (Stone >= amount)
+        if (stone >= amount)
         {
-            Stone -= amount;
+            stone -= amount;
+            Stone = stone;
             return true;
         }
         else

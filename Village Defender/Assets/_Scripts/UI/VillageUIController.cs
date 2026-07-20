@@ -7,6 +7,7 @@ public class VillageUIController : MonoBehaviour
     [Header("Références")]
     public BuildingInventory inventory;
     public TowerBuilder towerBuilder;
+    public ResourceFarmManager resourceFarmManager;
 
     [Header("Panels")]
     public GameObject shopPanel;
@@ -19,10 +20,19 @@ public class VillageUIController : MonoBehaviour
     [Header("Stock")]
     public TMP_Text stockText;
 
+    [Header("Fermes")]
+    public Button woodFarmButton;
+    public Button stoneFarmButton;
+    public Button ironFarmButton;
+    public TMP_Text woodFarmButtonText;
+    public TMP_Text stoneFarmButtonText;
+    public TMP_Text ironFarmButtonText;
+
     private void Start()
     {
         CloseAllPanels();
         RefreshTexts();
+        RefreshFarmUI();
     }
 
     public void ToggleShopPanel()
@@ -37,6 +47,7 @@ public class VillageUIController : MonoBehaviour
             stockPanel.SetActive(false);
 
         RefreshTexts();
+        RefreshFarmUI();
     }
 
     public void ToggleStockPanel()
@@ -76,10 +87,43 @@ public class VillageUIController : MonoBehaviour
             towerBuilder.RefreshStockDropdown();
 
         RefreshTexts();
+        RefreshFarmUI();
+    }
+
+    public void BuyWoodFarm()
+    {
+        if (resourceFarmManager != null)
+            resourceFarmManager.BuyWoodFarm();
+        else
+            Debug.LogError("Achat impossible : aucun ResourceFarmManager assigne dans VillageUIController.");
+
+        RefreshFarmUI();
+    }
+
+    public void BuyStoneFarm()
+    {
+        if (resourceFarmManager != null)
+            resourceFarmManager.BuyStoneFarm();
+        else
+            Debug.LogError("Achat impossible : aucun ResourceFarmManager assigne dans VillageUIController.");
+
+        RefreshFarmUI();
+    }
+
+    public void BuyIronFarm()
+    {
+        if (resourceFarmManager != null)
+            resourceFarmManager.BuyIronFarm();
+        else
+            Debug.LogError("Achat impossible : aucun ResourceFarmManager assigne dans VillageUIController.");
+
+        RefreshFarmUI();
     }
 
     public void RefreshTexts()
     {
+        RefreshFarmUI();
+
         if (inventory == null || GameManager.Instance == null) return;
         
         int epoqueActuelle = GameManager.Instance.currentEpoch;
@@ -131,5 +175,56 @@ public class VillageUIController : MonoBehaviour
             }
             stockText.text = content;
         }
+    }
+
+    public void RefreshFarmUI()
+    {
+        RefreshOneFarmUI(ResourceType.Wood, woodFarmButton, woodFarmButtonText);
+        RefreshOneFarmUI(ResourceType.Stone, stoneFarmButton, stoneFarmButtonText);
+        RefreshOneFarmUI(ResourceType.Iron, ironFarmButton, ironFarmButtonText);
+    }
+
+    private void RefreshOneFarmUI(ResourceType resourceType, Button button, TMP_Text buttonText)
+    {
+        if (button == null && buttonText == null)
+            return;
+
+        if (resourceFarmManager == null)
+        {
+            if (button != null)
+                button.interactable = false;
+
+            if (buttonText != null)
+                buttonText.text = "Ferme indisponible";
+
+            return;
+        }
+
+        if (!resourceFarmManager.HasFarm(resourceType))
+        {
+            if (button != null)
+                button.interactable = false;
+
+            if (buttonText != null)
+                buttonText.text = "Ferme indisponible";
+
+            return;
+        }
+
+        string displayName = resourceFarmManager.GetFarmDisplayName(resourceType);
+        int cost = resourceFarmManager.GetFarmCost(resourceType);
+        bool purchased = resourceFarmManager.IsFarmPurchased(resourceType);
+        bool enoughGold = GameManager.Instance != null && GameManager.Instance.gold >= cost;
+
+        if (buttonText != null)
+        {
+            if (purchased)
+                buttonText.text = displayName + " - Achet\u00e9e";
+            else
+                buttonText.text = displayName + " - " + cost + " or";
+        }
+
+        if (button != null)
+            button.interactable = !purchased && enoughGold;
     }
 }

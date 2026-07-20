@@ -11,16 +11,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fca82a27-470f-426d-a69f-3d1b82f3a83d" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Village Defender/.idea/indexLayout.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Village Defender/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Village Defender/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/Data/Tower/TourSorcier.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/Data/Tower/TourSorcier.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/GameManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/GameManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/UI/HUDUI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/UI/HUDUI.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/UI/VillageUIController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/UI/VillageUIController.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="EmbeddingIndexingInfo">
+    <option name="cachedIndexableFilesCount" value="85" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
@@ -35,7 +37,70 @@
     <setting file="file://$PROJECT_DIR$/Assets/_Scripts/Data/Tower/Tour.asset" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/_Scripts/Data/Wave/Wave1.asset" root0="FORCE_HIGHLIGHTING" />
   </component>
+  <component name="McpProjectServerCommands">
+    <commands />
+    <urls />
+  </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
+  <component name="NextEditCompletionFeaturesState">
+    <decayedCancelled>
+      <entry key="MS100" value="1.341126560712976" />
+      <entry key="MS500" value="2.57760295170829" />
+      <entry key="S2" value="3.603990736159896" />
+      <entry key="S5" value="5.818663077238328" />
+      <entry key="S10" value="9.887027404737077" />
+      <entry key="S30" value="17.18767021231274" />
+      <entry key="S60" value="26.04801056784361" />
+      <entry key="M2" value="47.07664562041876" />
+      <entry key="M5" value="117.92252971065061" />
+      <entry key="M10" value="216.81343579176243" />
+      <entry key="M15" value="298.56692364791206" />
+      <entry key="M30" value="465.38596562987044" />
+      <entry key="H1" value="618.5329350357741" />
+      <entry key="H2" value="725.7921966592027" />
+      <entry key="H4" value="789.7749085632488" />
+      <entry key="D1" value="849.3413976928388" />
+      <entry key="W1" value="860.1757374593091" />
+    </decayedCancelled>
+    <decayedSelected>
+      <entry key="MS100" value="0.0" />
+      <entry key="MS500" value="0.0" />
+      <entry key="S2" value="0.0" />
+      <entry key="S5" value="4.3663781037254715E-222" />
+      <entry key="S10" value="2.0895880224880167E-111" />
+      <entry key="S30" value="1.2784592509644384E-37" />
+      <entry key="S60" value="3.5755548533960964E-19" />
+      <entry key="M2" value="5.979594345267936E-10" />
+      <entry key="M5" value="2.0448840572553987E-4" />
+      <entry key="M10" value="0.0142999442560292" />
+      <entry key="M15" value="0.05891459497339907" />
+      <entry key="M30" value="0.24272328889787134" />
+      <entry key="H1" value="0.4926695534512706" />
+      <entry key="H2" value="0.701904233817737" />
+      <entry key="H4" value="0.8377972510206281" />
+      <entry key="D1" value="0.9709342513627983" />
+      <entry key="W1" value="0.9957950762280673" />
+    </decayedSelected>
+    <decayedShown>
+      <entry key="MS100" value="1.3173290415324823" />
+      <entry key="MS500" value="2.557348026907256" />
+      <entry key="S2" value="3.5937023056887556" />
+      <entry key="S5" value="5.8128491098121" />
+      <entry key="S10" value="9.882762057091792" />
+      <entry key="S30" value="17.18539887953418" />
+      <entry key="S60" value="26.046394377529804" />
+      <entry key="M2" value="47.0752314311279" />
+      <entry key="M5" value="117.92122283166151" />
+      <entry key="M10" value="216.82622886489986" />
+      <entry key="M15" value="298.62432032691964" />
+      <entry key="M30" value="465.62727455012305" />
+      <entry key="H1" value="619.024540468381" />
+      <entry key="H2" value="726.4934322253447" />
+      <entry key="H4" value="790.6123288678866" />
+      <entry key="D1" value="850.3122623225698" />
+      <entry key="W1" value="861.1715224103991" />
+    </decayedShown>
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 7
 }</component>
@@ -44,26 +109,28 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
-    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;Preprod&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.build.unityPlugin&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.MCP Project settings loaded": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.readMode.enableVisualFormatting": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "cidr.known.project.marker": "true",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "git-widget-placeholder": "Preprod",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.build.unityPlugin",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected="Standalone Player.Start Unity">
     <configuration name="Start Unity" type="RunUnityExe" factoryName="Unity Executable">
       <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\6000.3.7f1\Editor\Unity.exe" />
@@ -123,6 +190,8 @@
       <workItem from="1781160281080" duration="6361000" />
       <workItem from="1782305238669" duration="2065000" />
       <workItem from="1782393283439" duration="564000" />
+      <workItem from="1784303519565" duration="4268000" />
+      <workItem from="1784534581944" duration="2882000" />
     </task>
     <servers />
   </component>
