@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 [CreateAssetMenu(fileName = "NewWave", menuName = "VillageDefender/WaveData")]
 public class WaveData : ScriptableObject
@@ -13,5 +14,5 @@ public class WaveData : ScriptableObject
     }
 
     public List<EnemyGroup> groups;
-    public bool Boss = false;
+    public bool boss = false;
 }

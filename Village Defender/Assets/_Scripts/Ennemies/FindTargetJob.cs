@@ -13,22 +13,22 @@ public struct FindTargetJob : IJobParallelFor
     public void Execute(int index)
     {
         EnemyTargetingData ennemi = listeEnnemis[index];
-        int Target = -1; 
+        int target = -1; 
         
         if (ennemi.targetPriority == 1) 
         { 
-            float Rangemin = float.MaxValue; 
+            float rangemin = float.MaxValue; 
             for(int i = 0; i < listeTours.Length; i++) 
             { 
                 TowerTargetingData tour = listeTours[i];
-                float Range = math.distancesq(ennemi.position, tour.position); 
-                if (Range < Rangemin) 
+                float range = math.distancesq(ennemi.position, tour.position); 
+                if (range < rangemin) 
                 { 
-                    Rangemin = Range; 
-                    Target = tour.id;
+                    rangemin = range; 
+                    target = tour.id;
                 }
             }
         }
-        resultats[index] = Target;
+        resultats[index] = target;
     }
 }
