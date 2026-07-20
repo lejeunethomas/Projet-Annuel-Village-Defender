@@ -4,20 +4,20 @@ using UnityEngine.AI;
 public class EnemyMovement : MonoBehaviour
 {
     public EnemyData data;
-    private NavMeshAgent agent;
-    private int currentHealth;
-	private Transform Target;
-	private float attackTimer;
+    private NavMeshAgent _agent;
+    private int _currentHealth;
+	private Transform _target;
+	private float _attackTimer;
 
     void Start()
     {
-        agent = GetComponent<NavMeshAgent>();
+        _agent = GetComponent<NavMeshAgent>();
         
         if (data != null)
         {
-            agent.speed = data.moveSpeed;
-			agent.stoppingDistance = data.attackRange;
-            currentHealth = data.maxHealth;
+            _agent.speed = data.moveSpeed;
+			_agent.stoppingDistance = data.attackRange;
+            _currentHealth = data.maxHealth;
         }
 
         if(TargetManager.Instance != null)
@@ -28,32 +28,32 @@ public class EnemyMovement : MonoBehaviour
     
     void Update()
     {
-		if(Target != null && agent.hasPath && !agent.pathPending)
+		if(_target != null && _agent.hasPath && !_agent.pathPending)
 		{
-			if (agent.remainingDistance <= data.attackRange)
+			if (_agent.remainingDistance <= data.attackRange)
         	{
-				Vector3 direction = (Target.position - transform.position).normalized;
+				Vector3 direction = (_target.position - transform.position).normalized;
 				if(direction != Vector3.zero)
 				{
 					Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
 					transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
 				}
 
-				if(Target.CompareTag("Base")){
+				if(_target.CompareTag("Base")){
 					GameManager.Instance.DamageBase(1);
             		Die();
-				}else if(Target.CompareTag("Tower"))
+				}else if(_target.CompareTag("Tower"))
 				{
-					if(attackTimer <= 0f)
+					if(_attackTimer <= 0f)
 					{
-						TowerCombat tower = Target.GetComponent<TowerCombat>();
+						TowerCombat tower = _target.GetComponent<TowerCombat>();
 						if(tower != null)
 						{
 							tower.TakeDamage(data.attackDamage);
 						}
-						attackTimer = data.attackRate;
+						_attackTimer = data.attackRate;
 					}
-					attackTimer -= Time.deltaTime;
+					_attackTimer -= Time.deltaTime;
 				}
         	}
 		} 
@@ -61,8 +61,8 @@ public class EnemyMovement : MonoBehaviour
 
     public void TakeDamage(int damageAmount)
     {
-        currentHealth -= damageAmount;
-        if (currentHealth <= 0)
+        _currentHealth -= damageAmount;
+        if (_currentHealth <= 0)
         {
             if (data != null) GameManager.Instance.AddGold(data.goldReward);
             Die();
@@ -71,10 +71,10 @@ public class EnemyMovement : MonoBehaviour
     
     public void RecevoirNouvelleCible(Transform cible)
     {
-        if (agent != null && cible != null)
+        if (_agent != null && cible != null)
         {
-			Target = cible;
-            agent.SetDestination(cible.position);
+			_target = cible;
+            _agent.SetDestination(cible.position);
         }
     }
 

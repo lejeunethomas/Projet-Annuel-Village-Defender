@@ -10,14 +10,14 @@ public class SimpleSpawner : MonoBehaviour
     [Header("Points de spawn")]
     public List<Transform> spawnPoints = new List<Transform>();
 
-    private Coroutine currentSpawnRoutine;
-    private int nextSpawnPointIndex = 0;
+    private Coroutine _currentSpawnRoutine;
+    private int _nextSpawnPointIndex = 0;
 
     public void StartCurrentWave(int waveIndex)
     {
-        if (currentSpawnRoutine != null)
+        if (_currentSpawnRoutine != null)
         {
-            StopCoroutine(currentSpawnRoutine);
+            StopCoroutine(_currentSpawnRoutine);
         }
 
         if (waves == null || waves.Count == 0)
@@ -56,8 +56,8 @@ public class SimpleSpawner : MonoBehaviour
             return;
         }
 
-        nextSpawnPointIndex = 0;
-        currentSpawnRoutine = StartCoroutine(SpawnWave(waves[waveIndex]));
+        _nextSpawnPointIndex = 0;
+        _currentSpawnRoutine = StartCoroutine(SpawnWave(waves[waveIndex]));
     }
 
     IEnumerator SpawnWave(WaveData wave)
@@ -89,7 +89,7 @@ public class SimpleSpawner : MonoBehaviour
             }
         }
 
-        currentSpawnRoutine = null;
+        _currentSpawnRoutine = null;
         GameManager.Instance.NotifySpawningFinished();
     }
 
@@ -98,8 +98,8 @@ public class SimpleSpawner : MonoBehaviour
         if (spawnPoints == null || spawnPoints.Count == 0)
             return null;
 
-        Transform point = spawnPoints[nextSpawnPointIndex];
-        nextSpawnPointIndex = (nextSpawnPointIndex + 1) % spawnPoints.Count;
+        Transform point = spawnPoints[_nextSpawnPointIndex];
+        _nextSpawnPointIndex = (_nextSpawnPointIndex + 1) % spawnPoints.Count;
         return point;
     }
 

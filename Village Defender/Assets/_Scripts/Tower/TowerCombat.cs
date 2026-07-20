@@ -13,9 +13,9 @@ public class TowerCombat : MonoBehaviour
     public Transform projectileSpawn;
     public float projectileSpeed = 15f;
 
-    private float fireCountdown = 0f;
-    private Transform targetEnemy;
-	private int currentHealth;
+    private float _fireCountdown = 0f;
+    private Transform _targetEnemy;
+	private int _currentHealth;
 
     void Start()
     {
@@ -26,7 +26,7 @@ public class TowerCombat : MonoBehaviour
 
 		if(data != null)
 		{
-			currentHealth = data.maxHealth;
+			_currentHealth = data.maxHealth;
 			UpdateHealthBar();
 		}
     }
@@ -37,22 +37,22 @@ public class TowerCombat : MonoBehaviour
 
         UpdateTarget();
 
-        if (targetEnemy == null) return;
+        if (_targetEnemy == null) return;
 
-        if (fireCountdown <= 0f)
+        if (_fireCountdown <= 0f)
         {
             Shoot();
-            fireCountdown = 1f / data.fireRate;
+            _fireCountdown = 1f / data.fireRate;
         }
 
-        fireCountdown -= Time.deltaTime;
+        _fireCountdown -= Time.deltaTime;
     }
 
     void UpdateTarget()
     {
         if (TargetManager.Instance == null || TargetManager.Instance.ennemisActifs.Count == 0)
         {
-            targetEnemy = null;
+            _targetEnemy = null;
             return;
         }
         
@@ -64,26 +64,29 @@ public class TowerCombat : MonoBehaviour
             if (enemy == null) continue;
 
             float distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
-            if (distanceToEnemy < shortestDistance && enemy.data.Type == data.targetType)
+            if (distanceToEnemy < shortestDistance)
             {
-                shortestDistance = distanceToEnemy;
-                nearestEnemy = enemy;
+                if (enemy.data.Type == data.targetType || data.targetType == 0)
+                {
+                    shortestDistance = distanceToEnemy;
+                    nearestEnemy = enemy;   
+                }
             }
         }
 
         if (nearestEnemy != null && shortestDistance <= data.range)
         {
-            targetEnemy = nearestEnemy.transform;
+            _targetEnemy = nearestEnemy.transform;
         }
         else
         {
-            targetEnemy = null;
+            _targetEnemy = null;
         }
     }
 
     void Shoot()
     {
-        EnemyMovement e = targetEnemy.GetComponent<EnemyMovement>();
+        EnemyMovement e = _targetEnemy.GetComponent<EnemyMovement>();
         if (e != null)
         {
             if (projectilePrefab != null && projectileSpawn != null && e.transform != null)
@@ -110,9 +113,9 @@ public class TowerCombat : MonoBehaviour
 
 	public void TakeDamage(int damage)
 	{
-		currentHealth -= damage;
+		_currentHealth -= damage;
 		UpdateHealthBar();
-		if (currentHealth <= 0)
+		if (_currentHealth <= 0)
 		{
 			Destroy(gameObject);
 		}
@@ -122,7 +125,7 @@ public class TowerCombat : MonoBehaviour
 	{
 		if (healthBarFill != null && data != null)
         {
-            healthBarFill.fillAmount = (float)currentHealth / data.maxHealth;
+            healthBarFill.fillAmount = (float)_currentHealth / data.maxHealth;
         }
 	}
     

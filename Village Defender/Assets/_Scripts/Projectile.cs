@@ -2,27 +2,27 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    private Transform target;
-    private int damage;
-    private float speed = 10f;
+    private Transform _transform;
+    private int _damage;
+    private float _speed = 10f;
     
     public void Setup(Transform target, int damage, float speed)
     {
-        this.target = target;
-        this.damage = damage;
-        this.speed = speed;
+        this._transform = target;
+        this._damage = damage;
+        this._speed = speed;
     }
 
     void Update()
     {
-        if (target == null)
+        if (_transform == null)
         {
             Destroy(gameObject);
             return;
         }
         
-        Vector3 dir = target.position - transform.position;
-        float distanceFrame = speed * Time.deltaTime;
+        Vector3 dir = _transform.position - transform.position;
+        float distanceFrame = _speed * Time.deltaTime;
 
         if (dir.sqrMagnitude <= distanceFrame * distanceFrame)
         {
@@ -31,12 +31,12 @@ public class Projectile : MonoBehaviour
         }
         
         transform.Translate(dir.normalized * distanceFrame, Space.World);
-        transform.LookAt(target);
+        transform.LookAt(_transform);
     }
 
     void HitTarget()
     {
-        target.gameObject.SendMessage("TakeDamage", damage, SendMessageOptions.DontRequireReceiver);
+        _transform.gameObject.SendMessage("TakeDamage", _damage, SendMessageOptions.DontRequireReceiver);
         Destroy(gameObject);
     }
 }

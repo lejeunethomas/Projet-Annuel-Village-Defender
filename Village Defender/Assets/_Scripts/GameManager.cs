@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 
 public class GameManager : MonoBehaviour
 {
@@ -15,8 +16,8 @@ public class GameManager : MonoBehaviour
 
     [Header("Ressources")]
     public int gold = 100;
-    public int Wood = 0;
-    public int Stone = 0;
+    public int wood = 0;
+    public int stone = 0;
 
     [Header("Base")]
     public int baseMaxHealth = 10;
@@ -202,7 +203,7 @@ public class GameManager : MonoBehaviour
                 currentWaveIndex >= 0 &&
                 currentWaveIndex < spawner.waves.Count &&
                 spawner.waves[currentWaveIndex] != null &&
-                spawner.waves[currentWaveIndex].Boss)
+                spawner.waves[currentWaveIndex].boss)
             {
                 NextEpoque();
             }
@@ -230,15 +231,15 @@ public class GameManager : MonoBehaviour
 
     public void AddWood(int amount)
     {
-        Wood = Wood +  amount;
-        Debug.Log("Wood : " +  Wood);
+        wood = wood +  amount;
+        Debug.Log("Wood : " +  wood);
     }
 
     public bool SpendWood(int amount)
     {
-        if (Wood >= amount)
+        if (wood >= amount)
         {
-            Wood -= amount;
+            wood -= amount;
             return true;
         }
         else
@@ -250,15 +251,15 @@ public class GameManager : MonoBehaviour
 
     public void AddStone(int amount)
     {
-        Stone = Stone + amount;
-        Debug.Log("Stone : " + Stone);
+        stone = stone + amount;
+        Debug.Log("Stone : " + stone);
     }
 
     public bool SpendStone(int amount)
     {
-        if (Stone >= amount)
+        if (stone >= amount)
         {
-            Stone -= amount;
+            stone -= amount;
             return true;
         }
         else
