@@ -4,18 +4,28 @@ using UnityEngine.AI;
 public class EnemyMovement : MonoBehaviour
 {
     public EnemyData data;
+
+    [SerializeField, Range(0.1f, 2f)]
+    private float moveSpeedMultiplier = 0.85f;
+
     private NavMeshAgent _agent;
     private int _currentHealth;
 	private Transform _target;
 	private float _attackTimer;
+    private bool isDead = false;
+
+    public bool IsDead
+    {
+        get { return isDead; }
+    }
 
     void Start()
     {
         _agent = GetComponent<NavMeshAgent>();
         
-        if (data != null)
+        if (data != null && _agent != null)
         {
-            _agent.speed = data.moveSpeed;
+            _agent.speed = data.moveSpeed * moveSpeedMultiplier;
 			_agent.stoppingDistance = data.attackRange;
             _currentHealth = data.maxHealth;
         }
@@ -28,6 +38,15 @@ public class EnemyMovement : MonoBehaviour
     
     void Update()
     {
+        if (GameManager.Instance == null ||
+            GameManager.Instance.CurrentPhase != GameManager.GamePhase.Wave ||
+            isDead ||
+            data == null ||
+            _agent == null)
+        {
+            return;
+        }
+
 		if(_target != null && _agent.hasPath && !_agent.pathPending)
 		{
 			if (_agent.remainingDistance <= data.attackRange)
@@ -41,7 +60,7 @@ public class EnemyMovement : MonoBehaviour
 
 				if(_target.CompareTag("Base")){
 					GameManager.Instance.DamageBase(1);
-            		Die();
+            		DieWithoutReward();
 				}else if(_target.CompareTag("Tower"))
 				{
 					if(_attackTimer <= 0f)
@@ -61,12 +80,26 @@ public class EnemyMovement : MonoBehaviour
 
     public void TakeDamage(int damageAmount)
     {
+        if (isDead ||
+            GameManager.Instance == null ||
+            GameManager.Instance.CurrentPhase != GameManager.GamePhase.Wave)
+        {
+            return;
+        }
+
         _currentHealth -= damageAmount;
         if (_currentHealth <= 0)
         {
-            if (data != null) GameManager.Instance.AddGold(data.goldReward);
             Die();
         }
+    }
+
+    public void KillInstantly()
+    {
+        if (isDead)
+            return;
+
+        Die();
     }
     
     public void RecevoirNouvelleCible(Transform cible)
@@ -80,7 +113,30 @@ public class EnemyMovement : MonoBehaviour
 
     void Die()
     {
-        GameManager.Instance.UnregisterEnemy();
+        if (isDead)
+            return;
+
+        isDead = true;
+
+        if (data != null && GameManager.Instance != null)
+            GameManager.Instance.AddGold(data.goldReward);
+
+        if (GameManager.Instance != null)
+            GameManager.Instance.UnregisterEnemy();
+
+        Destroy(gameObject);
+    }
+
+    void DieWithoutReward()
+    {
+        if (isDead)
+            return;
+
+        isDead = true;
+
+        if (GameManager.Instance != null)
+            GameManager.Instance.UnregisterEnemy();
+
         Destroy(gameObject);
     }
 

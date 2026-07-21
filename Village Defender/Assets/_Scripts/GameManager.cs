@@ -174,6 +174,9 @@ public class GameManager : MonoBehaviour
     }
     public void ReturnToVillageAfterEndScreen(bool victory)
     {
+        if (spawner != null)
+            spawner.StopCurrentWaveAndDestroyEnemies();
+
         baseHealth = baseMaxHealth;
 
         if (baseHealthUI != null)
@@ -365,7 +368,16 @@ public class GameManager : MonoBehaviour
 
     public void Defeat()
     {
+        if (CurrentPhase == GamePhase.EndScreen)
+            return;
+
         SetPhase(GamePhase.EndScreen);
+
+        if (spawner != null)
+            spawner.StopCurrentWaveAndDestroyEnemies();
+
+        enemiesAlive = 0;
+        isSpawningFinished = false;
 
         if (endWaveUI != null)
             endWaveUI.ShowDefeat();

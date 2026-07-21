@@ -12,32 +12,38 @@ public class SimpleSpawner : MonoBehaviour
 
     private Coroutine _currentSpawnRoutine;
     private int _nextSpawnPointIndex = 0;
+    private readonly List<GameObject> spawnedEnemies = new List<GameObject>();
+    private bool waveWasCancelled;
 
     public void StartCurrentWave(int waveIndex)
     {
         if (_currentSpawnRoutine != null)
         {
             StopCoroutine(_currentSpawnRoutine);
+            _currentSpawnRoutine = null;
         }
+
+        RemoveNullSpawnedEnemies();
+        waveWasCancelled = false;
 
         if (waves == null || waves.Count == 0)
         {
             Debug.LogError("Aucune vague assignée dans le SimpleSpawner.");
-            GameManager.Instance.NotifySpawningFinished();
+            NotifySpawningFinishedIfCurrentWaveActive();
             return;
         }
 
         if (waveIndex < 0 || waveIndex >= waves.Count)
         {
             Debug.LogWarning("Il n'y a plus de vague disponible. Index demandé : " + waveIndex);
-            GameManager.Instance.NotifySpawningFinished();
+            NotifySpawningFinishedIfCurrentWaveActive();
             return;
         }
 
         if (spawnPoints == null || spawnPoints.Count == 0)
         {
             Debug.LogError("Aucun point de spawn assigné dans le SimpleSpawner.");
-            GameManager.Instance.NotifySpawningFinished();
+            NotifySpawningFinishedIfCurrentWaveActive();
             return;
         }
 
@@ -52,7 +58,7 @@ public class SimpleSpawner : MonoBehaviour
         if (spawnPoints.Count == 0)
         {
             Debug.LogError("Tous les points de spawn du SimpleSpawner sont null.");
-            GameManager.Instance.NotifySpawningFinished();
+            NotifySpawningFinishedIfCurrentWaveActive();
             return;
         }
 
@@ -60,17 +66,40 @@ public class SimpleSpawner : MonoBehaviour
         _currentSpawnRoutine = StartCoroutine(SpawnWave(waves[waveIndex]));
     }
 
+    public void StopCurrentWaveAndDestroyEnemies()
+    {
+        waveWasCancelled = true;
+
+        if (_currentSpawnRoutine != null)
+        {
+            StopCoroutine(_currentSpawnRoutine);
+            _currentSpawnRoutine = null;
+        }
+
+        for (int i = 0; i < spawnedEnemies.Count; i++)
+        {
+            if (spawnedEnemies[i] != null)
+                Destroy(spawnedEnemies[i]);
+        }
+
+        spawnedEnemies.Clear();
+        _nextSpawnPointIndex = 0;
+    }
+
     IEnumerator SpawnWave(WaveData wave)
     {
         if (wave == null)
         {
             Debug.LogError("La WaveData est null.");
-            GameManager.Instance.NotifySpawningFinished();
+            NotifySpawningFinishedIfCurrentWaveActive();
             yield break;
         }
 
         foreach (WaveData.EnemyGroup group in wave.groups)
         {
+            if (waveWasCancelled)
+                yield break;
+
             if (group == null || group.enemyType == null)
             {
                 Debug.LogWarning("Un groupe d'ennemis est mal configuré dans la vague.");
@@ -79,6 +108,9 @@ public class SimpleSpawner : MonoBehaviour
 
             for (int i = 0; i < group.count; i++)
             {
+                if (waveWasCancelled)
+                    yield break;
+
                 SpawnEnemy(group.enemyType, GetNextSpawnPoint());
 
                 float delay = 1f;
@@ -90,7 +122,7 @@ public class SimpleSpawner : MonoBehaviour
         }
 
         _currentSpawnRoutine = null;
-        GameManager.Instance.NotifySpawningFinished();
+        NotifySpawningFinishedIfCurrentWaveActive();
     }
 
     Transform GetNextSpawnPoint()
@@ -124,6 +156,7 @@ public class SimpleSpawner : MonoBehaviour
         }
 
         GameObject newEnemy = Instantiate(data.enemyPrefab, spawnPoint.position, spawnPoint.rotation);
+        spawnedEnemies.Add(newEnemy);
 
         EnemyMovement script = newEnemy.GetComponent<EnemyMovement>();
         if (script != null)
@@ -135,6 +168,28 @@ public class SimpleSpawner : MonoBehaviour
             Debug.LogError("Le prefab ennemi n'a pas de script EnemyMovement.");
         }
 
-        GameManager.Instance.RegisterEnemy();
+        if (GameManager.Instance != null)
+            GameManager.Instance.RegisterEnemy();
+    }
+
+    private void RemoveNullSpawnedEnemies()
+    {
+        for (int i = spawnedEnemies.Count - 1; i >= 0; i--)
+        {
+            if (spawnedEnemies[i] == null)
+                spawnedEnemies.RemoveAt(i);
+        }
+    }
+
+    private void NotifySpawningFinishedIfCurrentWaveActive()
+    {
+        if (waveWasCancelled ||
+            GameManager.Instance == null ||
+            GameManager.Instance.CurrentPhase != GameManager.GamePhase.Wave)
+        {
+            return;
+        }
+
+        GameManager.Instance.NotifySpawningFinished();
     }
 }
