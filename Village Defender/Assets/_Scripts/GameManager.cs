@@ -303,11 +303,8 @@ public class GameManager : MonoBehaviour
             wood -= amount;
             return true;
         }
-        else
-        {
-            Debug.Log("Pas assez de bois");
-            return false;
-        }
+        Debug.Log("Pas assez de bois");
+        return false;
     }
 
     public void AddStone(int amount)
@@ -322,11 +319,19 @@ public class GameManager : MonoBehaviour
             stone -= amount;
             return true;
         }
-        else
+        Debug.Log("Pas assez de Pierre");
+        return false;
+    }
+
+    public bool SpendIron(int amount)
+    {
+        if (iron >= amount)
         {
-            Debug.Log("Pas assez de Pierre");
-            return false;
+            iron -= amount;
+            return true;
         }
+        Debug.Log("Pas assez de Pierre");
+        return false;
     }
 
     public void DamageBase(int amount)
