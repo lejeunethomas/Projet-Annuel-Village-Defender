@@ -7,6 +7,8 @@ public class GameManager : MonoBehaviour
 
     public enum GamePhase
     {
+        MainMenu,
+        Intro,
         Village,
         Preparation,
         Wave,
@@ -44,6 +46,7 @@ public class GameManager : MonoBehaviour
     public GameObject villageUI;
     public GameObject preparationUI;
     public GameObject waveUI;
+    public GameObject hudUI;
     public GameOverUI endWaveUI;
 
     [Header("Récompenses")]
@@ -72,7 +75,7 @@ public class GameManager : MonoBehaviour
             baseHealthUI.UpdateHealth(baseHealth);
         }
         
-        SetPhase(GamePhase.Village);
+        SetPhase(GamePhase.MainMenu);
     }
 
     public void SetPhase(GamePhase newPhase)
@@ -90,6 +93,14 @@ public class GameManager : MonoBehaviour
 
         if (endWaveUI != null)
             endWaveUI.gameObject.SetActive(newPhase == GamePhase.EndScreen);
+
+        if (hudUI != null)
+        {
+            bool showHud = newPhase == GamePhase.Village ||
+                           newPhase == GamePhase.Preparation ||
+                           newPhase == GamePhase.Wave;
+            hudUI.SetActive(showHud);
+        }
 
         if (newPhase == GamePhase.Preparation)
         {
