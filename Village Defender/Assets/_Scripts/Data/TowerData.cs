@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public enum GameEpoque
 {
@@ -18,12 +19,14 @@ public class TowerData : ScriptableObject
 
     [Header("Économie")]
     public int cost = 15;
+    public int lvCost = 15;
 
     [Header("Stats")]
 	public int maxHealth = 10;
     public int range = 5;
     public float fireRate = 1f;
     public int damage = 15;
+    public int bonusLv = 3;
 
 	[Header("Cible")]
     public Type targetType = Type.None;

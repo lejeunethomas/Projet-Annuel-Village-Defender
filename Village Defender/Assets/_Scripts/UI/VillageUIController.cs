@@ -26,7 +26,7 @@ public class VillageUIController : MonoBehaviour
     public GameObject detailsPanel;
     public TMP_Text detailNameText;
     public TMP_Text detailDescriptionText;
-    public Button buildButton;
+    public TMP_Text levelUpText;
     public Button upgradeButton;
 
     private int _currentSelectedTowerIndex = -1;
@@ -81,7 +81,11 @@ public class VillageUIController : MonoBehaviour
                 if (buttonComponent != null)
                 {
                     int indexCatalogue = i;
-                    buttonComponent.onClick.AddListener(() => OpenTowerDetails(indexCatalogue));
+                    buttonComponent.onClick.AddListener(() => 
+                    {
+                        SelectTowerForBuilding(indexCatalogue);
+                        OpenTowerDetails(indexCatalogue);       
+                    });
                 }
             }
         }
@@ -168,25 +172,49 @@ public class VillageUIController : MonoBehaviour
     {
         _currentSelectedTowerIndex = index;
         TowerData data = inventory.GetBuilding(index);
+        int lv = inventory.GetTowerLevel(data.name);
         
         detailsPanel.SetActive(true);
         
+        int degats = data.damage + (lv * data.bonusLv);
+        int health = data.maxHealth + (lv * data.bonusLv);
+        
         detailNameText.text = data.towerName;
-        detailDescriptionText.text = "Dégâts : " + data.damage + 
+        detailDescriptionText.text = "Dégâts : " + degats + 
                                      "\nRange : " + data.range + 
                                      "\nCadence : " + data.fireRate + 
-                                     "\nVie : " + data.maxHealth + 
+                                     "\nVie : " + health + 
                                      "\nCible : " + data.targetType;
-        
-        buildButton.onClick.RemoveAllListeners();
-        buildButton.onClick.AddListener(() => SelectTowerForBuilding(index));
-        
-        upgradeButton.onClick.RemoveAllListeners();
-        upgradeButton.onClick.AddListener(() => UpgradeSelectedTower());
+        levelUpText.text = "Level : "+ lv + "     " + data.lvCost + " or";
+        if (upgradeButton != null)
+        {
+            upgradeButton.onClick.RemoveAllListeners();
+            upgradeButton.onClick.AddListener(() => UpgradeSelectedTower());
+        }
     }
     
     public void UpgradeSelectedTower()
     {
-        Debug.Log("Amélioration de la tour " + _currentSelectedTowerIndex);
+        if (_currentSelectedTowerIndex < 0) return;
+
+        TowerData data = inventory.GetBuilding(_currentSelectedTowerIndex);
+        int currentLevel = inventory.GetTowerLevel(data.name);
+    
+        int cost = data.lvCost + (currentLevel * 50); 
+
+        if (GameManager.Instance.gold >= cost)
+        {
+            GameManager.Instance.SpendGold(cost);
+        
+            inventory.LevelUpTower(data.name);
+        
+            Debug.Log(data.name + " améliorée au niveau " + (currentLevel + 1) + " !");
+        
+            OpenTowerDetails(_currentSelectedTowerIndex); 
+        }
+        else
+        {
+            Debug.Log("Pas assez d'or pour améliorer !");
+        }
     }
 }

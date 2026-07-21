@@ -16,6 +16,7 @@ public class TowerCombat : MonoBehaviour
     private float _fireCountdown = 0f;
     private Transform _targetEnemy;
 	private int _currentHealth;
+    private int _degatsFinaux;
 
     void Start()
     {
@@ -26,8 +27,14 @@ public class TowerCombat : MonoBehaviour
 
 		if(data != null)
 		{
-			_currentHealth = data.maxHealth;
+			
 			UpdateHealthBar();
+            
+            int degatsDeBase = data.damage;
+            int niveau = GameManager.Instance.buildingInventory.GetTowerLevel(data.name);
+            int bonusParNiveau = data.bonusLv;
+            _degatsFinaux = degatsDeBase + (niveau * bonusParNiveau);
+            _currentHealth = data.maxHealth + (niveau * bonusParNiveau);
 		}
     }
 
@@ -87,6 +94,7 @@ public class TowerCombat : MonoBehaviour
     void Shoot()
     {
         EnemyMovement e = _targetEnemy.GetComponent<EnemyMovement>();
+        
         if (e != null)
         {
             if (projectilePrefab != null && projectileSpawn != null && e.transform != null)
@@ -96,7 +104,7 @@ public class TowerCombat : MonoBehaviour
                 Projectile projectileScript = projectile.GetComponent<Projectile>();
                 if (projectileScript != null)
                 {
-                    projectileScript.Setup(e.transform, data.damage ,projectileSpeed);
+                    projectileScript.Setup(e.transform, _degatsFinaux ,projectileSpeed);
                 }
             }
         }
