@@ -186,8 +186,12 @@ public class TowerBuilder : MonoBehaviour
         PlacedBuilding placed = _placedBuildings[placedIndex];
         if (placed == null) return;
 
-        if (inventory != null)
-            inventory.AddBuildingToStock(placed.catalogIndex, 1);
+        if (inventory != null && GameManager.Instance != null)
+        {
+            TowerData data = inventory.GetBuilding(placed.catalogIndex);
+            if (data != null)
+                GameManager.Instance.AddGold(data.cost);
+        }
 
         if (placed.instance != null)
             Destroy(placed.instance);

@@ -117,6 +117,9 @@ public class ResourceFarmManager : MonoBehaviour
         farm.SetInstance(farmInstance);
         farm.purchased = true;
 
+        if (GameManager.Instance.villageUIController != null)
+            GameManager.Instance.villageUIController.RefreshFarmUI();
+
         Debug.Log("Ferme achetee : " + GetFarmDisplayName(resourceType) + ".");
         return true;
     }

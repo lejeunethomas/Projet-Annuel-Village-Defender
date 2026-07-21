@@ -24,6 +24,7 @@ public class VillageUIController : MonoBehaviour
 
     private void Start()
     {
+        RegisterInGameManager();
         CloseAllPanels();
         RefreshHotbar();
         RefreshFarmUI();
@@ -107,23 +108,13 @@ public class VillageUIController : MonoBehaviour
 
         if (resourceFarmManager == null)
         {
-            if (button != null)
-                button.interactable = false;
-
-            if (buttonText != null)
-                buttonText.text = "Ferme indisponible";
-
+            SetFarmButtonVisible(button, buttonText, false);
             return;
         }
 
         if (!resourceFarmManager.HasFarm(resourceType))
         {
-            if (button != null)
-                button.interactable = false;
-
-            if (buttonText != null)
-                buttonText.text = "Ferme indisponible";
-
+            SetFarmButtonVisible(button, buttonText, false);
             return;
         }
 
@@ -132,15 +123,36 @@ public class VillageUIController : MonoBehaviour
         bool purchased = resourceFarmManager.IsFarmPurchased(resourceType);
         bool enoughGold = GameManager.Instance != null && GameManager.Instance.gold >= cost;
 
-        if (buttonText != null)
+        if (purchased)
         {
-            if (purchased)
-                buttonText.text = displayName + " - Achet\u00e9e";
-            else
-                buttonText.text = displayName + " - " + cost + " or";
+            SetFarmButtonVisible(button, buttonText, false);
+            return;
         }
 
+        SetFarmButtonVisible(button, buttonText, true);
+
+        if (buttonText != null)
+            buttonText.text = displayName + " - " + cost + " or";
+
         if (button != null)
-            button.interactable = !purchased && enoughGold;
+            button.interactable = enoughGold;
+    }
+
+    private void SetFarmButtonVisible(Button button, TMP_Text buttonText, bool visible)
+    {
+        if (button != null)
+        {
+            button.gameObject.SetActive(visible);
+            button.interactable = visible;
+        }
+
+        if (buttonText != null)
+            buttonText.gameObject.SetActive(visible);
+    }
+
+    private void RegisterInGameManager()
+    {
+        if (GameManager.Instance != null && GameManager.Instance.villageUIController == null)
+            GameManager.Instance.villageUIController = this;
     }
 }

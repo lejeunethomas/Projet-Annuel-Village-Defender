@@ -1,0 +1,31 @@
+# JetBrains Rider / IntelliJ
+.idea/
+
+# Visual Studio
+.vs/
+
+# Dossiers générés par Unity
+Library/
+Temp/
+Obj/
+Logs/
+UserSettings/
+MemoryCaptures/
+Recordings/
+
+# Builds
+Build/
+Builds/
+
+# Fichiers générés par les IDE
+*.csproj
+*.sln
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.mdb
+*.opendb
+*.VC.db
