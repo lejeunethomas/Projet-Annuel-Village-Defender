@@ -21,7 +21,15 @@ public class VillageUIController : MonoBehaviour
     public TMP_Text woodFarmButtonText;
     public TMP_Text stoneFarmButtonText;
     public TMP_Text ironFarmButtonText;
+    
+    [Header("Panneau de Détails")]
+    public GameObject detailsPanel;
+    public TMP_Text detailNameText;
+    public TMP_Text detailDescriptionText;
+    public Button buildButton;
+    public Button upgradeButton;
 
+    private int _currentSelectedTowerIndex = -1;
     private void Start()
     {
         RegisterInGameManager();
@@ -73,7 +81,7 @@ public class VillageUIController : MonoBehaviour
                 if (buttonComponent != null)
                 {
                     int indexCatalogue = i;
-                    buttonComponent.onClick.AddListener(() => SelectTowerForBuilding(indexCatalogue));
+                    buttonComponent.onClick.AddListener(() => OpenTowerDetails(indexCatalogue));
                 }
             }
         }
@@ -154,5 +162,31 @@ public class VillageUIController : MonoBehaviour
     {
         if (GameManager.Instance != null && GameManager.Instance.villageUIController == null)
             GameManager.Instance.villageUIController = this;
+    }
+
+    public void OpenTowerDetails(int index)
+    {
+        _currentSelectedTowerIndex = index;
+        TowerData data = inventory.GetBuilding(index);
+        
+        detailsPanel.SetActive(true);
+        
+        detailNameText.text = data.towerName;
+        detailDescriptionText.text = "Dégâts : " + data.damage + 
+                                     "\nRange : " + data.range + 
+                                     "\nCadence : " + data.fireRate + 
+                                     "\nVie : " + data.maxHealth + 
+                                     "\nCible : " + data.targetType;
+        
+        buildButton.onClick.RemoveAllListeners();
+        buildButton.onClick.AddListener(() => SelectTowerForBuilding(index));
+        
+        upgradeButton.onClick.RemoveAllListeners();
+        upgradeButton.onClick.AddListener(() => UpgradeSelectedTower());
+    }
+    
+    public void UpgradeSelectedTower()
+    {
+        Debug.Log("Amélioration de la tour " + _currentSelectedTowerIndex);
     }
 }
