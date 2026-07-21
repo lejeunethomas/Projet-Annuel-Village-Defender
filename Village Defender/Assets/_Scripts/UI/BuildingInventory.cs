@@ -10,6 +10,9 @@ public class BuildingInventory : MonoBehaviour
 
     [Header("Stock possédé")]
     [SerializeField] private List<int> ownedCounts = new List<int>();
+    
+    [Header("Améliorations")]
+    private Dictionary<string, int> _towerLevels = new Dictionary<string, int>();
 
     private void Awake()
     {
@@ -18,9 +21,10 @@ public class BuildingInventory : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-
+        
         Instance = this;
         EnsureListSize();
+        InitTowerLevel();
     }
 
     private void OnValidate()
@@ -132,6 +136,36 @@ public class BuildingInventory : MonoBehaviour
                 
                 Debug.Log($"Liquidation : {Tower}x {data.GetDisplayName()} repris. Remboursement : {Return} or.");
             }
+        }
+    }
+
+    public void InitTowerLevel()
+    {
+        _towerLevels.Clear();
+        for (int i = 0; i < GetCatalogCount(); i++)
+        {
+            TowerData data = GetBuilding(i);
+            if (data != null)
+            {
+                _towerLevels.Add(data.name, 0);
+            }
+        }
+    }
+
+    public int GetTowerLevel(string towerName)
+    {
+        if (_towerLevels.ContainsKey(towerName))
+        {
+            return _towerLevels[towerName];
+        }
+        return 0;
+    }
+
+    public void LevelUpTower(string towerName)
+    {
+        if (_towerLevels.ContainsKey(towerName))
+        {
+            _towerLevels[towerName]++;
         }
     }
 }
