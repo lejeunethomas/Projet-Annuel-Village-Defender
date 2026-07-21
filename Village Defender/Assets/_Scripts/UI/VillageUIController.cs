@@ -185,7 +185,22 @@ public class VillageUIController : MonoBehaviour
                                      "\nCadence : " + data.fireRate + 
                                      "\nVie : " + health + 
                                      "\nCible : " + data.targetType;
-        levelUpText.text = "Level : "+ lv + "     " + data.lvCost + " or";
+        levelUpText.text = "Level : "+ lv + "\n";
+        if (lv < 3)
+        {
+            levelUpText.text += "wood : " + data.cost;
+        }
+        else if(lv > 3 && lv < 6)
+        {
+            levelUpText.text += "wood : " + data.cost;
+            levelUpText.text += "stone : " + data.cost/2;
+        }
+        else if (lv > 6)
+        {
+            levelUpText.text += "wood : " + data.cost * 2;
+            levelUpText.text += "stone : " + data.cost;
+            levelUpText.text += "iron : " + data.cost/2;
+        }
         if (upgradeButton != null)
         {
             upgradeButton.onClick.RemoveAllListeners();
@@ -200,21 +215,44 @@ public class VillageUIController : MonoBehaviour
         TowerData data = inventory.GetBuilding(_currentSelectedTowerIndex);
         int currentLevel = inventory.GetTowerLevel(data.name);
     
-        int cost = data.lvCost + (currentLevel * 50); 
+        int cost = data.lvCost + (currentLevel * 50);
 
-        if (GameManager.Instance.gold >= cost)
+        if (currentLevel < 3 && GameManager.Instance.wood >= cost)
         {
-            GameManager.Instance.SpendGold(cost);
-        
+            GameManager.Instance.SpendWood(cost);
+            
             inventory.LevelUpTower(data.name);
         
             Debug.Log(data.name + " améliorée au niveau " + (currentLevel + 1) + " !");
         
             OpenTowerDetails(_currentSelectedTowerIndex); 
         }
+        else if (currentLevel > 3 && currentLevel < 6 && GameManager.Instance.wood >= cost && GameManager.Instance.stone >= cost/2 )
+        {
+            GameManager.Instance.SpendWood(cost);
+            GameManager.Instance.SpendStone(cost/2);
+            
+            inventory.LevelUpTower(data.name);
+        
+            Debug.Log(data.name + " améliorée au niveau " + (currentLevel + 1) + " !");
+        
+            OpenTowerDetails(_currentSelectedTowerIndex);
+        }
+        else if (currentLevel > 6 && GameManager.Instance.wood >= cost*2 && GameManager.Instance.stone >= cost && GameManager.Instance.iron >= cost/2)
+        {
+            GameManager.Instance.SpendWood(cost*2);
+            GameManager.Instance.SpendStone(cost);
+            GameManager.Instance.SpendIron(cost/2);
+            
+            inventory.LevelUpTower(data.name);
+        
+            Debug.Log(data.name + " améliorée au niveau " + (currentLevel + 1) + " !");
+        
+            OpenTowerDetails(_currentSelectedTowerIndex);
+        }
         else
         {
-            Debug.Log("Pas assez d'or pour améliorer !");
+            Debug.Log("Pas assez de ressource pour améliorer !");
         }
     }
 }
