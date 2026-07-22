@@ -240,6 +240,21 @@ public class TowerBuilder : MonoBehaviour
         UpdateSelectedTowerText();
     }
 
+    public void ClearPlacedBuildingsForLoadedGame()
+    {
+        for (int i = _placedBuildings.Count - 1; i >= 0; i--)
+        {
+            PlacedBuilding placed = _placedBuildings[i];
+            if (placed != null && placed.instance != null)
+                Destroy(placed.instance);
+        }
+
+        _placedBuildings.Clear();
+        SelectTowerFromCatalog(-1);
+        SetCanBuild(false);
+        UpdateSelectedTowerText();
+    }
+
     void UpdateSelectedTowerText()
     {
         if (towerText == null) return;

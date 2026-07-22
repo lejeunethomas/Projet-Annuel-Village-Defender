@@ -1,25 +1,36 @@
+# =========================
+# Unity - fichiers générés
+# =========================
+
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Ll]ogs/
+[Uu]ser[Ss]ettings/
+[Mm]emoryCaptures/
+[Rr]ecordings/
+
+# Builds générés
+[Bb]uild/
+[Bb]uilds/
+
+# =========================
 # JetBrains Rider / IntelliJ
+# =========================
+
 .idea/
+*.iml
 
+# =========================
 # Visual Studio
+# =========================
+
 .vs/
-
-# Dossiers générés par Unity
-Library/
-Temp/
-Obj/
-Logs/
-UserSettings/
-MemoryCaptures/
-Recordings/
-
-# Builds
-Build/
-Builds/
-
-# Fichiers générés par les IDE
 *.csproj
+*.unityproj
 *.sln
+*.suo
+*.tmp
 *.user
 *.userprefs
 *.pidb
@@ -29,3 +40,48 @@ Builds/
 *.mdb
 *.opendb
 *.VC.db
+
+# =========================
+# VS Code
+# =========================
+
+.vscode/
+
+# Retire cette exception si tu souhaites partager
+# certains réglages VS Code avec ton équipe.
+# !.vscode/settings.json
+# !.vscode/extensions.json
+
+# =========================
+# Systèmes d'exploitation
+# =========================
+
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# =========================
+# Unity / outils annexes
+# =========================
+
+.gradle/
+ExportedObj/
+.consulo/
+sysinfo.txt
+
+# Builds mobiles
+*.apk
+*.aab
+
+# Packages exportés manuellement
+*.unitypackage
+
+# Crashlytics
+crashlytics-build.properties
+Crashlytics-build.properties

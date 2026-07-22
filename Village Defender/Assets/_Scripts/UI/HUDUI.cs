@@ -12,6 +12,11 @@ public class HUDUI : MonoBehaviour
 
     void Update()
     {
+        Refresh();
+    }
+
+    public void Refresh()
+    {
         if (GameManager.Instance == null)
             return;
 

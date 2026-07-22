@@ -8,6 +8,8 @@ public class FrontEndIntroController : MonoBehaviour
     [Header("Interfaces")]
     [SerializeField] private GameObject mainMenuUI;
     [SerializeField] private GameObject introDialogueUI;
+    [SerializeField] private SaveManager saveManager;
+    [SerializeField] private TMP_Text startAdventureButtonText;
 
     [Header("Dialogue")]
     [SerializeField] private RectTransform characterContainer;
@@ -47,6 +49,12 @@ public class FrontEndIntroController : MonoBehaviour
         ResetInitialState();
     }
 
+    private void Start()
+    {
+        ResolveSaveManagerReference();
+        RefreshStartButtonText();
+    }
+
     private void OnValidate()
     {
         if (characterEntranceDistance < 0f)
@@ -69,6 +77,44 @@ public class FrontEndIntroController : MonoBehaviour
     {
         if (_introStarted)
             return;
+
+        ResolveSaveManagerReference();
+
+        if (saveManager != null && saveManager.HasValidSave())
+        {
+            if (mainMenuUI == null)
+            {
+                Debug.LogError("FrontEndIntroController : impossible de continuer, MainMenuUI n'est pas assigne.");
+                return;
+            }
+
+            _introStarted = true;
+            _isFinishing = false;
+
+            mainMenuUI.SetActive(false);
+
+            if (introDialogueUI != null)
+                introDialogueUI.SetActive(false);
+
+            if (bubbleContainer != null)
+                bubbleContainer.SetActive(false);
+
+            if (dialogueText != null)
+            {
+                dialogueText.text = "";
+                dialogueText.maxVisibleCharacters = 0;
+            }
+
+            bool loaded = saveManager.LoadGameAndContinue();
+            if (!loaded)
+            {
+                _introStarted = false;
+                ResetInitialState();
+                RefreshStartButtonText();
+            }
+
+            return;
+        }
 
         if (!ValidateRequiredReferences())
             return;
@@ -327,6 +373,27 @@ public class FrontEndIntroController : MonoBehaviour
             GameManager.Instance.SetPhase(GameManager.GamePhase.Village);
         else
             Debug.LogError("FrontEndIntroController : impossible de terminer l'introduction, aucun GameManager.Instance n'est disponible.");
+
+        ResolveSaveManagerReference();
+
+        if (saveManager != null)
+            saveManager.BeginNewGame();
+    }
+
+    private void RefreshStartButtonText()
+    {
+        if (startAdventureButtonText == null)
+            return;
+
+        ResolveSaveManagerReference();
+        bool hasValidSave = saveManager != null && saveManager.HasValidSave();
+        startAdventureButtonText.text = hasValidSave ? "Continuer" : "Commencer";
+    }
+
+    private void ResolveSaveManagerReference()
+    {
+        if (saveManager == null)
+            saveManager = SaveManager.Instance;
     }
 
     private bool ValidateRequiredReferences()

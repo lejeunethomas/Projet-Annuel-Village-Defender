@@ -120,6 +120,9 @@ public class ResourceFarmManager : MonoBehaviour
         if (GameManager.Instance.villageUIController != null)
             GameManager.Instance.villageUIController.RefreshFarmUI();
 
+        if (SaveManager.Instance != null)
+            SaveManager.Instance.SaveGame();
+
         Debug.Log("Ferme achetee : " + GetFarmDisplayName(resourceType) + ".");
         return true;
     }
@@ -143,6 +146,58 @@ public class ResourceFarmManager : MonoBehaviour
     {
         ResourceFarm farm = GetFarm(resourceType);
         return farm != null && farm.purchased;
+    }
+
+    public float GetProductionPerSecond(ResourceType resourceType)
+    {
+        ResourceFarm farm = GetFarm(resourceType);
+        if (farm == null || productionInterval <= 0f)
+            return 0f;
+
+        return productionAmount / productionInterval;
+    }
+
+    public void RestoreFarm(ResourceType resourceType, bool purchased)
+    {
+        ResourceFarm farm = GetFarm(resourceType);
+        if (farm == null)
+            return;
+
+        farm.purchased = purchased;
+
+        if (!purchased)
+        {
+            if (farm.Instance != null)
+                Destroy(farm.Instance);
+
+            farm.SetInstance(null);
+            RefreshFarmUI();
+            return;
+        }
+
+        if (farm.Instance != null)
+        {
+            RefreshFarmUI();
+            return;
+        }
+
+        if (farm.prefab == null)
+        {
+            Debug.LogWarning("Restauration de ferme impossible : aucun prefab assigne pour " + GetFarmDisplayName(resourceType) + ".");
+            RefreshFarmUI();
+            return;
+        }
+
+        if (farm.spawnPoint == null)
+        {
+            Debug.LogWarning("Restauration de ferme impossible : aucun point d'apparition assigne pour " + GetFarmDisplayName(resourceType) + ".");
+            RefreshFarmUI();
+            return;
+        }
+
+        GameObject farmInstance = Instantiate(farm.prefab, farm.spawnPoint.position, farm.spawnPoint.rotation);
+        farm.SetInstance(farmInstance);
+        RefreshFarmUI();
     }
 
     public bool HasFarm(ResourceType resourceType)
@@ -194,5 +249,11 @@ public class ResourceFarmManager : MonoBehaviour
         }
 
         return null;
+    }
+
+    private void RefreshFarmUI()
+    {
+        if (GameManager.Instance != null && GameManager.Instance.villageUIController != null)
+            GameManager.Instance.villageUIController.RefreshFarmUI();
     }
 }

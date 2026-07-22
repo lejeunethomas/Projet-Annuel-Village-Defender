@@ -189,6 +189,9 @@ public class GameManager : MonoBehaviour
             towerBuilder.ReturnAllPlacedBuildingsToStock();
 
         SetPhase(GamePhase.Village);
+
+        if (SaveManager.Instance != null)
+            SaveManager.Instance.SaveGame();
     }
 
     public void NextEpoque()
@@ -368,6 +371,9 @@ public class GameManager : MonoBehaviour
         if (endWaveUI != null)
             endWaveUI.ShowVictory();
 
+        if (SaveManager.Instance != null)
+            SaveManager.Instance.SaveGame();
+
         Debug.Log("Victoire : vague terminée.");
     }
 
@@ -387,12 +393,85 @@ public class GameManager : MonoBehaviour
         if (endWaveUI != null)
             endWaveUI.ShowDefeat();
 
+        if (SaveManager.Instance != null)
+            SaveManager.Instance.SaveGame();
+
         Debug.Log("Défaite : la base a été détruite.");
     }
 
     public bool IsBuildPhase()
     {
         return CurrentPhase == GamePhase.Preparation;
+    }
+
+    public void ApplyLoadedProgress(
+        int loadedGold,
+        int loadedWood,
+        int loadedStone,
+        int loadedIron,
+        int loadedWaveIndex)
+    {
+        gold = Mathf.Max(0, loadedGold);
+        wood = Mathf.Max(0, loadedWood);
+        stone = Mathf.Max(0, loadedStone);
+        iron = Mathf.Max(0, loadedIron);
+        currentWaveIndex = Mathf.Max(0, loadedWaveIndex);
+
+        baseHealth = baseMaxHealth;
+
+        if (baseHealthUI != null)
+            baseHealthUI.UpdateHealth(baseHealth);
+
+        enemiesAlive = 0;
+        isSpawningFinished = false;
+    }
+
+    public void PrepareForLoadedGame()
+    {
+        if (spawner != null)
+            spawner.StopCurrentWaveAndDestroyEnemies();
+
+        DestroyRemainingEnemiesInScene();
+
+        baseHealth = baseMaxHealth;
+
+        if (baseHealthUI != null)
+            baseHealthUI.UpdateHealth(baseHealth);
+
+        enemiesAlive = 0;
+        isSpawningFinished = false;
+
+        if (towerBuilder != null)
+            towerBuilder.ClearPlacedBuildingsForLoadedGame();
+
+        if (villageUIController != null)
+            villageUIController.CloseAllPanels();
+    }
+
+    public void RefreshLoadedGameUI()
+    {
+        if (baseHealthUI != null)
+            baseHealthUI.UpdateHealth(baseHealth);
+
+        if (hudUI != null)
+        {
+            HUDUI hud = hudUI.GetComponent<HUDUI>();
+            if (hud != null)
+                hud.Refresh();
+        }
+
+        if (villageUIController != null)
+            villageUIController.RefreshFarmUI();
+    }
+
+    private void DestroyRemainingEnemiesInScene()
+    {
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        for (int i = 0; i < enemies.Length; i++)
+        {
+            if (enemies[i] != null)
+                Destroy(enemies[i]);
+        }
     }
 
     public void RestartScene()
