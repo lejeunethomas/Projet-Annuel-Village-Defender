@@ -17,8 +17,10 @@ MonoBehaviour:
   epoque: 1
   towerIcon: {fileID: 21300000, guid: 6893e9992cb176d44afaf3afee8b6fe8, type: 3}
   cost: 1
+  lvCost: 15
   maxHealth: 10
-  range: 5
+  range: 10
   fireRate: 1
   damage: 15
+  bonusLv: 3
   targetType: 0

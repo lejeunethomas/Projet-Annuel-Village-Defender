@@ -435,6 +435,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: ae7b5fbfb5efbc44880087f52c2acaa0, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 2100deff76960d1469c0dcc81e74684f, type: 2}
+    - target: {fileID: -7511558181221131132, guid: ae7b5fbfb5efbc44880087f52c2acaa0, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 2100deff76960d1469c0dcc81e74684f, type: 2}
+    - target: {fileID: -7511558181221131132, guid: ae7b5fbfb5efbc44880087f52c2acaa0, type: 3}
+      propertyPath: 'm_Materials.Array.data[2]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 2100deff76960d1469c0dcc81e74684f, type: 2}
+    - target: {fileID: -7511558181221131132, guid: ae7b5fbfb5efbc44880087f52c2acaa0, type: 3}
+      propertyPath: 'm_Materials.Array.data[3]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 2100deff76960d1469c0dcc81e74684f, type: 2}
     - target: {fileID: 919132149155446097, guid: ae7b5fbfb5efbc44880087f52c2acaa0, type: 3}
       propertyPath: m_Name
       value: CanonArtillerie

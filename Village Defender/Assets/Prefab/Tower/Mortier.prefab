@@ -435,6 +435,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 0604ab5696248204db2898f8c73e02ff, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: df0898184c024ea4fa5a7dc5cbd6ed9b, type: 2}
     - target: {fileID: 919132149155446097, guid: 0604ab5696248204db2898f8c73e02ff, type: 3}
       propertyPath: m_Name
       value: Mortier
