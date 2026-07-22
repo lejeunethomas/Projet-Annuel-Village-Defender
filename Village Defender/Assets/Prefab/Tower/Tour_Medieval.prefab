@@ -435,6 +435,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: c8ae1462dac14064e918fc759fae2a15, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 22f5493000aebd64ea44812ef7dd47d5, type: 2}
+    - target: {fileID: -7511558181221131132, guid: c8ae1462dac14064e918fc759fae2a15, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 22f5493000aebd64ea44812ef7dd47d5, type: 2}
+    - target: {fileID: -7511558181221131132, guid: c8ae1462dac14064e918fc759fae2a15, type: 3}
+      propertyPath: 'm_Materials.Array.data[2]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 22f5493000aebd64ea44812ef7dd47d5, type: 2}
     - target: {fileID: 919132149155446097, guid: c8ae1462dac14064e918fc759fae2a15, type: 3}
       propertyPath: m_Name
       value: "TourM\xE9di\xE9val"

@@ -12,6 +12,16 @@
   <component name="ChangeListManager">
     <list default="true" id="fca82a27-470f-426d-a69f-3d1b82f3a83d" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Village Defender/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Village Defender/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefab/Font/Tangerine-Bold SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefab/Font/Tangerine-Bold SDF.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefab/Font/Tangerine-Regular SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefab/Font/Tangerine-Regular SDF.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Examples &amp; Extras/Resources/Fonts &amp; Materials/Anton SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextMesh Pro/Examples &amp; Extras/Resources/Fonts &amp; Materials/Anton SDF.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Examples &amp; Extras/Resources/Fonts &amp; Materials/Bangers SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextMesh Pro/Examples &amp; Extras/Resources/Fonts &amp; Materials/Bangers SDF.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Examples &amp; Extras/Resources/Fonts &amp; Materials/Electronic Highway Sign SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextMesh Pro/Examples &amp; Extras/Resources/Fonts &amp; Materials/Electronic Highway Sign SDF.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Examples &amp; Extras/Resources/Fonts &amp; Materials/Oswald Bold SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextMesh Pro/Examples &amp; Extras/Resources/Fonts &amp; Materials/Oswald Bold SDF.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Examples &amp; Extras/Resources/Fonts &amp; Materials/Roboto-Bold SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextMesh Pro/Examples &amp; Extras/Resources/Fonts &amp; Materials/Roboto-Bold SDF.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/Data/Tower/Artillerie.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/Data/Tower/Artillerie.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,17 +29,24 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="87" />
+    <option name="cachedIndexableFilesCount" value="86" />
   </component>
   <component name="Git.Settings">
+    <option name="INCOMING_COMMITS_CHECK_STRATEGY" value="FETCH" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/lejeunethomas/Projet-Annuel-Village-Defender.git&quot;,
-    &quot;accountId&quot;: &quot;3382b13a-ef0a-4ec0-b5fb-210aa40077fc&quot;
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "lejeunethomas"
   }
-}</component>
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/lejeunethomas/Projet-Annuel-Village-Defender.git",
+    "accountId": "8f168c3c-dcbe-417a-af40-a962f2486867"
+  }
+}]]></component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Assets/_Scripts/Data/Tower/Tour.asset" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/_Scripts/Data/Wave/Wave1.asset" root0="FORCE_HIGHLIGHTING" />
@@ -41,61 +58,61 @@
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.218650780276105" />
-      <entry key="MS500" value="2.941362913591143" />
-      <entry key="S2" value="8.446560138686051" />
-      <entry key="S5" value="18.49612462804041" />
-      <entry key="S10" value="28.39234070700921" />
-      <entry key="S30" value="44.22360118639771" />
-      <entry key="S60" value="51.92669319911467" />
-      <entry key="M2" value="58.43529973914615" />
-      <entry key="M5" value="109.30732147286585" />
-      <entry key="M10" value="265.6399836181135" />
-      <entry key="M15" value="420.92903590004835" />
-      <entry key="M30" value="763.4327438843732" />
-      <entry key="H1" value="1110.9068742036989" />
-      <entry key="H2" value="1375.7947596467645" />
-      <entry key="H4" value="1542.6329499726014" />
-      <entry key="D1" value="1703.9653550435385" />
-      <entry key="W1" value="1733.93484788431" />
+      <entry key="MS100" value="1.0" />
+      <entry key="MS500" value="1.0" />
+      <entry key="S2" value="1.0" />
+      <entry key="S5" value="1.0" />
+      <entry key="S10" value="1.0000000000187481" />
+      <entry key="S30" value="1.0004222639258595" />
+      <entry key="S60" value="1.0400633794757106" />
+      <entry key="M2" value="3.062806980856915" />
+      <entry key="M5" value="56.224977458116875" />
+      <entry key="M10" value="217.77118777508832" />
+      <entry key="M15" value="374.6888754922899" />
+      <entry key="M30" value="716.2589065074926" />
+      <entry key="H1" value="1059.8287170559474" />
+      <entry key="H2" value="1320.5901876462608" />
+      <entry key="H4" value="1484.4504498916244" />
+      <entry key="D1" value="1642.6692109714918" />
+      <entry key="W1" value="1672.037192123422" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
       <entry key="MS500" value="0.0" />
       <entry key="S2" value="0.0" />
       <entry key="S5" value="0.0" />
-      <entry key="S10" value="2.7209382685694227E-171" />
-      <entry key="S30" value="1.3960668976832233E-57" />
-      <entry key="S60" value="3.736397861153491E-29" />
-      <entry key="M2" value="6.112608167675569E-15" />
-      <entry key="M5" value="2.0629591245891143E-6" />
-      <entry key="M10" value="0.0014363004994043529" />
-      <entry key="M15" value="0.012730052878787007" />
-      <entry key="M30" value="0.11282753599537387" />
-      <entry key="H1" value="0.3358981035900218" />
-      <entry key="H2" value="0.5795671691788826" />
-      <entry key="H4" value="0.7612930901951293" />
-      <entry key="D1" value="0.9555615098679083" />
-      <entry key="W1" value="0.9935273040392643" />
+      <entry key="S10" value="1.0531770844509352E-169" />
+      <entry key="S30" value="4.72244744703488E-57" />
+      <entry key="S60" value="6.872006582530985E-29" />
+      <entry key="M2" value="8.28975668070592E-15" />
+      <entry key="M5" value="2.330326175140087E-6" />
+      <entry key="M10" value="0.0015265405907279946" />
+      <entry key="M15" value="0.013257823646063515" />
+      <entry key="M30" value="0.11514262306402391" />
+      <entry key="H1" value="0.3393267202329093" />
+      <entry key="H2" value="0.5825175707503683" />
+      <entry key="H4" value="0.7632283870181567" />
+      <entry key="D1" value="0.9559659400435627" />
+      <entry key="W1" value="0.9935873643961692" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="1.1849403181121962" />
-      <entry key="MS500" value="2.924050071068563" />
-      <entry key="S2" value="8.417742871406826" />
-      <entry key="S5" value="18.463024479818944" />
-      <entry key="S10" value="28.364678786698686" />
-      <entry key="S30" value="44.206896779643266" />
-      <entry key="S60" value="51.916141569211106" />
-      <entry key="M2" value="58.42916367863742" />
-      <entry key="M5" value="109.30371719876386" />
-      <entry key="M10" value="265.6380451302995" />
-      <entry key="M15" value="420.93847669742615" />
-      <entry key="M30" value="763.5427272057065" />
-      <entry key="H1" value="1111.240684868693" />
-      <entry key="H2" value="1376.3730103109053" />
-      <entry key="H4" value="1543.3934950582548" />
-      <entry key="D1" value="1704.920776991325" />
-      <entry key="W1" value="1734.928354849357" />
+      <entry key="MS100" value="0.6506709277209668" />
+      <entry key="MS500" value="0.9176398823113651" />
+      <entry key="S2" value="0.9787416503974358" />
+      <entry key="S5" value="0.9914418065903038" />
+      <entry key="S10" value="0.9957117085921707" />
+      <entry key="S30" value="0.9989904071724125" />
+      <entry key="S60" value="1.0393333618199176" />
+      <entry key="M2" value="3.0623135108711796" />
+      <entry key="M5" value="56.22374039909972" />
+      <entry key="M10" value="217.7704998539563" />
+      <entry key="M15" value="374.6996129603756" />
+      <entry key="M30" value="716.3715944492241" />
+      <entry key="H1" value="1060.166157806285" />
+      <entry key="H2" value="1321.1714931070535" />
+      <entry key="H4" value="1485.2129838485835" />
+      <entry key="D1" value="1643.6250465263342" />
+      <entry key="W1" value="1673.0307604667742" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -118,14 +135,17 @@
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
     "cidr.known.project.marker": "true",
     "codeWithMe.voiceChat.enabledByDefault": "false",
+    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
     "git-widget-placeholder": "Preprod",
     "git.auto.fetch.suggestion.counter": "2",
+    "junie.onboarding.icon.badge.shown": "true",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "settings.editor.selected.configurable": "preferences.build.unityPlugin",
+    "to.speed.mode.migration.done": "true",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -191,9 +211,17 @@
       <workItem from="1784303519565" duration="4268000" />
       <workItem from="1784534581944" duration="2882000" />
       <workItem from="1784620617545" duration="2185000" />
-      <workItem from="1784622848684" duration="1387000" />
-      <workItem from="1784629917431" duration="4378000" />
+      <workItem from="1784711551305" duration="1182000" />
     </task>
+    <task id="LOCAL-00001" summary="Consomation ressource pour amélioration">
+      <option name="closed" value="true" />
+      <created>1784648558804</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1784648558804</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -212,19 +240,7 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State>
-              <option name="FILTERS">
-                <map>
-                  <entry key="branch">
-                    <value>
-                      <list>
-                        <option value="Preprod" />
-                      </list>
-                    </value>
-                  </entry>
-                </map>
-              </option>
-            </State>
+            <State />
           </value>
         </entry>
       </map>
@@ -232,6 +248,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+    <MESSAGE value="Consomation ressource pour amélioration" />
+    <option name="LAST_COMMIT_MESSAGE" value="Consomation ressource pour amélioration" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
