@@ -49,6 +49,8 @@ public class TowerCombat : MonoBehaviour
         if (_fireCountdown <= 0f)
         {
             Shoot();
+            if (data.characterAnimator != null) 
+                data.characterAnimator.SetTrigger("Attack");
             _fireCountdown = 1f / data.fireRate;
         }
 
