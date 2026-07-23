@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f1ffe71600d2cd4f90ba2dc0ef215bb, type: 3}
   m_Name: Sprinteur
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
-  enemyName: Soldat
+  enemyName: Sprinteur
   Type: 2
   enemyPrefab: {fileID: 8973471828063620200, guid: 3ee579666dc68c840ad5cbc3b022a212, type: 3}
   priority: 0
