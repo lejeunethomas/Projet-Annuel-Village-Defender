@@ -10,34 +10,7 @@
     <configurations />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fca82a27-470f-426d-a69f-3d1b82f3a83d" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Village Defender/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Village Defender/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefab/Ennemy/Soldat.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefab/Ennemy/Soldat.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefab/Ennemy/Soldat2.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefab/Ennemy/Soldat2.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefab/Tower/Catapulte.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefab/Tower/Catapulte.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefab/Tower/Tour.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefab/Tower/Tour.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefab/Tower/Tour_Antiquité.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefab/Tower/Tour_Antiquité.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefab/Tower/Tour_Medieval.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefab/Tower/Tour_Medieval.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/Data/Tower/Artillerie.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/Data/Tower/Artillerie.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/Data/Tower/Catapulte.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/Data/Tower/Catapulte.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/Data/Tower/Mortier.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/Data/Tower/Mortier.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/Data/Tower/Tour_Antiquité.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/Data/Tower/Tour_Antiquité.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/Data/Tower/Tour_Medieval.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/Data/Tower/Tour_Medieval.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/Data/Tower/Tour_Moderne.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/Data/Tower/Tour_Moderne.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/Data/TowerData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/Data/TowerData.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/Data/WaveData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/Data/WaveData.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/GameManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/GameManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/SimpleSpawner.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/SimpleSpawner.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/Tower/TowerBuilder.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/Tower/TowerBuilder.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/UI/BuildingInventory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/UI/BuildingInventory.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/UI/GameOverUI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/UI/GameOverUI.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/UI/VillageUIController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/UI/VillageUIController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Packages/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Packages/packages-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/packages-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Village Defender.slnx" beforeDir="false" afterPath="$PROJECT_DIR$/Village Defender.slnx" afterDir="false" />
-    </list>
+    <list default="true" id="fca82a27-470f-426d-a69f-3d1b82f3a83d" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -225,7 +198,7 @@
       <workItem from="1784845889438" duration="1089000" />
       <workItem from="1784850331219" duration="4721000" />
       <workItem from="1784875898981" duration="1524000" />
-      <workItem from="1784882779838" duration="759000" />
+      <workItem from="1784882779838" duration="1378000" />
     </task>
     <servers />
   </component>
