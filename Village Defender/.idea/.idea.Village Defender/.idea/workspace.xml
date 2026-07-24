@@ -11,11 +11,68 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fca82a27-470f-426d-a69f-3d1b82f3a83d" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Assets/Ennemy.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Ennemy/Archer Era 1.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Ennemy/Archer Era 1/Animations.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Ennemy/Archer Era 1/Animations/LanceurPierreJet.fbx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Ennemy/Archer Era 1/Animations/LanceurPierreJet.fbx.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Ennemy/Archer Era 1/Animations/LanceurPierreWalking.fbx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Ennemy/Archer Era 1/Animations/LanceurPierreWalking.fbx.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Ennemy/Archer Era 1/Controller.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Ennemy/Archer Era 1/Controller/Archer1AnimController.controller" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Ennemy/Archer Era 1/Model.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Ennemy/Archer Era 1/Model/LanceurPierre.fbx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Ennemy/Archer Era 1/Model/LanceurPierre.fbx.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Ennemy/Belier Era 1.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Ennemy/Belier Era 1/Animations.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Ennemy/Belier Era 1/Animations/ElephantAnimations.fbx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Ennemy/Belier Era 1/Animations/ElephantAnimations.fbx.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Ennemy/Belier Era 1/Controller.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Ennemy/Belier Era 1/Controller/Belier1AnimController.controller" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Ennemy/Belier Era 1/Controller/Belier1AnimController.controller.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Ennemy/Belier Era 1/Model.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Ennemy/Belier Era 1/Model/ElephantModel.fbx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Ennemy/Belier Era 1/Model/ElephantModel.fbx.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Ennemy/Soldier Era 1.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Ennemy/Soldier Era 1/Animations.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Ennemy/Soldier Era 1/Animations/CromagnonPunch.fbx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Ennemy/Soldier Era 1/Animations/CromagnonPunch.fbx.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Ennemy/Soldier Era 1/Animations/CromagnonRun.fbx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Ennemy/Soldier Era 1/Animations/CromagnonRun.fbx.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Ennemy/Soldier Era 1/Controller.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Ennemy/Soldier Era 1/Controller/Soldier1AnimController.controller" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Ennemy/Soldier Era 1/Controller/Soldier1AnimController.controller.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Ennemy/Soldier Era 1/Model.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Ennemy/Soldier Era 1/Model/CromagnonModel.fbx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Ennemy/Soldier Era 1/Model/CromagnonModel.fbx.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Ennemy/Sprinter Era 1.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Ennemy/Sprinter Era 1/Animations.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Ennemy/Sprinter Era 1/Animations/GuepardAnimation.fbx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Ennemy/Sprinter Era 1/Animations/GuepardAnimation.fbx.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Ennemy/Sprinter Era 1/Controller.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Ennemy/Sprinter Era 1/Controller/Sprinter1AnimController.controller" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Ennemy/Sprinter Era 1/Controller/Sprinter1AnimController.controller.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Ennemy/Sprinter Era 1/Material.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Ennemy/Sprinter Era 1/Material/JaguarMaterial.mat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Ennemy/Sprinter Era 1/Material/JaguarMaterial.mat.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Ennemy/Sprinter Era 1/Material/tableaux-sur-toile-motif-de-fourrure-de-jaguar.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Ennemy/Sprinter Era 1/Material/tableaux-sur-toile-motif-de-fourrure-de-jaguar.png.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Ennemy/Sprinter Era 1/Model.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Ennemy/Sprinter Era 1/Model/GuepardModel.fbx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Ennemy/Sprinter Era 1/Model/GuepardModel.fbx.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefab/Ennemy/Soldat2.prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefab/Ennemy/Soldat2.prefab.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Village Defender/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Village Defender/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/Data/Enemies/Bélier.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/Data/Enemies/Bélier.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/Data/Enemies/Soldat.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/Data/Enemies/Soldat.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/Data/Enemies/Sprinteur.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/Data/Enemies/Sprinteur.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefab/Ennemy/Archer.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefab/Ennemy/Archer.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefab/Ennemy/Bélier.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefab/Ennemy/Bélier.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefab/Ennemy/Soldat.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefab/Ennemy/Soldat.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefab/Ennemy/Sprinteur.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefab/Ennemy/Sprinteur.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefab/Font/Tangerine-Bold SDF.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefab/Font/Tangerine-Bold SDF.asset.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Ennemy/Archer Era 1/Controller/Archer1AnimController.controller.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefab/Font/Tangerine-Bold.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefab/Font/Tangerine-Bold.ttf.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/Ennemies/EnemyMovement.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/Ennemies/EnemyMovement.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,7 +80,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="89" />
+    <option name="cachedIndexableFilesCount" value="84" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
@@ -49,61 +106,61 @@
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.0" />
-      <entry key="MS500" value="1.000037415963663" />
-      <entry key="S2" value="1.1061474962646634" />
-      <entry key="S5" value="3.250858012795872" />
-      <entry key="S10" value="10.746400349262078" />
-      <entry key="S30" value="32.4843830997661" />
-      <entry key="S60" value="45.4830660888418" />
-      <entry key="M2" value="55.88101790850309" />
-      <entry key="M5" value="108.07719634029921" />
-      <entry key="M10" value="263.48887832202837" />
-      <entry key="M15" value="418.48045493160186" />
-      <entry key="M30" value="761.4831205695583" />
-      <entry key="H1" value="1110.3018917768725" />
-      <entry key="H2" value="1376.5612099715386" />
-      <entry key="H4" value="1544.3803778156675" />
-      <entry key="D1" value="1706.734702090082" />
-      <entry key="W1" value="1736.9013164620683" />
+      <entry key="MS100" value="1.3858467105739303" />
+      <entry key="MS500" value="3.0913228438416325" />
+      <entry key="S2" value="10.482089084144112" />
+      <entry key="S5" value="24.264646349924153" />
+      <entry key="S10" value="43.49441902384959" />
+      <entry key="S30" value="100.9285233537703" />
+      <entry key="S60" value="146.86533725863032" />
+      <entry key="M2" value="186.99206711272922" />
+      <entry key="M5" value="224.54182894133385" />
+      <entry key="M10" value="242.08963654996148" />
+      <entry key="M15" value="248.96324206591956" />
+      <entry key="M30" value="257.3363584539923" />
+      <entry key="H1" value="296.67270024191106" />
+      <entry key="H2" value="511.91047993361883" />
+      <entry key="H4" value="924.0470442483022" />
+      <entry key="D1" value="1758.1593862778266" />
+      <entry key="W1" value="1983.2920552834876" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
       <entry key="MS500" value="0.0" />
       <entry key="S2" value="0.0" />
       <entry key="S5" value="0.0" />
-      <entry key="S10" value="8.456333769200342E-172" />
-      <entry key="S30" value="9.45643348265986E-58" />
-      <entry key="S60" value="3.0751314577851726E-29" />
-      <entry key="M2" value="5.545386783430985E-15" />
-      <entry key="M5" value="1.9841419402485155E-6" />
-      <entry key="M10" value="0.0014085957334340436" />
-      <entry key="M15" value="0.012565822258569368" />
-      <entry key="M30" value="0.11209737846430548" />
-      <entry key="H1" value="0.3348094659120388" />
-      <entry key="H2" value="0.5786272253463716" />
-      <entry key="H4" value="0.7606755059460887" />
-      <entry key="D1" value="0.9554322693868572" />
-      <entry key="W1" value="0.9935081064427433" />
+      <entry key="S10" value="0.0" />
+      <entry key="S30" value="3.3270075841990295E-237" />
+      <entry key="S60" value="5.768021830921807E-119" />
+      <entry key="M2" value="7.59474939081049E-60" />
+      <entry key="M5" value="2.2501184416421218E-24" />
+      <entry key="M10" value="1.5000394800278492E-12" />
+      <entry key="M15" value="1.3103936896576395E-8" />
+      <entry key="M30" value="1.1447242854319421E-4" />
+      <entry key="H1" value="0.010699178872380548" />
+      <entry key="H2" value="0.10343683518157626" />
+      <entry key="H4" value="0.3216159746989722" />
+      <entry key="D1" value="0.8277317269291619" />
+      <entry key="W1" value="0.9733520393564956" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="0.8526348917679567" />
-      <entry key="MS500" value="0.9686542805379047" />
-      <entry key="S2" value="1.0968754518312447" />
-      <entry key="S5" value="3.236261115464591" />
-      <entry key="S10" value="10.72419122675507" />
-      <entry key="S30" value="32.46417543257989" />
-      <entry key="S60" value="45.46908220469115" />
-      <entry key="M2" value="55.87255583348105" />
-      <entry key="M5" value="108.0725080463976" />
-      <entry key="M10" value="263.486355362581" />
-      <entry key="M15" value="418.4893568820211" />
-      <entry key="M30" value="761.5921823683206" />
-      <entry key="H1" value="1110.634515371013" />
-      <entry key="H2" value="1377.138470149291" />
-      <entry key="H4" value="1545.1402795654162" />
-      <entry key="D1" value="1707.6899904204593" />
-      <entry key="W1" value="1737.8948036018726" />
+      <entry key="MS100" value="1.3297623996790418" />
+      <entry key="MS500" value="3.0679209287360822" />
+      <entry key="S2" value="10.463264071992066" />
+      <entry key="S5" value="24.247083178402544" />
+      <entry key="S10" value="43.47834391729939" />
+      <entry key="S30" value="100.91543644341539" />
+      <entry key="S60" value="146.8555522755265" />
+      <entry key="M2" value="186.9857337711872" />
+      <entry key="M5" value="224.53874796172704" />
+      <entry key="M10" value="242.08796274416886" />
+      <entry key="M15" value="248.96209019959934" />
+      <entry key="M30" value="257.3358729085067" />
+      <entry key="H1" value="296.6830155925828" />
+      <entry key="H2" value="512.0134904411906" />
+      <entry key="H4" value="924.368222207418" />
+      <entry key="D1" value="1758.9869688622587" />
+      <entry key="W1" value="1984.2653830727402" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -202,6 +259,7 @@
       <workItem from="1784622848684" duration="1387000" />
       <workItem from="1784629917431" duration="4378000" />
       <workItem from="1784845889438" duration="1089000" />
+      <workItem from="1784850331219" duration="3482000" />
     </task>
     <servers />
   </component>

@@ -10,6 +10,7 @@ public class FrontEndIntroController : MonoBehaviour
     [SerializeField] private GameObject introDialogueUI;
     [SerializeField] private SaveManager saveManager;
     [SerializeField] private TMP_Text startAdventureButtonText;
+    [SerializeField] private GameObject restartButton;
 
     [Header("Dialogue")]
     [SerializeField] private RectTransform characterContainer;
@@ -52,7 +53,7 @@ public class FrontEndIntroController : MonoBehaviour
     private void Start()
     {
         ResolveSaveManagerReference();
-        RefreshStartButtonText();
+        RefreshMainMenuSaveState();
     }
 
     private void OnValidate()
@@ -110,7 +111,7 @@ public class FrontEndIntroController : MonoBehaviour
             {
                 _introStarted = false;
                 ResetInitialState();
-                RefreshStartButtonText();
+                RefreshMainMenuSaveState();
             }
 
             return;
@@ -145,6 +146,22 @@ public class FrontEndIntroController : MonoBehaviour
             StopCoroutine(_introCoroutine);
 
         _introCoroutine = StartCoroutine(PlayIntro());
+    }
+
+    public void RestartAdventureFromBeginning()
+    {
+        if (_introStarted)
+            return;
+
+        ResolveSaveManagerReference();
+
+        if (saveManager != null)
+            saveManager.DeleteSave();
+        else
+            Debug.LogWarning("FrontEndIntroController : impossible de supprimer la sauvegarde, aucun SaveManager n'est disponible.");
+
+        RefreshMainMenuSaveState();
+        StartAdventure();
     }
 
     public void OnDialogueClicked()
@@ -186,6 +203,9 @@ public class FrontEndIntroController : MonoBehaviour
 
         if (introDialogueUI != null)
             introDialogueUI.SetActive(false);
+
+        if (restartButton != null)
+            restartButton.SetActive(false);
 
         if (bubbleContainer != null)
             bubbleContainer.SetActive(false);
@@ -380,14 +400,16 @@ public class FrontEndIntroController : MonoBehaviour
             saveManager.BeginNewGame();
     }
 
-    private void RefreshStartButtonText()
+    private void RefreshMainMenuSaveState()
     {
-        if (startAdventureButtonText == null)
-            return;
-
         ResolveSaveManagerReference();
         bool hasValidSave = saveManager != null && saveManager.HasValidSave();
-        startAdventureButtonText.text = hasValidSave ? "Continuer" : "Commencer";
+
+        if (startAdventureButtonText != null)
+            startAdventureButtonText.text = hasValidSave ? "Continuer" : "Commencer";
+
+        if (restartButton != null)
+            restartButton.SetActive(hasValidSave);
     }
 
     private void ResolveSaveManagerReference()
