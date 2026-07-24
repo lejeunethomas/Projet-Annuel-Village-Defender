@@ -13,10 +13,22 @@ public class TowerCombat : MonoBehaviour
     public Transform projectileSpawn;
     public float projectileSpeed = 15f;
 
+    [Header("Animation")]
+    [SerializeField] private Animator characterAnimator;
+    [SerializeField] private string attackParameter = "Attack";
+
     private float _fireCountdown = 0f;
     private Transform _targetEnemy;
 	private int _currentHealth;
+    private int _maxHealth;
     private int _degatsFinaux;
+    private int _attackParameterHash;
+    private bool _hasAttackParameter;
+
+    void Awake()
+    {
+        SetupAnimator();
+    }
 
     void Start()
     {
@@ -27,14 +39,13 @@ public class TowerCombat : MonoBehaviour
 
 		if(data != null)
 		{
-			
-			UpdateHealthBar();
-            
             int degatsDeBase = data.damage;
-            int niveau = GameManager.Instance.buildingInventory.GetTowerLevel(data.name);
+            int niveau = GetTowerLevel();
             int bonusParNiveau = data.bonusLv;
             _degatsFinaux = degatsDeBase + (niveau * bonusParNiveau);
-            _currentHealth = data.maxHealth + (niveau * bonusParNiveau);
+            _maxHealth = data.maxHealth + (niveau * bonusParNiveau);
+            _currentHealth = _maxHealth;
+			UpdateHealthBar();
 		}
     }
 
@@ -49,8 +60,7 @@ public class TowerCombat : MonoBehaviour
         if (_fireCountdown <= 0f)
         {
             Shoot();
-            if (data.characterAnimator != null) 
-                data.characterAnimator.SetTrigger("Attack");
+            PlayAttackAnimation();
             _fireCountdown = 1f / data.fireRate;
         }
 
@@ -133,11 +143,59 @@ public class TowerCombat : MonoBehaviour
 	
 	private void UpdateHealthBar()
 	{
-		if (healthBarFill != null && data != null)
+		if (healthBarFill != null && data != null && _maxHealth > 0)
         {
-            healthBarFill.fillAmount = (float)_currentHealth / data.maxHealth;
+            healthBarFill.fillAmount = Mathf.Clamp01((float)_currentHealth / _maxHealth);
         }
 	}
+
+    private int GetTowerLevel()
+    {
+        if (GameManager.Instance == null ||
+            GameManager.Instance.buildingInventory == null ||
+            data == null)
+        {
+            return 0;
+        }
+
+        return GameManager.Instance.buildingInventory.GetTowerLevel(data.name);
+    }
+
+    private void SetupAnimator()
+    {
+        if (characterAnimator == null)
+            characterAnimator = GetComponentInChildren<Animator>(true);
+
+        if (characterAnimator == null || characterAnimator.runtimeAnimatorController == null)
+            return;
+
+        _attackParameterHash = Animator.StringToHash(attackParameter);
+
+        foreach (AnimatorControllerParameter parameter in characterAnimator.parameters)
+        {
+            if (parameter.nameHash == _attackParameterHash &&
+                parameter.type == AnimatorControllerParameterType.Trigger)
+            {
+                _hasAttackParameter = true;
+                break;
+            }
+        }
+    }
+
+    private void PlayAttackAnimation()
+    {
+        if (characterAnimator == null ||
+            characterAnimator.runtimeAnimatorController == null ||
+            !_hasAttackParameter ||
+            !characterAnimator.isActiveAndEnabled ||
+            !characterAnimator.gameObject.activeInHierarchy)
+        {
+            return;
+        }
+
+        characterAnimator.ResetTrigger(_attackParameterHash);
+        characterAnimator.SetTrigger(_attackParameterHash);
+    }
     
     void OnDestroy()
     {

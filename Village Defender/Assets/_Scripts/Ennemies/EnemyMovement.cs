@@ -13,6 +13,7 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] private string speedParameter = "Speed";
     [SerializeField] private string attackParameter = "Attack";
     [SerializeField] private float movementAnimationThreshold = 0.1f;
+    [SerializeField, Min(0f)] private float attackDistanceTolerance = 0.15f;
 
     private NavMeshAgent _agent;
     private int _currentHealth;
@@ -62,9 +63,9 @@ public class EnemyMovement : MonoBehaviour
             return;
         }
 
-		if(_target != null && _agent.hasPath && !_agent.pathPending)
+		if(_target != null && !_agent.pathPending)
 		{
-			if (_agent.remainingDistance <= data.attackRange)
+			if (IsTargetInAttackRange())
         	{
                 if (!_agent.isStopped)
                     _agent.isStopped = true;
@@ -84,6 +85,9 @@ public class EnemyMovement : MonoBehaviour
             {
                 if (_agent.isStopped)
                     _agent.isStopped = false;
+
+                if (!_agent.hasPath)
+                    _agent.SetDestination(_target.position);
 
                 UpdateMovementAnimation();
             }
@@ -175,20 +179,49 @@ public class EnemyMovement : MonoBehaviour
 
         if (_target.CompareTag("Base"))
         {
-            PlayAttackAnimation();
             GameManager.Instance.DamageBase(1);
+            PlayAttackAnimation();
             _attackTimer = data.attackRate;
         }
-        else if (_target.CompareTag("Tower"))
+        else
         {
             TowerCombat tower = _target.GetComponent<TowerCombat>();
+            if (tower == null)
+                tower = _target.GetComponentInParent<TowerCombat>();
+            if (tower == null)
+                tower = _target.GetComponentInChildren<TowerCombat>();
+
             if (tower != null)
             {
-                PlayAttackAnimation();
                 tower.TakeDamage(data.attackDamage);
+                PlayAttackAnimation();
                 _attackTimer = data.attackRate;
             }
         }
+    }
+
+    private bool IsTargetInAttackRange()
+    {
+        if (_target == null || data == null)
+            return false;
+
+        Vector3 enemyPosition = transform.position;
+        Vector3 closestTargetPoint = _target.position;
+
+        Collider targetCollider = _target.GetComponent<Collider>();
+        if (targetCollider == null)
+            targetCollider = _target.GetComponentInChildren<Collider>();
+
+        if (targetCollider != null && targetCollider.enabled)
+            closestTargetPoint = targetCollider.ClosestPoint(enemyPosition);
+
+        closestTargetPoint.y = enemyPosition.y;
+
+        float effectiveAttackRange = Mathf.Max(0f, data.attackRange) + attackDistanceTolerance;
+        if (_agent != null)
+            effectiveAttackRange += _agent.radius;
+
+        return Vector3.Distance(enemyPosition, closestTargetPoint) <= effectiveAttackRange;
     }
 
     private void UpdateMovementAnimation()
