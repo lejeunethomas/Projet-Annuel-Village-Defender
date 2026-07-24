@@ -94,6 +94,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyMovement
   data: {fileID: 11400000, guid: d9156cabbb49dc24ca8c6423977e7769, type: 2}
   moveSpeedMultiplier: 0.85
+  animator: {fileID: 0}
+  speedParameter: Speed
+  attackParameter: Attack
+  movementAnimationThreshold: 0.1
 --- !u!1001 &7901506864001615048
 PrefabInstance:
   m_ObjectHideFlags: 0

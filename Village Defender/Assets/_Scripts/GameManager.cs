@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -33,6 +34,9 @@ public class GameManager : MonoBehaviour
     [Header("Époque")] 
     public int currentEpoch = 1;
 
+    [Header("Ère")]
+    [SerializeField] private EraManager eraManager;
+
     [Header("Références gameplay")]
     public SimpleSpawner spawner;
     public TowerBuilder towerBuilder;
@@ -53,6 +57,7 @@ public class GameManager : MonoBehaviour
     public int endWaveBonusGold = 25;
 
     public GamePhase CurrentPhase { get; private set; }
+    private bool returnToVillageAfterEndScreenInProgress;
 
     private void Awake()
     {
@@ -68,6 +73,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         baseHealth = baseMaxHealth;
+        ApplyCurrentEraInstantly();
 
         if (baseHealthUI != null)
         {
@@ -174,6 +180,43 @@ public class GameManager : MonoBehaviour
     }
     public void ReturnToVillageAfterEndScreen(bool victory)
     {
+        if (returnToVillageAfterEndScreenInProgress)
+        {
+            Debug.LogWarning("Retour au village déjà en cours.");
+            return;
+        }
+
+        bool needsEraTransition = victory &&
+                                  currentWaveIndex >= 5 &&
+                                  eraManager != null &&
+                                  eraManager.NeedsTransitionForWaveIndex(currentWaveIndex);
+
+        if (victory && currentWaveIndex >= 5 && eraManager == null)
+            Debug.LogWarning("GameManager : EraManager non assigné, retour au village sans transition d'ère.");
+
+        if (needsEraTransition)
+        {
+            returnToVillageAfterEndScreenInProgress = true;
+            StartCoroutine(ReturnToVillageAfterEraTransition());
+            return;
+        }
+
+        returnToVillageAfterEndScreenInProgress = true;
+        CompleteReturnToVillageAfterEndScreen();
+        returnToVillageAfterEndScreenInProgress = false;
+    }
+
+    private IEnumerator ReturnToVillageAfterEraTransition()
+    {
+        yield return eraManager.PlayEraTransition(
+            currentWaveIndex,
+            CompleteReturnToVillageAfterEndScreen);
+
+        returnToVillageAfterEndScreenInProgress = false;
+    }
+
+    private void CompleteReturnToVillageAfterEndScreen()
+    {
         if (spawner != null)
             spawner.StopCurrentWaveAndDestroyEnemies();
 
@@ -189,6 +232,9 @@ public class GameManager : MonoBehaviour
             towerBuilder.ReturnAllPlacedBuildingsToStock();
 
         SetPhase(GamePhase.Village);
+
+        if (villageUIController != null)
+            villageUIController.RefreshHotbar();
 
         if (SaveManager.Instance != null)
             SaveManager.Instance.SaveGame();
@@ -416,6 +462,7 @@ public class GameManager : MonoBehaviour
         stone = Mathf.Max(0, loadedStone);
         iron = Mathf.Max(0, loadedIron);
         currentWaveIndex = Mathf.Max(0, loadedWaveIndex);
+        ApplyCurrentEraInstantly();
 
         baseHealth = baseMaxHealth;
 
@@ -461,7 +508,21 @@ public class GameManager : MonoBehaviour
         }
 
         if (villageUIController != null)
+        {
             villageUIController.RefreshFarmUI();
+            villageUIController.RefreshHotbar();
+        }
+    }
+
+    private void ApplyCurrentEraInstantly()
+    {
+        if (eraManager == null)
+        {
+            Debug.LogWarning("GameManager : EraManager non assigné, impossible d'appliquer le décor d'ère.");
+            return;
+        }
+
+        eraManager.ApplyEraInstantly(currentWaveIndex);
     }
 
     private void DestroyRemainingEnemiesInScene()

@@ -23,6 +23,10 @@ public class TowerData : ScriptableObject
     public int cost = 15;
     public int lvCost = 15;
 
+    [Header("Déblocage")]
+    [Min(0)]
+    public int unlockWaveIndex = 0;
+
     [Header("Stats")]
 	public int maxHealth = 10;
     public int range = 5;
@@ -36,5 +40,10 @@ public class TowerData : ScriptableObject
     public string GetDisplayName()
     {
         return string.IsNullOrWhiteSpace(towerName) ? name : towerName;
+    }
+
+    public bool IsUnlocked(int currentWaveIndex)
+    {
+        return currentWaveIndex >= unlockWaveIndex;
     }
 }

@@ -14,5 +14,7 @@ public class WaveData : ScriptableObject
     }
 
     public List<EnemyGroup> groups;
+
+    [FormerlySerializedAs("Boss")]
     public bool boss = false;
 }

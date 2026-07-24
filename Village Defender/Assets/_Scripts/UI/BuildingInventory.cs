@@ -80,9 +80,9 @@ public class BuildingInventory : MonoBehaviour
         if (GameManager.Instance == null)
             return false;
 
-        if (GameManager.Instance.currentEpoch < (int)data.epoque)
+        if (!IsBuildingUnlocked(catalogIndex))
         {
-            Debug.Log("Impossible d'acheter : " + data.GetDisplayName() + ". Nécessite l'époque " + data.epoque);
+            Debug.Log("Impossible d'acheter : " + data.GetDisplayName() + ". Tour verrouillée jusqu'à currentWaveIndex " + data.unlockWaveIndex + ".");
             return false;
         }
 
@@ -102,6 +102,14 @@ public class BuildingInventory : MonoBehaviour
     {
         if (catalogIndex < 0 || catalogIndex >= ownedCounts.Count)
             return false;
+
+        if (!IsBuildingUnlocked(catalogIndex))
+        {
+            TowerData data = GetBuilding(catalogIndex);
+            string towerName = data != null ? data.GetDisplayName() : catalogIndex.ToString();
+            Debug.Log("Impossible de placer : " + towerName + ". Tour verrouillée pour la vague actuelle.");
+            return false;
+        }
 
         if (ownedCounts[catalogIndex] <= 0)
         {
@@ -159,6 +167,15 @@ public class BuildingInventory : MonoBehaviour
             return _towerLevels[towerName];
         }
         return 0;
+    }
+
+    public bool IsBuildingUnlocked(int catalogIndex)
+    {
+        TowerData data = GetBuilding(catalogIndex);
+        if (data == null || GameManager.Instance == null)
+            return false;
+
+        return data.IsUnlocked(GameManager.Instance.currentWaveIndex);
     }
 
     public void LevelUpTower(string towerName)

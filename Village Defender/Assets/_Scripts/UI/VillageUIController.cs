@@ -40,24 +40,40 @@ public class VillageUIController : MonoBehaviour
 
     public void RefreshHotbar()
     {
-        if (hotbarPanel != null) hotbarPanel.SetActive(true); 
+        if (hotbarPanel != null)
+        {
+            bool showHotbar = GameManager.Instance != null &&
+                              GameManager.Instance.CurrentPhase == GameManager.GamePhase.Preparation;
+            hotbarPanel.SetActive(showHotbar);
+        }
 
         RefreshFarmUI();
 
-        if (inventory == null || GameManager.Instance == null) return;
-        
-        int epoqueActuelle = GameManager.Instance.currentEpoch;
+        if (hotbarContainer == null)
+        {
+            Debug.LogWarning("VillageUIController : HotbarContainer n'est pas assigné.");
+            return;
+        }
 
         foreach (Transform child in hotbarContainer)
         {
             Destroy(child.gameObject);
         }
 
+        if (inventory == null || GameManager.Instance == null)
+            return;
+
+        if (hotbarButtonPrefab == null)
+        {
+            Debug.LogWarning("VillageUIController : HotbarButtonPrefab n'est pas assigné.");
+            return;
+        }
+
         for (int i = 0; i < inventory.GetCatalogCount(); i++)
         {
             TowerData data = inventory.GetBuilding(i);
 
-            if (data != null && (int)data.epoque == epoqueActuelle)
+            if (data != null && data.IsUnlocked(GameManager.Instance.currentWaveIndex))
             {
                 GameObject newBtn = Instantiate(hotbarButtonPrefab, hotbarContainer);
                 
@@ -101,9 +117,25 @@ public class VillageUIController : MonoBehaviour
     
     public void SelectTowerForBuilding(int index)
     {
+        if (inventory == null || towerBuilder == null)
+            return;
+
+        TowerData data = inventory.GetBuilding(index);
+        if (data == null)
+        {
+            Debug.LogWarning("VillageUIController : tentative de sélection d'une tour invalide à l'index " + index + ".");
+            return;
+        }
+
+        if (GameManager.Instance == null || !data.IsUnlocked(GameManager.Instance.currentWaveIndex))
+        {
+            Debug.Log("Sélection refusée : " + data.GetDisplayName() + " est verrouillée jusqu'à currentWaveIndex " + data.unlockWaveIndex + ".");
+            return;
+        }
+
         towerBuilder.SelectTowerFromCatalog(index);
 
-        Debug.Log("Tour sélectionnée : " + inventory.GetBuilding(index).name);
+        Debug.Log("Tour sélectionnée : " + data.name);
     }
 
     public void RefreshFarmUI()
@@ -170,8 +202,20 @@ public class VillageUIController : MonoBehaviour
 
     public void OpenTowerDetails(int index)
     {
+        if (inventory == null || GameManager.Instance == null)
+            return;
+
         _currentSelectedTowerIndex = index;
         TowerData data = inventory.GetBuilding(index);
+        if (data == null)
+            return;
+
+        if (!data.IsUnlocked(GameManager.Instance.currentWaveIndex))
+        {
+            Debug.Log("Détails refusés : " + data.GetDisplayName() + " est verrouillée jusqu'à currentWaveIndex " + data.unlockWaveIndex + ".");
+            return;
+        }
+
         int lv = inventory.GetTowerLevel(data.name);
         
         detailsPanel.SetActive(true);
@@ -213,6 +257,15 @@ public class VillageUIController : MonoBehaviour
         if (_currentSelectedTowerIndex < 0) return;
 
         TowerData data = inventory.GetBuilding(_currentSelectedTowerIndex);
+        if (data == null || GameManager.Instance == null)
+            return;
+
+        if (!data.IsUnlocked(GameManager.Instance.currentWaveIndex))
+        {
+            Debug.Log("Amélioration refusée : " + data.GetDisplayName() + " est verrouillée pour la vague actuelle.");
+            return;
+        }
+
         int currentLevel = inventory.GetTowerLevel(data.name);
     
         int cost = data.lvCost + (currentLevel * 50);

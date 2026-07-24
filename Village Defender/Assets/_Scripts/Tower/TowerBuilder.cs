@@ -51,6 +51,21 @@ public class TowerBuilder : MonoBehaviour
 
     public void SelectTowerFromCatalog(int index)
     {
+        if (index >= 0 && inventory != null && GameManager.Instance != null)
+        {
+            TowerData data = inventory.GetBuilding(index);
+            if (data == null)
+            {
+                Debug.LogWarning("TowerBuilder : sélection impossible, index de catalogue invalide : " + index + ".");
+                index = -1;
+            }
+            else if (!data.IsUnlocked(GameManager.Instance.currentWaveIndex))
+            {
+                Debug.Log("TowerBuilder : sélection refusée, " + data.GetDisplayName() + " est verrouillée jusqu'à currentWaveIndex " + data.unlockWaveIndex + ".");
+                index = -1;
+            }
+        }
+
         _selectedCatalogIndex = index;
         SetMode(BuildMode.Build);
     }
@@ -111,6 +126,12 @@ public class TowerBuilder : MonoBehaviour
         TowerData towerToBuild = inventory.GetBuilding(_selectedCatalogIndex);
         if (towerToBuild == null || towerToBuild.towerPrefab == null)
             return;
+
+        if (GameManager.Instance == null || !towerToBuild.IsUnlocked(GameManager.Instance.currentWaveIndex))
+        {
+            Debug.Log("Construction refusée : " + towerToBuild.GetDisplayName() + " est verrouillée jusqu'à currentWaveIndex " + towerToBuild.unlockWaveIndex + ".");
+            return;
+        }
 
         if (Camera.main == null) return;
 

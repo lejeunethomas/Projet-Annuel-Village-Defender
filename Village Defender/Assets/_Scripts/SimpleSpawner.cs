@@ -35,7 +35,14 @@ public class SimpleSpawner : MonoBehaviour
 
         if (waveIndex < 0 || waveIndex >= waves.Count)
         {
-            Debug.LogWarning("Il n'y a plus de vague disponible. Index demandé : " + waveIndex);
+            Debug.LogWarning("SimpleSpawner : aucune WaveData assignée pour l'index demandé " + waveIndex + ". Vérifiez la liste ordonnée des vagues dans l'Inspector.");
+            NotifySpawningFinishedIfCurrentWaveActive();
+            return;
+        }
+
+        if (waves[waveIndex] == null)
+        {
+            Debug.LogError("SimpleSpawner : WaveData manquante à l'index " + waveIndex + " dans la liste ordonnée des vagues.");
             NotifySpawningFinishedIfCurrentWaveActive();
             return;
         }

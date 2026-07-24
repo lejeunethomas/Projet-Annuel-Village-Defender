@@ -16,8 +16,10 @@ MonoBehaviour:
   towerPrefab: {fileID: 6307273590239403016, guid: 5e7133c925905d141a2967487a2d03fb, type: 3}
   epoque: 3
   towerIcon: {fileID: 21300000, guid: e0253832bb7a0ba43b290ec628d2fb0e, type: 3}
+  characterAnimator: {fileID: 0}
   cost: 1
   lvCost: 15
+  unlockWaveIndex: 5
   maxHealth: 10
   range: 5
   fireRate: 1

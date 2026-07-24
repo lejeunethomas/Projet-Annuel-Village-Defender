@@ -55,11 +55,13 @@ public class GameOverUI : MonoBehaviour
 
     private void OnMainButtonClicked()
     {
-        gameObject.SetActive(false);
-
         if (GameManager.Instance != null)
         {
             GameManager.Instance.ReturnToVillageAfterEndScreen(wasVictory);
+            return;
         }
+
+        Debug.LogError("GameOverUI : aucun GameManager.Instance disponible pour retourner au village.");
+        gameObject.SetActive(false);
     }
 }
